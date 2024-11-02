@@ -4,9 +4,11 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 async function main (): Promise<void> {
     console.log("Start seeding ...");
 
+    /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
     const user = await prisma.user.create({
         data: {
             name: "test name",

@@ -1,37 +1,50 @@
 <script lang="ts">
-    
+    import { signIn } from "@auth/sveltekit/client";
+
+    let email = "";
+    let password = "";
 </script>
 
 <style>
-    .login {
-        display: flex;
-        align-items: center;
-        text-align: center;
+    article {
         justify-content: center;
-        justify-items: center;
-        padding-top: 13vi;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px;
+        width: initial;
     }
 </style>
 
-<section>
-    <section class="login">
+<article>
+    <h2>
+        <img src="/favicon.png" alt="Voyago logo" />
+        <span>Voyago</span>
+    </h2>
+    <form>
+        <label for="email">Email</label>
+        <label for="password">Password</label>
+        <input
+            bind:value={email}
+            type="email"
+            id="email"
+            name="email"
+            required
+        />
+        <input
+            bind:value={password}
+            type="password"
+            id="password"
+            name="password"
+            required
+        />
 
-        <div>
-            <form method="POST" class="flex flex-col bg-white text-black font-bold rounded-lg space-y-8 p-10 text-lg items-start tracking-tight">
-                <p class="text-3xl text-black tracking-tight">Login</p>
-                <label class="flex flex-col items-start">
-                    Email
-                    <input name="email" type="email" placeholder="example@example.com" class="flex border-3 border-[#42356b] rounded-lg p-1">
-                </label>
-                <label class="flex flex-col items-start">
-                    Password
-                    <input name="password" type="password" placeholder="cd was here" class="flex border-3 border-[#42356b] rounded-lg p-1">
-                </label>
-                <button class="border-3 border-[#42356b] text-black font-bold px-2 rounded-full ">Sign in</button>
-            </form>
-            <a href="/register">
-                <p class="text-white text-sm underline py-2">Don't have an account? Register </p>
-            </a>
-        </div>
-    </section>
-</section>
+        <input
+            on:click={() => signIn("signin", { email, password })}
+            type="submit"
+            id="submit"
+            name="submit"
+            value="Sign In"
+            required
+        />
+    </form>
+</article>
