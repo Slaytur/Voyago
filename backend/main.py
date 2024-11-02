@@ -9,8 +9,8 @@ import uvicorn
 import pickle
 dotenv.load_dotenv()
 
-YOUR_API_KEY = os.environ.get("PERPLEXITY_API_KEY")
-client = OpenAI(api_key=YOUR_API_KEY, base_url="https://api.perplexity.ai")
+API_KEY = os.environ.get("PERPLEXITY_API_KEY")
+client = OpenAI(api_key=API_KEY, base_url="https://api.perplexity.ai")
 
 app = FastAPI(title="python backend")
 
@@ -37,8 +37,8 @@ async def root():
     return {"message": "Welcome to the Python Backend!"}
 
 # API endpoint to get recommended cities based on location, interests, and date
-# @app.post("/get_cities", response_model=CityResponse)
-def get_cities(request: CityRequest):
+@app.post("/get_cities", response_model=CityResponse)
+async def get_cities(request: CityRequest):
     custom_prompt = GET_CITIES[::].replace("{location}", request.location).replace("{interests}", ", ".join(request.interests)).replace("{date}", request.date)
 
     messages = [
@@ -52,16 +52,18 @@ def get_cities(request: CityRequest):
         },
     ]
     
-    # with open("response_cache.pkl", "rb") as f:
-    #     response = pickle.load(f)
+    if os.path.exists("response_cache.pkl"):
+        with open("response_cache.pkl", "rb") as f:
+            response = pickle.load(f)
+    else:
+        response = client.chat.completions.create(
+            model="llama-3.1-sonar-large-128k-online",
+            messages=messages,
+        )
         
-    response = client.chat.completions.create(
-        model="llama-3.1-sonar-large-128k-online",
-        messages=messages,
-    )
+        with open('response_cache.pkl', 'wb') as f:
+            pickle.dump(response, f)
     
-    with open('response_cache.pkl', 'wb') as f:
-        pickle.dump(response, f)
     cities = []
     descriptions = []
 
@@ -74,7 +76,7 @@ def get_cities(request: CityRequest):
             descriptions.append(response_list[i+1])
             
 
-    return CityResponse(cities, descriptions)
+    return CityResponse(cities=cities, descriptions=descriptions)
 
 # API endpoint to get itinerary based on a list of cities
 @app.post("/get_itinerary", response_model=ItineraryResponse)
