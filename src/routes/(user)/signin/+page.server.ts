@@ -7,6 +7,9 @@ import {
     setSessionTokenCookie,
     validateSessionToken
 } from "$lib/server/session";
+import { writable } from "svelte/store";
+
+let userId;
 
 export const actions = {
     default: async ({ request, cookies }) => {
@@ -17,6 +20,8 @@ export const actions = {
                 email: email
             }
         });
+
+        userId = user?.id;
 
         if (!user) return null;
 

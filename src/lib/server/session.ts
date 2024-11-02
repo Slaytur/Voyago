@@ -5,6 +5,10 @@ import type { RequestEvent } from "@sveltejs/kit";
 
 import type { User, Session } from "@prisma/client";
 
+import { writable } from "svelte/store";
+
+let userData;
+
 export function generateSessionToken (): string {
     const bytes = new Uint8Array(20);
     crypto.getRandomValues(bytes);
@@ -22,6 +26,13 @@ export async function createSession (token: string, userId: number): Promise<Ses
     await db.session.create({
         data: session
     });
+
+    userData = await db.user.findFirst({
+        where: {
+            id: userId
+        }
+    });
+
     return session;
 }
 
@@ -82,3 +93,5 @@ export function deleteSessionTokenCookie (event: RequestEvent): void {
         path: "/"
     });
 }
+
+export default userData;

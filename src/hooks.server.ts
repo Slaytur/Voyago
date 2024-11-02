@@ -6,7 +6,6 @@ import {
 
 import type { Handle } from "@sveltejs/kit";
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 export const handle: Handle = async ({ event, resolve }) => {
     const token = event.cookies.get("session") ?? null;
     if (token === null) {
