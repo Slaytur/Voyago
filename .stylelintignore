@@ -1,0 +1,9 @@
+# Node modules
+node_modules/
+
+# Ignore all files that do not contain CSS
+/*
+
+!src/*.svelte
+!src/*.scss
+!src/*.css
