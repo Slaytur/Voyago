@@ -28,12 +28,12 @@
         <p class="leading-7 text text-[18px] font-sourcesans">&rarr; something something something.</p>
         <p class="leading-7 text text-[18px] font-sourcesans">&rarr; something something something.</p>
 
-        <Button.Root
-        class="inline-flex h-12 items-center w-fit rounded-xl outline mt-4 outline-black text-black justify-center rounded-input bg-dark
+            <Button.Root href='/signin'
+            class="inline-flex h-12 items-center w-fit rounded-xl outline mt-4 outline-black text-black justify-center rounded-input bg-dark
             px-[21px] text-[15px] font-semibold shadow-mini
             hover:bg-dark/95 active:scale-98 active:transition-all"
-        >
-        Explore
+            >
+            Explore
         </Button.Root>
     </div>
 </section>
