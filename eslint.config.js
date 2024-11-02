@@ -52,16 +52,17 @@ export default tseslint.config(
             // @typescript-eslint
             ["@typescript-eslint/array-type"]: ["warn", { default: "array-simple" }],
             ["@typescript-eslint/consistent-type-definitions"]: "off",
-            ["@typescript-eslint/explicit-function-return-type"]: ["warn", {
-                allowExpressions: true,
-                allowTypedFunctionExpressions: true,
-                allowHigherOrderFunctions: true,
-                allowDirectConstAssertionInArrowFunctions: true,
-                allowConciseArrowFunctionExpressionsStartingWithVoid: false,
-                allowFunctionsWithoutTypeParameters: false,
-                allowedNames: [],
-                allowIIFEs: false
-            }],
+            ["@typescript-eslint/explicit-function-return-type"]: "off",
+            // ["warn", {
+            //     allowExpressions: true,
+            //     allowTypedFunctionExpressions: true,
+            //     allowHigherOrderFunctions: true,
+            //     allowDirectConstAssertionInArrowFunctions: true,
+            //     allowConciseArrowFunctionExpressionsStartingWithVoid: false,
+            //     allowFunctionsWithoutTypeParameters: false,
+            //     allowedNames: [],
+            //     allowIIFEs: false
+            // }],
             ["@typescript-eslint/no-confusing-void-expression"]: "off",
             ["@typescript-eslint/no-this-alias"]: "off",
             ["@typescript-eslint/no-unused-vars"]: ["warn", {

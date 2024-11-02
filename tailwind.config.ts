@@ -14,13 +14,13 @@ const config: Config = {
             }
         },
         borderWidth: {
-            DEFAULT: '1px',
-            '0': '0',
-            '1': '1px',
-            '2': '2px',
-            '3': '3px',
-            '4': '4px',
-            '6': '6px',
+            DEFAULT: "1px",
+            0: "0",
+            1: "1px",
+            2: "2px",
+            3: "3px",
+            4: "4px",
+            6: "6px"
         },
         extend: {
             colors: {
@@ -65,7 +65,7 @@ const config: Config = {
             },
             fontFamily: {
                 sans: [...fontFamily.sans],
-                sourcesans: ["Source Sans Pro", "sans"],
+                sourcesans: ["Source Sans", "sans"],
                 opensans: ["Open Sans", "sans"],
                 chewy: ["Chewy", "sans"]
             }

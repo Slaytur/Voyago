@@ -1,36 +1,29 @@
 import { db } from "$lib/server/prisma";
 import { Argon2id } from "oslo/password";
 import { redirect } from "@sveltejs/kit";
-import {
-    createSession,
-    generateSessionToken,
-    setSessionTokenCookie,
-    validateSessionToken
-} from "$lib/server/session";
-import { writable } from "svelte/store";
-
-let userId;
+import { signIn } from "@auth/sveltekit/client";
+import { AuthError } from "@auth/sveltekit";
 
 export const actions = {
     default: async ({ request, cookies }) => {
-        const data = await request.formData();
-        const { email, password } = Object.fromEntries(data) as Record<string, string>;
-        const user = await db.user.findFirst({
-            where: {
-                email: email
+        const e = await request.formData();
+        const { email, password } = Object.fromEntries(e) as Record<string, string>;
+        const data = {
+            email: email,
+            password: password
+        };
+        
+        try {
+            signIn("user", data);
+        } catch (error: any) {
+            if (error instanceof AuthError) {
+                switch (error.type) {
+                    case "CredentialsSignin":
+                        return null;
+                    default:
+                        return null;
+                }
             }
-        });
-
-        userId = user?.id;
-
-        if (!user) return null;
-
-        if (!(await new Argon2id().verify(user.password, password))) return null;
-
-        const token = generateSessionToken();
-        const session = createSession(token, Number(user.id));
-
-        await validateSessionToken(token);
-        redirect(302, "/");
+        }
     }
 };
