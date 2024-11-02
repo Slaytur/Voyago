@@ -42,8 +42,8 @@
     }}
  />
 
-<div class="min-h-screen">
-    <main>
+<div class="min-h-screen max-h-screen">
+    <main class="">
         <Header />
         <Toaster position="top-center" />
         <slot />

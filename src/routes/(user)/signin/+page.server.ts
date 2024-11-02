@@ -4,6 +4,7 @@ import { redirect } from "@sveltejs/kit";
 
 export async function load ({ locals }: RequestEvent) {
     const session = await locals.auth();
+    console.log(session);
     if (session) throw redirect(302, "/");
 
     return { providerMap };
