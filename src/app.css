@@ -82,4 +82,18 @@
     font-display: swap;
     src: url(SourceSansPro-Regular.otf) format('opentype');
   }
+  @font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(OpenSans-VariableFont_wdth,wght.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Chewy';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(Chewy-Regular.ttf) format('truetype');
+  }
 }

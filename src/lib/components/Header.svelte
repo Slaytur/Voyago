@@ -3,9 +3,9 @@
     let pathname = $page.route.id;
 </script>
 
-<header class="h-16 font-sourcesans pt-1 text-white font-bold space-x-10 flex flex-row justify-center items-center w-full">
+<header class="h-16 font-opensans pt-1 text-black font-bold space-x-10 flex flex-row shadow-sm shadow-black justify-center items-center w-full">
     <a href="/">
-        <p class="text-3xl tracking-tight">Voyago</p>
+        <p class="text-3xl tracking-wide font-chewy ">Voyago</p>
     </a>
     <a href="/travel">
         <p>Travel</p>
@@ -27,7 +27,7 @@
         </a>
     </div>
     <a href={pathname == "/" || pathname == "/(user)/register" ? "/signin" : "/register"}>
-        <div class="bg-white text-black font-bold pt-1 pb-1.5 flex flex-col justify-center items-center px-4 rounded-full w-fit">
+        <div class="outline outline-black font-bold py-1 flex flex-col justify-center items-center px-4 rounded-full w-fit">
             <p>{pathname == "/" || pathname == "/(user)/register" ? "Sign In >" : "Register >"}</p>
         </div>
     </a>

@@ -7,7 +7,7 @@
     import "../app.css";
 </script>
 
-<div class="bg-gradient-to-br from-[#252651] via-[#12162E] to-[#12162E] max-h-screen h-screen">
+<div class="min-h-screen">
     <Header />
 
     <Toaster position="top-center" />
