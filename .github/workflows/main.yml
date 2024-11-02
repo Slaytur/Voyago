@@ -10,4 +10,4 @@ jobs:
 
     steps:
       - name: Send POST request to server
-        run: curl -X POST https://voyago-refresh.namikas.dev
+        run: curl -X POST https://voyago-refresh.namikas.dev/webhook
