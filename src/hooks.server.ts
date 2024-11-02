@@ -1,1 +1,1 @@
-export { handle } from "./auth";
+export { signIn, signOut, handle } from "./auth";

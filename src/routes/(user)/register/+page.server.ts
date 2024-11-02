@@ -1,5 +1,5 @@
 import { db } from "$lib/server/prisma";
-import { Argon2id } from "oslo/password";
+import { hash } from "bcryptjs";
 import { redirect } from "@sveltejs/kit";
 
 export const actions = {
@@ -18,7 +18,7 @@ export const actions = {
             || typeof lname !== "string"
         ) return null;
 
-        const hashedPassword = await new Argon2id().hash(password);
+        const hashedPassword = await hash(password, 10);
         const user = await db.user.create({
             data: {
                 email: email,
