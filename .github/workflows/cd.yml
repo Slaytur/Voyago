@@ -11,7 +11,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    concurrency: ci-${{ github.ref }}
+    concurrency: cd-${{ github.ref }}
 
     steps:
       - name: Deploy
