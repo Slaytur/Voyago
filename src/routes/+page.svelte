@@ -8,7 +8,7 @@
 
 </script>
 
-<section class="flex w-full h-screen pt-14 flex-col">
+<section class="flex w-full h-screen pt-14 px-4 flex-col">
     <div class="absolute pt-24 mr-10 top-0 h-full bottom-0 left-0 right-0 -z-50 justify-center items-center" >
 
     </div>
@@ -16,9 +16,9 @@
         <img src={palace} alt="palace" class="h-[100%] " />
         <img src={manchu} alt="manchu peachu" class="h-[100%]" />
         <img src={city} alt="palace" class="h-full aspect-square " />
-        <img src={pyramids} alt="pyramids" class="h-[100%] " />
+        <img src={pyramids} alt="pyramids" class="h-[100%]" />
     </div>
-    <div class="h-full flex flex-col w-[500px] ml-[15%]  justify-center items-centerml-60">
+    <div class="h-full flex flex-col w-[500px] ml-[15%] justify-center items-center">
         <div class="font-sourcesans font-black text-[80px] leading-[80px] tracking-tight">Plan the next era of your
             <div class="text-[90px]">
                 <GradientText text="life" />
@@ -29,9 +29,9 @@
         <p class="leading-7 text text-[18px] font-sourcesans">&rarr; something something something.</p>
 
             <Button.Root href='/signin'
-            class="inline-flex h-12 items-center w-fit rounded-xl outline mt-4 outline-black text-black justify-center rounded-input bg-dark
-            px-[21px] text-[15px] font-semibold shadow-mini
-            hover:bg-dark/95 active:scale-98 active:transition-all"
+            class="inline-flex h-12 items-center justify-center rounded-input bg-dark
+	px-[21px] text-[15px] font-semibold text-background shadow-mini
+	hover:bg-dark/95 active:scale-98 active:transition-al"
             >
             Explore
         </Button.Root>
