@@ -1,6 +1,5 @@
 <script>
     import { Toaster } from "svelte-french-toast";
-
     import Header from "$lib/components/Header.svelte";
     import Footer from "$lib/components/Footer.svelte";
 
@@ -8,13 +7,10 @@
 </script>
 
 <div class="min-h-screen">
-    <Header />
-
-    <Toaster position="top-center" />
-
     <main>
+        <Header />
+        <Toaster position="top-center" />
         <slot />
+        <Footer />
     </main>
-
-    <Footer />
 </div>
