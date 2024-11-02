@@ -2,8 +2,8 @@
   export let text = "Gradient Text";
 </script>
 
-<div class="relative">
-  <h1 class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400  to-orange-400 animate-gradient-x">
+<div class="relative w-full h-full">
+  <h1 class="text-transparent w-full h-full pt-3 bg-clip-text bg-gradient-to-r from-pink-400  to-orange-400 animate-gradient-x">
     {text}
   </h1>
 </div>
