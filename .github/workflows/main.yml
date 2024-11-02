@@ -1,0 +1,15 @@
+name: refresh
+
+on:
+  push:
+    branches:
+      - main  # Adjust this if you want it to trigger on other branches
+
+jobs:
+  notify_server:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send POST request to server
+        run: |
+          curl -X POST https://voyago-refresh.namikas.dev -H "Content-Type: application/json" -d '{"key": "BVUmQVqAW8SeH8qtCkh8"}'
