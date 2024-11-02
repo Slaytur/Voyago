@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -73,28 +75,23 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+  
   @font-face {
-    font-family: 'Source Sans Pro';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url("src/assets/fonts/SourceSansPro-Regular.otf") format('opentype');
+    font-family: "Chewy";
+    src: local("Chewy"), url("/fonts/Chewy/Chewy-Regular.ttf");
   }
+
   @font-face {
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url("src/assets/fonts/OpenSans-VariableFont_wdth\,wght.ttf") format('truetype');
+    font-family: "Open Sans";
+    src: local("Open Sans"), url("/fonts/Open_Sans/static/OpenSans-Regular.ttf");
   }
+
   @font-face {
-    font-family: 'Chewy';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url("src/assets/fonts/Chewy-Regular.ttf") format('truetype');
+    font-family: "Source Sans";
+    src: local("Source Sans"), url("/fonts/Source_Sans_3/static/SourceSans3-Regular.ttf");
   }
 }
