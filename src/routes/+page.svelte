@@ -24,7 +24,7 @@
         </a>
     </header>
     <div class="mt-4">
-        <ScrollingBar/>
+        <ScrollingBar/> 
     </div>
     <div class="w-[530px] h-full  mt-8 ml-60">
         <div class="font-sourcesans text-white font-bold text-[80px] leading-[80px] tracking-tight">Build the next era of your
