@@ -3,9 +3,14 @@ import Credentials from "@auth/sveltekit/providers/credentials";
 import type { Provider } from "@auth/sveltekit/providers";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "$lib/server/prisma";
+<<<<<<< Updated upstream
 import { compare, hash } from "bcryptjs";
 import type { RequestEvent } from "./routes/$types";
 import { redirect } from "@sveltejs/kit";
+=======
+import { Argon2id } from "oslo/password";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+>>>>>>> Stashed changes
 
 export const hashPassword = (password: string): Promise<string> => hash(password, 10);
 
@@ -63,10 +68,26 @@ export const { signIn, signOut, handle } = SvelteKitAuth({
     providers
 });
 
+<<<<<<< Updated upstream
 export const providerMap = providers.map(provider => {
     if (typeof provider === "function") {
         const providerData = provider();
         return { id: providerData.id, name: providerData.name };
     } else
         return { id: provider.id, name: provider.name };
+=======
+                const user = await db.user.findUnique({ where: { email: credentials.email } });
+                if (user === null) return null;
+
+                /**
+                 * @note Password is base64-encoded before sending to server.
+                 */
+                const hashMatch = await new Argon2id().verify(credentials.password, user.password);
+                if (!hashMatch) throw new Error("The credentials provided do not exist.");
+
+                return user;
+            }
+        })
+    ]
+>>>>>>> Stashed changes
 });
