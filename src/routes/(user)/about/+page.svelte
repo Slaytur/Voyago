@@ -1,21 +1,21 @@
 <script>
     // Initialize formData with default values
     let formData = {
-        name: '',
-        email: '',
-        feedback: ''
+        name: "",
+        email: "",
+        feedback: ""
     };
 
     let showThankYou = false; // Controls the display of the thank-you message
 
     // Handle form submission
-    function handleSubmit(event) {
+    function handleSubmit (event) {
         event.preventDefault();
-        console.log('Form Data:', formData);
+        console.log("Form Data:", formData);
 
         // Show thank-you message and reset form data
         showThankYou = true;
-        formData = { name: '', email: '', feedback: '' };
+        formData = { name: "", email: "", feedback: "" };
 
         // Hide the thank-you message after 3 seconds
         setTimeout(() => {
