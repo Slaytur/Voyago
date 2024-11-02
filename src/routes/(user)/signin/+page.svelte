@@ -20,10 +20,6 @@
 <article>
     <div class="w-1/3 mx-auto mt-20 p-8 bg-secondary rounded-lg">
         <div>
-<<<<<<< Updated upstream
-            <img src="/favicon.png" alt="Voyago logo" class="mx-auto" />
-            <h1 class="text-center text-3xl font-bold">Sign In</h1>
-=======
             <form method="POST" class="flex flex-col bg-white text-black font-bold rounded-lg space-y-8 p-10 text-lg items-start tracking-tight">
                 <p class="text-3xl text-black tracking-tight">Login</p>
                 <label class="flex flex-col items-start">
@@ -40,7 +36,6 @@
             <a href="/signup">
                 <p class="text-white text-sm underline py-2">Don't have an account? Register </p>
             </a>
->>>>>>> Stashed changes
         </div>
         <form>
             <Label.Root for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</Label.Root>

@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-export { signIn, signOut, handle } from "./auth";
-=======
 // export { signIn, signOut, handle } from "./auth";
 
 import { createSessionClient } from "$lib/server/appwrite";
@@ -17,4 +14,3 @@ export async function handle ({ event, resolve }) {
     // Continue with the request.
     return resolve(event);
 }
->>>>>>> Stashed changes

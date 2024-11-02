@@ -1,18 +1,3 @@
-<<<<<<< Updated upstream
-import { providerMap, signIn } from "../../../auth";
-import type { Actions, RequestEvent } from "../../$types";
-import { redirect } from "@sveltejs/kit";
-
-export async function load ({ locals }: RequestEvent) {
-    const session = await locals.auth();
-    console.log(session);
-    if (session) throw redirect(302, "/");
-
-    return { providerMap };
-}
-
-export const actions: Actions = { default: signIn };
-=======
 // src/routes/signup/+page.server.js
 
 import { SESSION_COOKIE, createAdminClient } from "$lib/server/appwrite.js";
@@ -44,4 +29,3 @@ export const actions = {
         redirect(302, "/dashboard");
     }
 };
->>>>>>> Stashed changes
