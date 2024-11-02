@@ -1,6 +1,7 @@
 import { db } from "$lib/server/prisma";
 import { Argon2id } from "oslo/password";
 import { redirect } from "@sveltejs/kit";
+import { createSession, generateSessionToken, setSessionTokenCookie, validateSessionToken } from "$lib/server/session";
 
 export const actions = {
     default: async ({ request, cookies }) => {
@@ -15,6 +16,10 @@ export const actions = {
         if (!user) return null;
 
         if (!(await new Argon2id().verify(user.password, password))) return null;
+
+        const token = generateSessionToken();
+        const session = createSession(token, user.id);
+        validateSessionToken(token);
 
         redirect(302, "/");
     }
