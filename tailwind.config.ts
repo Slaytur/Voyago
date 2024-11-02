@@ -65,7 +65,7 @@ const config: Config = {
             },
             fontFamily: {
                 sans: [...fontFamily.sans],
-                sourcesans: ["Source Sans Pro", "sans"],
+                sourcesans: ["Source Sans", "sans"],
                 opensans: ["Open Sans", "sans"],
                 chewy: ["Chewy", "sans"]
             }
