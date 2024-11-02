@@ -8,7 +8,7 @@
         <ScrollingBar/>
     </div>
     <div class="w-[500px] h-full  mt-8 ml-60">
-        <div class="font-sourcesans text-white font-bold text-[80px] leading-[80px] tracking-tight">Plan the next era of your 
+        <div class="font-sourcesans text-white font-bold text-[80px] leading-[80px] tracking-tight">Plan the next era of your
             <GradientText text="life" />
         </div>
         <p class="mt-8 leading-7 text-white text text-[18px] font-bold font-sourcesans">Revolutionizing ease of travel to every part of the world.</p>

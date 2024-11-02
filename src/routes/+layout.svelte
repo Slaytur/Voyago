@@ -9,7 +9,7 @@
 
 <div class="bg-gradient-to-br from-[#252651] via-[#12162E] to-[#12162E] max-h-screen h-screen">
     <Header />
-    
+
     <Toaster position="top-center" />
 
     <main>
