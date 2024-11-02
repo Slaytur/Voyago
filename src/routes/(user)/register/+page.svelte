@@ -22,25 +22,25 @@
                 <div class="flex flex-row justify-center items-center space-x-1">
                     <label class="flex flex-col items-start">
                         First Name
-                        <input name="fname" type="text" placeholder="Charlie" class="flex border-4 border-[#6578e0] rounded-lg p-1">
+                        <input name="fname" type="text" placeholder="Charlie" class="flex border-3 border-[#42356b] rounded-lg p-1">
                     </label>
                     <label class="flex flex-col items-start">
                         Last Name
-                        <input name="lname" type="text" placeholder="Doan" class="flex border-4 border-[#6578e0] rounded-lg p-1">
+                        <input name="lname" type="text" placeholder="Doan" class="flex border-3 border-[#42356b] rounded-lg p-1">
                     </label>
                 </div>
                 <label class="flex flex-col items-start">
                     Email
-                    <input name="email" type="email" placeholder="example@example.com" class="flex border-4 border-[#6578e0] rounded-lg p-1">
+                    <input name="email" type="email" placeholder="example@example.com" class="flex border-3 border-[#42356b] rounded-lg p-1">
                 </label>
                 <label class="flex flex-col items-start">
                     Password
-                    <input name="password" type="password" placeholder="cd was here" class="flex border-4 border-[#6578e0] rounded-lg p-1">
+                    <input name="password" type="password" placeholder="cd was here" class="flex border-3 border-[#42356b] rounded-lg p-1">
                 </label>
-                <button class="border-4 border-[#6578e0] text-black font-bold rounded-full w-24">Sign in</button>
+                <button class="border-3 border-[#42356b] text-black font-bold rounded-full w-24">Register</button>
             </form>
             <a href="/signin">
-                <p class="text-white text-sm underline">Already have an account? Sign in ></p>
+                <p class="text-white text-sm underline">Already have an account? Sign in</p>
             </a>
         </div>
     </section>

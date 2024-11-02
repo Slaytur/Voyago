@@ -17,7 +17,7 @@
         </div>
 
     </div>
-    <div class=" h-full flex flex-col w-1/3 ml-[15%] justify-center items-centerml-60">
+    <div class="h-full flex flex-col w-1/3 ml-[15%] justify-center items-centerml-60">
         <div class="font-sourcesans font-bold text-[80px] leading-[80px] tracking-tight">Plan the next era of your
             <GradientText text="life" />
         </div>
