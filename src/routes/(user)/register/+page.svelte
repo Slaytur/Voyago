@@ -9,30 +9,11 @@
         text-align: center;
         justify-content: center;
         justify-items: center;
-        padding-top: 13vi;
+        padding-top: 7vi;
     }
 </style>
 
 <section>
-    <header class="h-16 font-sourcesans pt-1 text-white font-bold space-x-10 flex flex-row justify-center items-center w-full">
-        <a href="/">
-            <p class="text-3xl tracking-tight">stripe</p>
-        </a>
-        <p>Products</p>
-        <p>Solutions</p>
-        <p>Developers</p>
-        <p>Resources</p>
-        <p>Pricing</p>
-        <div class="px-28"></div>
-
-        <div><p>Contact Sales ></p></div>
-        <a href="/signin">
-            <div class="bg-white text-black font-bold pt-1 pb-1.5 flex flex-col justify-center items-center px-4 rounded-full w-fit">
-                <p> Sign in ></p>
-            </div>
-        </a>
-    </header>
-
     <section class="login">
 
         <div>
@@ -58,8 +39,8 @@
                 </label>
                 <button class="border-4 border-[#6578e0] text-black font-bold rounded-full w-24">Sign in</button>
             </form>
-            <a href="/register">
-                <p class="text-white text-sm underline">Don't have an account? Register ></p>
+            <a href="/signin">
+                <p class="text-white text-sm underline">Already have an account? Sign in ></p>
             </a>
         </div>
     </section>

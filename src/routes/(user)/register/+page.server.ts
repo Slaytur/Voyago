@@ -1,6 +1,5 @@
 import { db } from "$lib/server/prisma";
 import { Argon2id } from "oslo/password";
-import { lucia } from "$lib/server/auth.js";
 import { redirect } from "@sveltejs/kit";
 
 export const actions = {
@@ -26,12 +25,6 @@ export const actions = {
                 password: hashedPassword,
                 name: `${fname} ${lname}`
             }
-        });
-        const session = await lucia.createSession(user.id, {});
-        const sessionCookie = lucia.createSessionCookie(session.id);
-        cookies.set(sessionCookie.name, sessionCookie.value, {
-            path: ".",
-            ...sessionCookie.attributes
         });
         redirect(302, "/signin");
     }
