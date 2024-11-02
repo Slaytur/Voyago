@@ -52,10 +52,7 @@
                 name="submit"
                 value="Sign In"
                 required
-                class="inline-flex h-12 items-center justify-center rounded-input bg-dark
-        px-[21px] text-[15px] font-semibold text-background shadow-mini
-        hover:bg-dark/95 active:scale-98 active:transition-all
-        bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         
             />
         </form>
