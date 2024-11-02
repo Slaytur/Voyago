@@ -10,7 +10,7 @@
 
 <section class="flex w-full h-screen pt-14 flex-col">
     <div class="absolute pt-24 mr-10 top-0 h-full bottom-0 left-0 right-0 -z-50 justify-center items-center" >
-        
+
     </div>
     <div class="w-1/2 h-full pt-24 pb-10 pr-10 bottom-0 -z-50 top-0 right-0 absolute grid-cols-2 gap-4 grid grid-rows-2">
         <img src={palace} alt="palace" class="h-[100%] " />
