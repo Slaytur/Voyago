@@ -3,7 +3,7 @@
     let pathname = $page.route.id;
 </script>
 
-<header class="h-16 font-opensans pt-1 text-black font-bold space-x-10 flex flex-row shadow-sm shadow-black justify-center items-center w-full">
+<header class="absolute h-16 font-opensans pt-1 text-black bg-white font-bold space-x-10 flex flex-row shadow-sm shadow-black justify-center items-center w-full">
     <a href="/">
         <p class="text-3xl tracking-wide font-chewy ">Voyago</p>
     </a>
