@@ -36,8 +36,8 @@
     <section class="row tw-mt-5">
         <div class="col-sm-6">
             <h1 class="tw-text-7xl tw-font-bold tw-max-w-[500px] tw-mt-10">
-                Plan the next era of your
-                <GradientText text="life" />
+                <p use:concurrent={{ interval: 60 }}>Plan the next</p> <p use:concurrent={{ interval: 90 }}>era of your</p>
+                <GradientText interval={210} text="life" />
             </h1>
             <div class="tw-text-lg tw-my-10">
                 <p class="tw-mb-2 tw-flex">
