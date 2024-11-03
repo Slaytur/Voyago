@@ -53,7 +53,7 @@ class DataResponse(BaseModel):
     travel_tips: List[str]
     packing_list: List[str]
 
-# @app.post("/autofillPoI1", response_model=PointOfInrestResponse)
+@app.post("/autofillPoI1", response_model=PointOfInrestResponse)
 async def autofillPoI1(request: PointOfInrest1Request):
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
