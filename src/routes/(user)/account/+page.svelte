@@ -4,7 +4,7 @@
     const { user } = data;
 </script>
 
-<ul class="pt-14">
+<ul class="tw-pt-14">
     <li>
         <strong>Email:</strong> {user.email}
     </li>
@@ -16,6 +16,6 @@
     </li>
 </ul>
 
-<form method="post">
+<form method="POST">
     <button type="submit">Log out</button>
 </form>

@@ -1,7 +1,7 @@
 <script lang="ts">
     export let data;
   
-    const { user, documents} = data
+    const { user, documents } = data;
 
     function convertToDate (date: string) {
       return date.slice(0, date.indexOf("T"));
@@ -23,7 +23,7 @@
         <button class="tw-text-black tw-outline-[#A295CB] tw-outline tw-outline-2 tw-shadow-lg focus:tw-ring-4 focus:tw-outline-none tw-font-medium tw-rounded-full tw-text-xl tw-w-full sm:tw-w-auto tw-px-10 tw-py-2.5 tw-text-center">Create an Itinerary</button>
     </a>
 
-    <h2 class="tw-pt-8 tw-text-[40px] tw-font-semibold">Itineraries: </h2>
+    <h2 class="tw-pt-8 tw-text-[40px] tw-font-semibold">Itineraries:</h2>
     <ul class="tw-my-8 tw-space-y-4 tw-flex tw-flex-col tw-justify-center tw-items-center">
         {#if documents && documents.length > 0}
         {#each documents as document}
@@ -36,4 +36,3 @@
         {/if}
     </ul>
 </section>
-    

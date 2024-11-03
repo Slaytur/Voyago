@@ -20,7 +20,7 @@
                 <input type="email" class="form-control" placeholder="Email address" autocomplete="email" required />
             </div>
             <div class="tw-mb-4">
-                <label for="inputPassword4" class="form-label">Password</label>
+                <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" placeholder="Enter password" autocomplete="new-password" required />
             </div>
             <input type="submit" value="Log In" class="btn tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white" />

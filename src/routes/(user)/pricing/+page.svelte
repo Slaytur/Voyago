@@ -7,9 +7,6 @@
 </script>
 
 <article>
-                <div>
-                <div>
-                <div>
     <h1 class="tw-text-7xl tw-font-bold tw-text-center tw-mt-20 tw-mb-5" use:concurrent={{ interval: 210 }}>World-class <span class="tw-text-accent">adventures</span> within reach</h1>
     <h2 class="tw-text-3xl tw-font-bold tw-text-center tw-text-primary">Transparent pricing that fits your budget</h2>
     <div class="row row-cols-1 row-cols-md-4 tw-text-center tw-mt-20 container tw-mx-auto">

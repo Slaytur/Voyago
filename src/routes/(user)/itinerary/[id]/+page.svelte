@@ -34,23 +34,18 @@
     if (currentSequence.length > 0) {
         titles.push(currentSequence);
     }
-    console.log(titles)
-
-
-    // console.log(id);
-
 </script>
-<section class="pt-24 px-10 w-full h-screen flex flex-col overflow-scroll">
-    <h1 class=" text-[50px] font-opensans"><b>Trip</b>: {document.Name}</h1>
+<section class="tw-pt-24 tw-px-10 tw-w-full tw-h-screen tw-flex tw-flex-col tw-overflow-scroll">
+    <h1 class="tw-text-[50px] tw-font-opensans"><b>Trip</b>: {document.Name}</h1>
     {#each titles as titleArray}
     <!-- Title (First item in titleArray) -->
 
     <br>
-    <h1 class="flex flex-col text-3xl">{titleArray[0]}</h1>
+    <h1 class="tw-flex tw-flex-col tw-text-3xl">{titleArray[0]}</h1>
     <!-- Lines (Remaining items in titleArray) -->
         <div class="">
             {#each titleArray.slice(1) as line}
-            <p class="text-xl font-opensans ml-7 text-gray-500">{line}</p>
+            <p class="tw-text-xl tw-font-opensans tw-ml-7 tw-text-gray-500">{line}</p>
             {/each}
         </div>
             

@@ -31,11 +31,11 @@
             </div>
             <div class="row g-2 tw-mb-4">
                 <div class="col-md-6">
-                    <label for="inputPassword4" class="form-label">Password</label>
+                    <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" placeholder="Enter password" autocomplete="new-password" required />
                 </div>
                 <div class="col-md-6">
-                    <label for="inputPassword4" class="form-label">Confirm Password</label>
+                    <label for="password" class="form-label">Confirm Password</label>
                     <input type="password" class="form-control" placeholder="Confirm password" autocomplete="new-password" required />
                 </div>
             </div>
