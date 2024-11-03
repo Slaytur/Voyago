@@ -422,7 +422,7 @@
           
         <h1>Enter your vacation length (in days):</h1>
         <input type="number" bind:value={vacationLength} placeholder="Enter days" min="1" class="border rounded-md p-2 w-[100px]" />
-        <button type="submit" on:click={submit} class="text-white bg-[#A295CB] hover:bg-[#b6a0ff] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <button hidden={activityList.length > 0 && selectedRegion && selectedAttraction && nearAttractions.length > 0 && travelPace && date && vacationLength ? false : true} type="submit" on:click={submit} class="text-white bg-[#A295CB] hover:bg-[#b6a0ff] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           Submit
       </button>
     </div>
