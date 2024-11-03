@@ -42,7 +42,7 @@
         {#if documents && documents.length > 0}
         {#each documents as document}
         <li class="pt-2">
-          <button class="text-white bg-[#A295CB]  focus:ring-4 focus:outline-none  font-medium rounded-full text-sm w-full sm:w-auto px-10 py-2.5 text-center" text={document.Name} href=`/itinerary/${document.$id}` />
+          <a href={`/itineraries/${document.$id}`}><button class="text-white bg-[#A295CB]  focus:ring-4 focus:outline-none  font-medium rounded-full text-sm w-full sm:w-auto px-10 py-2.5 text-center" >{document.Name}</button></a>
         </li>
         {/each}
         {:else}
