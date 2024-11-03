@@ -41,9 +41,42 @@
     let travelPace: string | null = null;
     let vacationLength: number | null = null;
 
-    function onRegionSelect(value: string) {
+    async function onRegionSelect(value: string) {
         selectedRegion = regions.find(region => region.value === value) || null;
-        attractions = [{ value: "United States", label: "United States" }, { value: "Canada / Greenland", label: "Canada / Greenland" }];
+        console.log(selectedRegion);
+        if (!selectedRegion){
+            attractions = [];
+            selectedAttraction = null;
+            return
+        }
+        const token = 'i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR';
+        try {
+            const response = await fetch("https://voyago-backend.namikas.dev/autofillPoI1", {
+                // mode: 'no-cors',
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    region: selectedRegion.value,
+                    interests: activityList.join(", "),
+                    token: token
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+            
+            const major_attractions = await response.json();
+            console.log(major_attractions);
+
+        } catch (error) {
+            console.error("Failed to fetch attractions:", error);
+            attractions = [];  // Return an empty array in case of an error to match original behavior
+        }
+
         selectedAttraction = null;
     }
 
@@ -76,8 +109,34 @@
     }
 </script>
 
-<div class="flex flex-col justify-center items-center py-16">
+<div class="flex flex-col w-full justify-center items-center py-16">
     <div class="sele pt-14 flex ml-7 max-w-[40%] flex-col space-y-4 justify-center">
+        <h1>Enter your planned activities/interests:</h1>
+        <div class="flex items-center space-x-2">
+            <input
+                type="text"
+                bind:value={activities}
+                placeholder="e.g., hiking, museum visit"
+                class="border rounded-md p-2"
+            />
+            <Button.Root on:click={addActivity} class="border rounded-md bg-green p-2">
+                Enter
+            </Button.Root>
+        </div>
+        <!-- Display the list of activities with remove buttons -->
+        {#if activityList.length > 0}
+            <ul class="mt-4 space-y-2">
+                {#each activityList as activity, index}
+                    <li class="flex items-center space-x-2">
+                        <span>{activity}</span>
+                        <Button.Root on:click={() => removeActivity(index)} class="border rounded-md bg-red p-1 ">
+                            X
+                        </Button.Root>
+                    </li>
+                {/each}
+            </ul>
+        {/if}
+
         <!-- Region selection -->
         <Select.Root items={regions} on:ValueChange={e => onRegionSelect(e.detail.value)}>
             <h1>Choose a region:</h1>
@@ -154,32 +213,8 @@
 
     <!-- User inputs: Activities, Travel Pace, and Vacation Length -->
     <div class="sele pt-14 flex ml-7 flex-col space-y-4">
-        <h1>Enter your planned activities:</h1>
-        <div class="flex items-center space-x-2">
-            <input
-                type="text"
-                bind:value={activities}
-                placeholder="e.g., hiking, museum visit"
-                class="border rounded-md p-2"
-            />
-            <Button.Root on:click={addActivity} class="border rounded-md bg-green p-2">
-                Enter
-            </Button.Root>
-        </div>
 
-        <!-- Display the list of activities with remove buttons -->
-        {#if activityList.length > 0}
-            <ul class="mt-4 space-y-2">
-                {#each activityList as activity, index}
-                    <li class="flex items-center space-x-2">
-                        <span>{activity}</span>
-                        <Button.Root on:click={() => removeActivity(index)} class="border rounded-md bg-red p-1 ">
-                            X
-                        </Button.Root>
-                    </li>
-                {/each}
-            </ul>
-        {/if}
+        
 
         <h1>What is your preferred travel pace?</h1>
         <Select.Root items={[{ value: "Relaxed", label: "Relaxed" }, { value: "Moderate", label: "Moderate" }, { value: "Packed", label: "Packed" }]} on:ValueChange={e => travelPace = e.detail.value}>
