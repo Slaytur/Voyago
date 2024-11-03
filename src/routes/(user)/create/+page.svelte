@@ -182,6 +182,7 @@
                     interests: activityList.join(", "),
                     location: selectedRegion?.value,
                     date: date,
+                    name: name,
                     date_length: vacationLength as unknown as string,
                     token: token
                 })
