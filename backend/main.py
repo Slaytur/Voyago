@@ -123,7 +123,7 @@ async def root(request: DataRequest):
     # Run all async functions concurrently
     weather, packing_list, travel_tips, itinerary = await asyncio.gather(
         get_weather(request.points_of_interest, request.location, request.date),
-        get_packing_list(request.points_of_interest, request.location, request.date),
+        get_packing_list(request.points_of_interest, request.location, request.date, request.date_length),
         get_travel_tips(request.points_of_interest),
         get_itinerary(request.interests, request.points_of_interest, request.location, request.date, request.date_length)
     )
