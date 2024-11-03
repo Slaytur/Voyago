@@ -49,15 +49,15 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <img src={Logo} alt="Voyago logo" width="30" height="24" class="d-inline-block align-text-top">
+            <a class="navbar-brand tw-font-chewy" href="/">
+                <img src={Logo} alt="Voyago logo" width="30" height="24" class="d-inline-block align-text-top hover:tw-rotate-90 tw-transition-all">
                 Voyago
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav tw-font-medium">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
                     </li>
@@ -68,7 +68,7 @@
                         <a class="nav-link" href="/pricing">Pricing</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact">Contact</a>
+                        <a class="nav-link" href="/about">About</a>
                     </li>
                 </ul>
             </div>
