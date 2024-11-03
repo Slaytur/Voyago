@@ -20,7 +20,7 @@
             <h1 class="text-center text-3xl font-bold">Register</h1>
         </div>
         <br>
-        <form method="POST" action="?/signup" on:submit|preventDefault={submit}>
+        <form method="POST" action="?/signup">
             <div class="grid gap-6 md:grid-cols-2">
                 <div>
                     <Label.Root for="fname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</Label.Root>
@@ -106,7 +106,7 @@
                 </Label.Root>
             </div>
             <br>
-            <Button.Root class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register</Button.Root>
+            <Button.Root type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register</Button.Root>
         </form>
     </div>
 </article>
