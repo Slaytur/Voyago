@@ -39,7 +39,7 @@
     let profile = "pavel";
 </script>
 
-<Menubar.Root class="flex w-full fixed bg-white h-14 items-center gap-1 rounded-10px border border-dark-10 bg-background-alt px-[3px] shadow-mini">
+<Menubar.Root class="flex w-full fixed bg-white h-14 z-50 items-center gap-1 rounded-10px border border-dark-10 bg-background-alt px-[3px] shadow-mini">
     <div class="px-2.5">
         <a href="/" class="flex">
             <Icon classes="size-6" />

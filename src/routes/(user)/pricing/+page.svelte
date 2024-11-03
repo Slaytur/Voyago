@@ -1,10 +1,11 @@
 <script lang="ts">
     import { Button } from "bits-ui";
     import GradientText from "$lib/components/GradientText.svelte";
-    import personal from "$lib/images/personal.png";
-    import pro from "$lib/images/pro.png";
-    import team from "$lib/images/team.png";
-    import enterprise from "$lib/images/enterprise.png";
+    import enterprise from "$lib/images/enterprise.png"
+    import team from "$lib/images/team.png"
+    import pro from "$lib/images/pro.png"
+    import personal from "$lib/images/personal.png"
+
 </script>
 
 <style>
@@ -20,7 +21,7 @@
       border: 5px solid black;
       border-radius: 30px;
       width: 300px;
-      height: 300px;
+      height: 380px;
     }
     .text {
       display: flex;
@@ -61,55 +62,70 @@
     </section>
     <div class="prices space-x-10">
       <section class="login black">
-          <div class="box flex flex-col items-start p-6">
+          <div class="box flex flex-col items-center p-6">
               <img src={personal} class="w-12 h-12" alt="StarterImg"/>
               <h1 class=" mt-1.5">STARTER</h1>
               <h1 class=" text-[50px]  -mt-2 font-bold">$0</h1>
               <p class='mb-4'>
                   Your first itinerary is free!
               </p>
-              <p>
-                  You’re going to love it.
+              <p class="px-2">
+                You’re going to love it.
               </p>
+                <button class="text-white bg-[#A295CB]  focus:ring-4 focus:outline-none  font-medium rounded-full text-sm w-full sm:w-auto px-10 py-2.5 absolute bottom-24 text-center">
+                    Get Started
+                </button>
           </div>
+
       </section>
       <section class="login black">
-          <div class="box flex flex-col items-start p-6">
-              <img src={pro} class="w-12 h-12"/>
+          <div class="box flex flex-col items-center p-6">
+              <img src={pro} alt='pro' class="w-12 h-12"/>
               <h1 class=" mt-1.5">EXPLORER</h1>
               <h1 class=" text-[50px]  -mt-2 font-bold">$5</h1>
               <p class='mb-4'>
                   15 itineraries
               </p>
-              <p>
+              <p class="px-2">
                   For the curious traveler, dipping their toes in adventure.
               </p>
+              <button class="text-white absolute bottom-24 bg-[#A295CB]  focus:ring-4 focus:outline-none  font-medium rounded-full text-sm w-full sm:w-auto px-10 py-2.5 text-center">
+                Get Started
+                </button>
+
           </div>
       </section>
       <section class="login black">
-          <div class="box flex flex-col items-start p-6">
-              <img src={team} class="w-12 h-12"/>
+          <div class="box flex flex-col items-center p-6">
+              <img src={team} alt='team' class="w-12 h-12"/>
               <h1 class=" mt-1.5">VOYAGER</h1>
               <h1 class=" text-[50px]  -mt-2 font-bold">$15</h1>
               <p class='mb-4'>
                   30 itineraries
               </p>
-              <p>
-                  For the avid explorer, ready to roam further.
+              <p class="px-3">
+                For the avid explorer, ready to roam further.
               </p>
+              <button class="text-white bg-[#A295CB]  focus:ring-4 focus:outline-none  font-medium rounded-full text-sm w-full sm:w-auto px-10 py-2.5 absolute bottom-24 text-center">
+                Get Started
+            </button>
           </div>
       </section>
       <section class="login black">
-          <div class="box flex flex-col items-start p-6">
-              <img src={enterprise} class="w-12 h-12"/>
-              <h1 class=" mt-1.5">VETERAN</h1>
-              <h1 class=" text-[50px]  -mt-2 font-bold">$30</h1>
-              <p class='mb-4'>
-                  60 itineraries
-              </p>
-              <p>
-                  For the seasoned adventurer, conquering every corner of the map.
-              </p>
+          <div class="box flex flex-col items-center p-6">
+                <img src={enterprise} alt='enterprise' class="w-12 h-12"/>
+                <h1 class=" mt-1.5">VETERAN</h1>
+                <h1 class=" text-[50px]  -mt-2 font-bold">$30</h1>
+                <p class='mb-4'>
+                    60 itineraries
+                </p>
+                <p class="px-3">
+                For the seasoned adventurer, conquering every corner of the map.
+                </p>
+                <button class="text-white bg-[#A295CB]  focus:ring-4 focus:outline-none  font-medium rounded-full text-sm w-full sm:w-auto px-10 py-2.5 absolute bottom-24 text-center">
+                Get Started
+                </button>
+
           </div>
       </section>
     </div>
