@@ -97,7 +97,7 @@
             
             const major_attractions = await response.json();
             console.log(major_attractions);
-            let attractionstemp: Attraction[] = major_attractions.data.map(location => ({ value: location }));
+            let attractionstemp: Attraction[] = major_attractions.data.map((location: any) => ({ value: location }));
             attractions = attractionstemp;
             console.log(attractions)
 
@@ -136,7 +136,7 @@
             
             const near_attractions = await response.json();
             console.log(near_attractions);
-            let nearattractionstemp: Attraction[] = near_attractions.data.map(location => ({ value: location }));
+            let nearattractionstemp: Attraction[] = near_attractions.data.map((location: any) => ({ value: location }));
             nearAttractions = nearattractionstemp;
             selectedNearAttractions = [selectedAttraction];
             console.log(nearAttractions)
@@ -165,6 +165,42 @@
     function removeActivity(index: number) {
         activityList = activityList.filter((_, i) => i !== index);
     }
+
+    function changeDate(e: any) {
+        date = e.month + "-" + e.day + "-" + e.year;
+    }
+
+    async function submit() {
+      const token = 'i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR';
+        try {
+            const response = await fetch("https://voyago-backend.namikas.dev/create-itinerary", {
+                // mode: 'no-cors',
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    points_of_interest: nearAttractions.join(", "),
+                    interests: activityList.join(", "),
+                    location: selectedRegion?.value,
+                    date: date,
+                    date_length: vacationLength as unknown as string,
+                    token: token
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+            
+            const res = await response.json();
+            console.log(res);
+
+        } catch (error) {
+            console.error("Failed to fetch itinerary:", error);
+        }
+    }
 </script>
 
 <div class="flex flex-col w-full justify-center items-center py-16">
@@ -177,6 +213,7 @@
                 bind:value={activities}
                 placeholder="e.g., hiking, museum visit"
                 class="border rounded-md p-2"
+                required
             />
             <Button.Root on:click={addActivity} class="border rounded-md bg-green p-2">
                 Enter
@@ -264,7 +301,7 @@
         
 
         <h1>What is your preferred travel pace?</h1>
-        <Select.Root items={[{ value: "Relaxed"}, { value: "Moderate"}, { value: "Packed"}]} onSelectedChange={e => travelPace = e.value}>
+        <Select.Root items={[{ value: "Relaxed"}, { value: "Moderate"}, { value: "Packed"}]} onSelectedChange={e => travelPace = e!.value}>
             <Select.Trigger class="inline-flex h-10 w-[296px] items-center rounded-md border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background">
                 <Select.Value class="text-sm text-muted-foreground" placeholder="Select a travel pace" />
             </Select.Trigger>
@@ -278,7 +315,7 @@
         </Select.Root>
 
         
-        <DatePicker.Root weekdayFormat="short" fixedWeeks={true} onValueChange={e => date = String(e.month) + "/" + String(e.day) + "/" + String(e.year)}>
+        <DatePicker.Root weekdayFormat="short" fixedWeeks={true} onValueChange={e => date = String(e?.month) + "/" + String(e?.day) + "/" + String(e?.year)}>
             <div class="flex w-full max-w-[232px] flex-col gap-1.5">
               <DatePicker.Label class="block select-none text-sm font-medium"
                 >Approximate travel Date</DatePicker.Label
@@ -385,10 +422,8 @@
           
         <h1>Enter your vacation length (in days):</h1>
         <input type="number" bind:value={vacationLength} placeholder="Enter days" min="1" class="border rounded-md p-2 w-[100px]" />
-        {#if selectedNearAttractions.length > 0 && activityList.length > 0 && travelPace && vacationLength && date}
-            <Button.Root color="green" class="border rounded-md ml-3 bg-green w-fit p-2" on:click={makeRoute(selectedNearAttractions, activityList, selectedRegion, date, vacationLength)}>
-                Continue
-            </Button.Root>
-        {/if}
+        <button type="submit" on:click={submit} class="text-white bg-[#A295CB] hover:bg-[#b6a0ff] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          Submit
+      </button>
     </div>
 </div>
