@@ -27,8 +27,8 @@ app.add_middleware(
 )
 
 class DataRequest(BaseModel):
-    points_of_interest: list[str]
-    interests: list[str]
+    points_of_interest: str
+    interests: str
     location: str
     date: str
     date_length: str
