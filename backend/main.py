@@ -120,8 +120,8 @@ async def root(request: DataRequest):
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
 
-    weather = await get_weather(request.points_of_interest, request.location, request.date)
-    packing_list = await get_packing_list(request.points_of_interest, request.location, request.date, request.date_length)
+    weather = ""#await get_weather(request.points_of_interest, request.location, request.date)
+    packing_list = []#await get_packing_list(request.points_of_interest, request.location, request.date, request.date_length)
     travel_tips = []#await get_travel_tips(request.points_of_interest)
     itinerary = await get_itinerary(request.interests, request.points_of_interest, request.location, request.date, request.date_length)
 
