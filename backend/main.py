@@ -20,12 +20,12 @@ app = FastAPI(title="python backend")
 
 class DataRequest(BaseModel):
     points_of_interest: list[str]
-    interest: list[str]
+    interests: list[str]
     location: str
     date: str
     date_length: str
     token: str
-    
+
 class DataResponse(BaseModel):
     itinerary: str
     weather: str
@@ -38,7 +38,7 @@ async def root(request: DataRequest):
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
     task1 = asyncio.create_task(get_travel_tips(request.points_of_interest))
-    task2 = asyncio.create_task(get_itinerary(request.interest, request.points_of_interest, request.location, request.date, request.date_length))
+    task2 = asyncio.create_task(get_itinerary(request.interests, request.points_of_interest, request.location, request.date, request.date_length))
     
     weather = get_weather(request.points_of_interest, request.location, request.date)
     packing_list = get_packing_list(request.points_of_interest, request.location, request.date, request.date_length)
