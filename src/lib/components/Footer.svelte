@@ -20,24 +20,24 @@
             <div class="col-6 col-md-2 mb-3">
                 <h5 class="tw-text-[1.25rem] tw-font-medium">Info</h5>
                 <ul class="nav flex-column">
-                    <a href="/itineraries">Itineraries</a>
+                    <a href="/create">Itineraries</a>
                     <a href="/pricing">Pricing</a>
-                    <a href="/services">Services</a>
+                    <a href="/dashboard">Dashboard</a>
                 </ul>
             </div>
 
             <div class="col-6 col-md-2 mb-3">
                 <h5 class="tw-text-[1.25rem] tw-font-medium">About</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="/about" class="nav-link p-0 text-body-secondary">About</a></li>
+                    <li class="nav-item mb-2"><a href="/feedback" class="nav-link p-0 text-body-secondary">Feedback</a></li>
                 </ul>
             </div>
 
             <div class="col-6 col-md-2 mb-3">
                 <h5>Legal</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="/terms_of_service" class="nav-link p-0 text-body-secondary">Terms of Service</a></li>
-                    <li class="nav-item mb-2"><a href="/privacy_policy" class="nav-link p-0 text-body-secondary">Privacy Policy</a></li>
+                    <li class="nav-item mb-2"><a href="https://voyago.namikas.dev" class="nav-link p-0 text-body-secondary">Terms of Service</a></li>
+                    <li class="nav-item mb-2"><a href="https://saselsu.org" class="nav-link p-0 text-body-secondary">Privacy Policy</a></li>
                 </ul>
             </div>
 
@@ -62,29 +62,3 @@
         </div>
     </div>
 </footer>
-
-<!--
-<div class="foot">
-    <footer class="foot flex flex-row justify-between items-start h-16 bg-white rounded px-16 text-[14px] py-2">
-        <div class="flex flex-col justify-start">
-            <h1 class="font-bold">Products & Pricing</h1>
-            <div class="flex flex-col text-[12px]">
-                <a href="/itineraries">Itineraries</a>
-                <a href="/pricing">Pricing</a>
-                <a href="/services">Services</a>
-            </div>
-        </div>
-        <div class="flex flex-col justify-center text-[14px]">
-            <h1 class="font-bold">About</h1>
-            <div class="flex flex-col text-[12px]">
-                <a href="/about">About</a>
-            </div>
-        </div>
-        <div class="flex flex-col justify-center text-[14px]">
-            <h1 class="font-bold">Privacy</h1>
-            <div class="flex flex-col text-[12px]">
-                <a href="https://www.saselsu.org">Privacy Statement</a>
-            </div>
-        </div>
-    </footer>
-</div> -->
