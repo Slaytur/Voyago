@@ -28,15 +28,15 @@
                         <a class="nav-link" href="/pricing">Pricing</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/about">About</a>
+                        <a class="nav-link" href="/feedback">Feedback</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto tw-font-medium">
                     <li class="nav-item tw-me-2">
-                        <a href="/signup" class="btn tw-bg-secondary tw-text-white hover:tw-bg-secondaryForeground hover:tw-text-white">Sign Up</a>
+                        <a href="/signup" class="btn tw-bg-primary tw-text-white hover:tw-bg-primaryForeground hover:tw-text-white">Sign Up</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/signin" class="btn tw-bg-secondary tw-text-white hover:tw-bg-secondaryForeground hover:tw-text-white">Sign In</a>
+                        <a href="/signin" class="btn tw-bg-primary tw-text-white hover:tw-bg-primaryForeground hover:tw-text-white">Sign In</a>
                     </li>
                 </ul>
             </div>
