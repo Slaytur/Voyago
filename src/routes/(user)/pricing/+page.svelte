@@ -1,125 +1,70 @@
 <script lang="ts">
-    import { Button } from "bits-ui";
-    import GradientText from "$lib/components/GradientText.svelte";
-    import enterprise from "$lib/images/enterprise.png"
-    import team from "$lib/images/team.png"
-    import pro from "$lib/images/pro.png"
-    import personal from "$lib/images/personal.png"
-
+    import Personal from "$lib/images/personal.png";
+    import Pro from "$lib/images/pro.png";
+    import Team from "$lib/images/team.png";
+    import Enterprise from "$lib/images/enterprise.png";
 </script>
 
-<style>
-    .login {
-        display: flex;
-        align-items: center;
-        text-align: center;
-        justify-content: center;
-        justify-items: center;
-        padding-top: 1vi;
-    }
-    .box {
-      border: 5px solid black;
-      border-radius: 30px;
-      width: 300px;
-      height: 380px;
-    }
-    .text {
-      display: flex;
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      justify-items: center;
-    }
-    #grad {
-      padding: 0px 30px 0px; 
-    }
-    .prices {
-      display: flex;
-      justify-content: center;
-      justify-items: center;
-      align-items: center;
-      padding-left: 30px;
-    }
-</style>
-
-<section class="py-40 font-opensans">
-    <section class="top">
-      <div class="text text-[60px] font-bold">
-        World-class 
-        <div id="grad" class="text">
-            <GradientText interval={210} text="adventures" />
+<article class="">
+    <h1 class="tw-text-7xl tw-font-bold tw-text-center tw-mt-20 tw-mb-5">World-class <span class="tw-text-accent">adventures</span> within reach</h1>
+    <h2 class="tw-text-3xl tw-font-bold tw-text-center tw-text-primary">Transparent pricing that fits your budget</h2>
+    <div class="row row-cols-1 row-cols-md-4 tw-text-center tw-mt-20 container tw-mx-auto">
+        <div class="col">
+            <div class="card card-body tw-mb-4 tw-rounded-[3px] tw-shadow-sm">
+                <img src={Personal} alt="" class="tw-mx-auto">
+                <h3 class="tw-text-2xl tw-text-primary tw-uppercase">Starter</h3>
+                <h3 class="card-title tw-text-4xl tw-font-bold">$0</h3>
+                <span class="tw-text-2xl tw-text-primary">1 itinerary</span>
+                <hr class="tw-my-4">
+                <ul class="tw-list-none">
+                    <li>Your first itinerary is free!</li>
+                    <li>You're going to love it.</li>
+                </ul>
+                <hr class="tw-my-4">
+                <button class="btn tw-bg-secondary tw-text-white tw-font-semibold">Sign Up</button>
+            </div>
         </div>
-          within reach
-      </div>
-      <h2 class="text text-[26px] font-bold tracking-wide mb-10">Transparent pricing that fits your budget</h2>
-    </section>
-    <div class="prices space-x-10">
-      <section class="login black">
-          <div class="box flex flex-col items-center p-6">
-              <img src={personal} class="w-12 h-12" alt="StarterImg"/>
-              <h1 class=" mt-1.5">STARTER</h1>
-              <h1 class=" text-[50px]  -mt-2 font-bold">$0</h1>
-              <p class='mb-4'>
-                  Your first itinerary is free!
-              </p>
-              <p class="px-2">
-                You’re going to love it.
-              </p>
-                <button class="text-white bg-[#A295CB]  focus:ring-4 focus:outline-none  font-medium rounded-full text-sm w-full sm:w-auto px-10 py-2.5 absolute bottom-24 text-center">
-                    Get Started
-                </button>
-          </div>
-
-      </section>
-      <section class="login black">
-          <div class="box flex flex-col items-center p-6">
-              <img src={pro} alt='pro' class="w-12 h-12"/>
-              <h1 class=" mt-1.5">EXPLORER</h1>
-              <h1 class=" text-[50px]  -mt-2 font-bold">$5</h1>
-              <p class='mb-4'>
-                  15 itineraries
-              </p>
-              <p class="px-2">
-                  For the curious traveler, dipping their toes in adventure.
-              </p>
-              <button class="text-white absolute bottom-24 bg-[#A295CB]  focus:ring-4 focus:outline-none  font-medium rounded-full text-sm w-full sm:w-auto px-10 py-2.5 text-center">
-                Get Started
-                </button>
-
-          </div>
-      </section>
-      <section class="login black">
-          <div class="box flex flex-col items-center p-6">
-              <img src={team} alt='team' class="w-12 h-12"/>
-              <h1 class=" mt-1.5">VOYAGER</h1>
-              <h1 class=" text-[50px]  -mt-2 font-bold">$15</h1>
-              <p class='mb-4'>
-                  30 itineraries
-              </p>
-              <p class="px-3">
-                For the avid explorer, ready to roam further.
-              </p>
-              <button class="text-white bg-[#A295CB]  focus:ring-4 focus:outline-none  font-medium rounded-full text-sm w-full sm:w-auto px-10 py-2.5 absolute bottom-24 text-center">
-                Get Started
-            </button>
-          </div>
-      </section>
-      <section class="login black">
-          <div class="box flex flex-col items-center p-6">
-                <img src={enterprise} alt='enterprise' class="w-12 h-12"/>
-                <h1 class=" mt-1.5">VETERAN</h1>
-                <h1 class=" text-[50px]  -mt-2 font-bold">$30</h1>
-                <p class='mb-4'>
-                    60 itineraries
-                </p>
-                <p class="px-3">
-                For the seasoned adventurer, conquering every corner of the map.
-                </p>
-                <button class="text-white bg-[#A295CB]  focus:ring-4 focus:outline-none  font-medium rounded-full text-sm w-full sm:w-auto px-10 py-2.5 absolute bottom-24 text-center">
-                Get Started
-                </button>
-
-          </div>
-      </section>
+        <div class="col">
+            <div class="card card-body tw-mb-4 tw-rounded-[3px] tw-shadow-sm">
+                <img src={Pro} alt="" class="tw-mx-auto">
+                <h3 class="tw-text-2xl tw-text-primary tw-uppercase">Explorer</h3>
+                <h3 class="card-title tw-text-4xl tw-font-bold">$5</h3>
+                <span class="tw-text-2xl tw-text-primary">10 itineraries</span>
+                <hr class="tw-my-4">
+                <ul class="tw-list-none">
+                    <li>For the curious traveler, dipping their toes in adventure.</li>
+                </ul>
+                <hr class="tw-my-4">
+                <button class="btn tw-bg-secondary tw-text-white tw-font-semibold">Get Started</button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card card-body tw-mb-4 tw-rounded-[3px] tw-shadow-sm">
+                <img src={Team} alt="" class="tw-mx-auto">
+                <h3 class="tw-text-2xl tw-text-primary tw-uppercase">Voyager</h3>
+                <h3 class="card-title tw-text-4xl tw-font-bold">$15</h3>
+                <span class="tw-text-2xl tw-text-primary">30 itineraries</span>
+                <hr class="tw-my-4">
+                <ul class="tw-list-none">
+                    <li>For the avid explorer, ready to roam further.</li>
+                </ul>
+                <hr class="tw-my-4">
+                <button class="btn tw-bg-secondary tw-text-white tw-font-semibold">Get Started</button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card card-body tw-mb-4 tw-rounded-[3px] tw-shadow-sm tw-border-accent">
+                <img src={Enterprise} alt="" class="tw-mx-auto">
+                <h3 class="tw-text-2xl tw-text-primary tw-uppercase">Veteran</h3>
+                <h3 class="card-title tw-text-4xl tw-font-bold">$25</h3>
+                <span class="tw-text-2xl tw-text-primary">60 itineraries</span>
+                <hr class="tw-my-4">
+                <ul class="tw-list-none">
+                    <li>For the seasoned adventurer, conquering every corner of the map.</li>
+                </ul>
+                <hr class="tw-my-4">
+                <button class="btn tw-bg-accent tw-text-white tw-font-semibold">Get Started</button>
+            </div>
+        </div>
     </div>
-</section>
+</article>

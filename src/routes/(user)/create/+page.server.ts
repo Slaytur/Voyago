@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // src/routes/signup/+page.server.js
 
 import { SESSION_COOKIE, createAdminClient, createDatabaseClient } from "$lib/server/appwrite.js";
@@ -26,7 +27,6 @@ export const actions = {
         };
 
         const doc = await dbaccount.createDocument("6726c103000d53b938ab", "6726c10f0033575af875", ID.unique(), data);
-
 
         // Redirect to the account page.
         redirect(302, "/dashboard");

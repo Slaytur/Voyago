@@ -1,6 +1,6 @@
 <script lang="ts">
     import GradientText from "$lib/components/GradientText.svelte";
-    
+
     import palace from "$lib/images/Palace-modified.png";
     import manchu from "$lib/images/Machu_Picchu_Peru-modified.png";
     import city from "$lib/images/unsplash_allwyway-modified.png";

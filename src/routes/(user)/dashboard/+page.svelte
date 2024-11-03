@@ -1,5 +1,3 @@
-
-  
   <!-- <ul class="pt-14">
     <li>
       <strong>Email:</strong> {user.email}
@@ -15,11 +13,11 @@
   <form method="post">
     <button type="submit">Log out</button>
   </form> -->
-  
+
 <script lang="ts">
     export let data;
-  
-    const { user, documents} = data
+
+    const { user, documents } = data;
 
 </script>
 
@@ -32,26 +30,25 @@
     }
 </style>
 <section class="flex justify-center space-x-6 pt-14 flex-col">
-    
+
     <a href='/create'>
-    create
+        create
     </a>
 
     <h2 class="pt-8">Itineraries: </h2>
     <ul class="my-8 space-y-4">
         {#if documents && documents.length > 0}
-        {#each documents as document}
-        <li class="pt-2">
-            <strong>Title:</strong> {document.Name} <br>
-            <strong>Itinerary:</strong> {document.Itinerary} <br>
-            <strong>Weather:</strong> {document.weather} <br>
-            <strong>Packing List:</strong> {document.packing_list.join(", ")} <br>
-            <strong>Travel Tips:</strong> {document.travel_tips.join(", ")} <br>
-        </li>
-        {/each}
+            {#each documents as document}
+                <li class="pt-2">
+                    <strong>Title:</strong> {document.Name} <br>
+                    <strong>Itinerary:</strong> {document.Itinerary} <br>
+                    <strong>Weather:</strong> {document.weather} <br>
+                    <strong>Packing List:</strong> {document.packing_list.join(", ")} <br>
+                    <strong>Travel Tips:</strong> {document.travel_tips.join(", ")} <br>
+                </li>
+            {/each}
         {:else}
-        <li>No documents found.</li>
+            <li>No documents found.</li>
         {/if}
     </ul>
 </section>
-    
