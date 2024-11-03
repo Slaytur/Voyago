@@ -4,7 +4,6 @@ WORKDIR /app
 COPY . .
 
 RUN bun i
-RUN bunx prisma generate
 RUN bun run build
 #COPY --from=builder /app/build .
 
