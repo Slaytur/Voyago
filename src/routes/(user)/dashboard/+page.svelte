@@ -1,21 +1,3 @@
-
-  
-  <!-- <ul class="pt-14">
-    <li>
-      <strong>Email:</strong> {user.email}
-    </li>
-    <li>
-        <strong>Name:</strong> {user.name}
-    </li>
-    <li>
-        <strong>ID: </strong> {user.$id}
-    </li>
-  </ul>
-
-  <form method="post">
-    <button type="submit">Log out</button>
-  </form> -->
-  
 <script lang="ts">
     export let data;
   
