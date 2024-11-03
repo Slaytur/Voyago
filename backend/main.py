@@ -72,7 +72,7 @@ async def autofillPoI1(request: PointOfInrest1Request):
     
 
     response_text = response.choices[0].message.content
-    print(response_text, request.interests, request.region)
+    # print(response_text, request.interests, request.region)
     response_list = response_text.split("\n")
     
     poi = []
@@ -83,12 +83,12 @@ async def autofillPoI1(request: PointOfInrest1Request):
     return PointOfInrestResponse(data=poi)
 
 
-@app.post("/autofillPoI2", response_model=DataResponse)
+@app.post("/autofillPoI2", response_model=PointOfInrestResponse)
 async def autofillPoI2(request: PointOfInrest2Request):
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
     
-    custom_prompt = GET_POI_SUGGESTIONS_2[::].replace("{point_of_interest}", ", ".join(request.interests)).replace("{interests}", request.interests)
+    custom_prompt = GET_POI_SUGGESTIONS_2[::].replace("{point_of_interest}", ", ".join(request.point_of_interest)).replace("{interests}", request.interests)
 
     messages = [{
             "role": "user",
