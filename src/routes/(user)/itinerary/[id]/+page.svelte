@@ -40,7 +40,7 @@
     // console.log(id);
 
 </script>
-<section class="pt-24 px-10 w-full h-screen flex flex-col ">
+<section class="pt-24 px-10 w-full h-screen flex flex-col overflow-scroll">
     <h1 class=" text-[50px] font-opensans"><b>Trip</b>: {document.Name}</h1>
     {#each titles as titleArray}
     <!-- Title (First item in titleArray) -->
