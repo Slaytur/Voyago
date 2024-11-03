@@ -38,7 +38,8 @@
     async function makeRoute(selectedNearAttractions:Attraction[], activityList:string[], selectedRegion:Region, date:string, vacationLength:Number){
       const token = 'i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR';
       try {
-          console.log(selectedAttraction);
+          const newatt: string[] = selectedNearAttractions.map(selectedNearAttractions => selectedNearAttractions.value);
+          console.log(newatt);
           const response = await fetch("https://voyago-backend.namikas.dev/create-itinerary", {
               // mode: 'no-cors',
               method: "POST",
@@ -47,11 +48,11 @@
                   "Authorization": `Bearer ${token}`
               },
               body: JSON.stringify({
-                  points_of_interest: selectedNearAttractions.join(", "),
-                  interests: activityList.join(", "),
-                  region: selectedRegion.value,
+                  points_of_interest: newatt,
+                  interests: activityList,
+                  location: selectedRegion.value,
                   date: date,
-                  length: vacationLength,
+                  date_length: String(vacationLength),
                   token: token
               })
           });
@@ -164,10 +165,6 @@
     }
     function removeActivity(index: number) {
         activityList = activityList.filter((_, i) => i !== index);
-    }
-
-    function changeDate(e: any) {
-        date = e.month + "-" + e.day + "-" + e.year;
     }
 
     async function submit() {
@@ -422,8 +419,10 @@
           
         <h1>Enter your vacation length (in days):</h1>
         <input type="number" bind:value={vacationLength} placeholder="Enter days" min="1" class="border rounded-md p-2 w-[100px]" />
-        <button hidden={activityList.length > 0 && selectedRegion && selectedAttraction && nearAttractions.length > 0 && travelPace && date && vacationLength ? false : true} type="submit" on:click={submit} class="text-white bg-[#A295CB] hover:bg-[#b6a0ff] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          Submit
-      </button>
+        {#if selectedNearAttractions.length > 0 && activityList.length > 0 && travelPace && vacationLength && date}
+            <Button.Root color="green" class="border rounded-md ml-3 bg-green w-fit p-2" on:click={e=>makeRoute(selectedNearAttractions, activityList, selectedRegion, date, vacationLength)}>
+                Continue
+            </Button.Root>
+        {/if}
     </div>
 </div>
