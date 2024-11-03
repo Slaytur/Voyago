@@ -32,8 +32,9 @@
     let selectedRegion: Region | null = null;
     let attractions: Attraction[] = [];
     let nearAttractions: Attraction[] = [];
+    let items: Attraction[] = [];
     let selectedAttraction: Attraction | null = null;
-    let selectedNearAttraction: Attraction[] | null = [];
+    let selectedNearAttractions: Attraction[] = [];
 
     // Function to simulate fetching attractions
     async function fetchAttractions(region: string) {
@@ -64,125 +65,140 @@
 
 
       nearAttractions = [{ value: "United States", label: "United States" },{ value: "Canada / Greenland", label: "Canada / Greenland" }]//await fetchAttractions(selectedRegion.value);
-      selectedNearAttraction = null; // Reset selected attraction
   }
 
-  function addItem(value: string) {
-      if (nearAttractions.find(region => region.value === value)) {
-          return;
-      }  
-  }
+    function addItem(value: string) {
+        let nearAttraction = nearAttractions.find(region => region.value === value) || null;
+        if (nearAttraction == null) {return;}
+        let checkAdded = selectedNearAttractions.find(attraction => attraction.value === nearAttraction.value) || null;
+        if (checkAdded != null) {
+            selectedNearAttractions.push(nearAttraction);
+        } 
+        else{
+            selectedNearAttractions = selectedNearAttractions.filter(item => item !== checkAdded);
+        }
+    }
 
 </script>
 
-<div class="sele pt-14 flex flex-col space-y-4">
-    <Select.Root items={regions} on:ValueChange={e => onRegionSelect(e.detail.value)}>
-        <h1>Choose a region:</h1>
-        <Select.Trigger
-            class="inline-flex h-10 w-[296px] items-center rounded-[9px] border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background"
-            aria-label="Select a region"
-        >
-            <span class="mr-[9px] size-6 text-muted-foreground">🌏</span>
-            <Select.Value class="text-sm text-muted-foreground" placeholder="Select a region" />
-            <span class="ml-auto size-6 text-muted-foreground">▼</span>
-        </Select.Trigger>
-
-        <Select.Content
-            class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none"
-            transition={fly}
-            sideOffset={8}
-        >
-            {#each regions as region}
-                <Select.Item
-                    class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted"
-                    value={region.value}
-                    label={region.label}
-                    on:click = {e => onRegionSelect(e.detail.value)}
+<div class="">
+    <div class="sele pt-14 flex ml-7 max-w-[40%] flex-col space-y-4">
+        <Select.Root items={regions} on:ValueChange={e => onRegionSelect(e.detail.value)}>
+            <h1>Choose a region:</h1>
+            <Select.Trigger
+                class="inline-flex h-10 w-[296px] items-center rounded-[9px] border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background"
+                aria-label="Select a region"
+            >
+                <span class="mr-[9px] size-6 text-muted-foreground">🌏</span>
+                <Select.Value class="text-sm text-muted-foreground" placeholder="Select a region" />
+                <span class="ml-auto size-6 text-muted-foreground">▼</span>
+            </Select.Trigger>
+    
+            <Select.Content
+                class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none"
+                transition={fly}
+                sideOffset={8}
+            >
+                {#each regions as region}
+                    <Select.Item
+                        class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted"
+                        value={region.value}
+                        label={region.label}
+                        on:click = {e => onRegionSelect(e.detail.value)}
+                    >
+                        {region.label}
+                        <Select.ItemIndicator class="ml-auto" asChild={false}>
+                            <span>✔</span>
+                        </Select.ItemIndicator>
+                    </Select.Item>
+                {/each}
+            </Select.Content>
+    
+            <Select.Input name="favoriteRegion" />
+        </Select.Root>
+    
+        {#if attractions.length > 0}
+            <Select.Root items={attractions}>
+                <h1>Choose an attraction: </h1>
+                <Select.Trigger
+                    class="inline-flex h-10 w-[296px] items-center rounded-[9px] border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background"
+                    aria-label="Select an attraction"
                 >
-                    {region.label}
-                    <Select.ItemIndicator class="ml-auto" asChild={false}>
-                        <span>✔</span>
-                    </Select.ItemIndicator>
-                </Select.Item>
-            {/each}
-        </Select.Content>
-
-        <Select.Input name="favoriteRegion" />
-    </Select.Root>
-
-    {#if attractions.length > 0}
-        <Select.Root items={attractions}>
-            <h1>Choose an attraction: </h1>
-            <Select.Trigger
-                class="inline-flex h-10 w-[296px] items-center rounded-[9px] border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background"
-                aria-label="Select an attraction"
-            >
-                <span class="mr-[9px] size-6 text-muted-foreground">🎢</span>
-                <Select.Value class="text-sm text-muted-foreground" placeholder="Select an attraction" />
-                <span class="ml-auto size-6 text-muted-foreground">▼</span>
-            </Select.Trigger>
-
-            <Select.Content
-                class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none"
-                transition={fly}
-                sideOffset={8}
-            >
-                {#each attractions as attraction}
-                    <Select.Item
-                        class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted"
-                        value={attraction.value}
-                        label={attraction.label}
-                        on:click = {e => onAttractionSelect(e.detail.value)}
-                    >
-                        {attraction.label}
-                        <Select.ItemIndicator class="ml-auto" asChild={false}>
-                            <span>✔</span>
-                        </Select.ItemIndicator>
-                    </Select.Item>
+                    <span class="mr-[9px] size-6 text-muted-foreground">🎢</span>
+                    <Select.Value class="text-sm text-muted-foreground" placeholder="Select an attraction" />
+                    <span class="ml-auto size-6 text-muted-foreground">▼</span>
+                </Select.Trigger>
+    
+                <Select.Content
+                    class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none"
+                    transition={fly}
+                    sideOffset={8}
+                >
+                    {#each attractions as attraction}
+                        <Select.Item
+                            class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted"
+                            value={attraction.value}
+                            label={attraction.label}
+                            on:click = {e => onAttractionSelect(e.detail.value)}
+                        >
+                            {attraction.label}
+                            <Select.ItemIndicator class="ml-auto" asChild={false}>
+                                <span>✔</span>
+                            </Select.ItemIndicator>
+                        </Select.Item>
+                    {/each}
+                </Select.Content>
+    
+                <Select.Input name="favoriteAttraction" />
+            </Select.Root>
+        {/if}
+    
+        {#if nearAttractions.length > 0}
+            <Select.Root items={nearAttractions} multiple>
+                <h1>Choose up to 4 nearby attractions: </h1>
+                <Select.Trigger
+                    class="inline-flex h-10 w-[296px] items-center rounded-[9px] border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background"
+                    aria-label="Select a nearer attraction"
+                >
+                    <span class="mr-[9px] size-6 text-muted-foreground">🎢</span>
+                    <Select.Value class="text-sm text-muted-foreground" placeholder="Select an attraction" />
+                    <span class="ml-auto size-6 text-muted-foreground">▼</span>
+                </Select.Trigger>
+    
+                <Select.Content
+                    class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none"
+                    transition={fly}
+                    sideOffset={8}
+                >
+                    {#each nearAttractions as nearAttraction}
+                        <Select.Item
+                            class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted"
+                            value={nearAttraction.value}
+                            label={nearAttraction.label}
+                            on:click = {e => addItem(e.detail.value)}
+                        >
+                            {nearAttraction.label}
+                            <Select.ItemIndicator class="ml-auto" asChild={false}>
+                                <span>✔</span>
+                            </Select.ItemIndicator>
+                        </Select.Item>
+                    {/each}
+                </Select.Content>
+    
+                <Select.Input name="favoriteAttraction" />
+            </Select.Root>
+        {/if}
+        {#if selectedNearAttractions.length > 0}
+            <Button.Root color="green" hidden={false} class="border rounded-md ml-3 bg-green w-fit p-2" >
+                Continue
+            </Button.Root>
+            <ul>
+                {#each regions as region, i}
+                    <li>
+                        {region.label}
+                    </li>
                 {/each}
-            </Select.Content>
-
-            <Select.Input name="favoriteAttraction" />
-        </Select.Root>
-    {/if}
-
-    {#if nearAttractions.length > 0}
-        <Select.Root items={nearAttractions} multiple>
-            <h1>Choose up to 4 nearby attractions: </h1>
-            <Select.Trigger
-                class="inline-flex h-10 w-[296px] items-center rounded-[9px] border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background"
-                aria-label="Select a nearer attraction"
-            >
-                <span class="mr-[9px] size-6 text-muted-foreground">🎢</span>
-                <Select.Value class="text-sm text-muted-foreground" placeholder="Select an attraction" />
-                <span class="ml-auto size-6 text-muted-foreground">▼</span>
-            </Select.Trigger>
-
-            <Select.Content
-                class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none"
-                transition={fly}
-                sideOffset={8}
-                on:click={addItem(e.detail.value)}
-            >
-                {#each nearAttractions as nearAttraction}
-                    <Select.Item
-                        class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted"
-                        value={nearAttraction.value}
-                        label={nearAttraction.label}
-                        
-                    >
-                        {nearAttraction.label}
-                        <Select.ItemIndicator class="ml-auto" asChild={false}>
-                            <span>✔</span>
-                        </Select.ItemIndicator>
-                    </Select.Item>
-                {/each}
-            </Select.Content>
-
-            <Select.Input name="favoriteAttraction" />
-        </Select.Root>
-    {/if}
-    <Button.Root color="green" hidden={false}>
-        Continue
-    </Button.Root>
+            </ul>
+        {/if}
+    </div>
 </div>
