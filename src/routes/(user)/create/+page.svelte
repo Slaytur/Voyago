@@ -6,27 +6,25 @@
     // Define regions with types
     interface Region {
         value: string;
-        label: string;
     }
 
     interface Attraction {
         value: string;
-        label: string;
     }
 
     const regions: Region[] = [
-        { value: "United States", label: "United States" },
-        { value: "Canada / Greenland", label: "Canada / Greenland" },
-        { value: "Central America", label: "Central America" },
-        { value: "South America", label: "South America" },
-        { value: "Western Europe", label: "Western Europe" },
-        { value: "Eastern Europe", label: "Eastern Europe" },
-        { value: "East Asia", label: "East Asia" },
-        { value: "South Asia", label: "South Asia" },
-        { value: "Southeast Asia", label: "Southeast Asia" },
-        { value: "Middle East", label: "Middle East" },
-        { value: "Africa", label: "Africa" },
-        { value: "Oceania", label: "Oceania" }
+        { value: "United States"},
+        { value: "Canada / Greenland"},
+        { value: "Central America"},
+        { value: "South America"},
+        { value: "Western Europe"},
+        { value: "Eastern Europe"},
+        { value: "East Asia"},
+        { value: "South Asia"},
+        { value: "Southeast Asia"},
+        { value: "Middle East"},
+        { value: "Africa"},
+        { value: "Oceania"}
     ];
 
     let selectedRegion: Region | null = null;
@@ -43,11 +41,11 @@
 
     async function onRegionSelect(value: string) {
         selectedRegion = regions.find(region => region.value === value) || null;
-        console.log(selectedRegion);
+        console.log(selectedRegion?.value);
         if (!selectedRegion){
             attractions = [];
             selectedAttraction = null;
-            return
+            return;
         }
         const token = 'i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR';
         try {
@@ -71,6 +69,9 @@
             
             const major_attractions = await response.json();
             console.log(major_attractions);
+            let attractionstemp: Attraction[] = major_attractions.data.map(location => ({ value: location }));
+            attractions = attractionstemp;
+            console.log(attractions)
 
         } catch (error) {
             console.error("Failed to fetch attractions:", error);
@@ -82,7 +83,7 @@
 
     function onAttractionSelect(value: string) {
         selectedAttraction = attractions.find(region => region.value === value) || null;
-        nearAttractions = [{ value: "United States", label: "United States" }, { value: "Canada / Greenland", label: "Canada / Greenland" }];
+        nearAttractions = [{ value: "needs api  call for near selections"}, { value: "Canada / needs api  call for near selections"}];
     }
 
     function addItem(value: string) {
@@ -147,8 +148,8 @@
             </Select.Trigger>
             <Select.Content class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none" transition={fly} sideOffset={8}>
                 {#each regions as region}
-                    <Select.Item class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted" value={region.value} label={region.label} on:click={() => onRegionSelect(region.value)}>
-                        {region.label}
+                    <Select.Item class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted" value={region.value} on:click={() => onRegionSelect(region.value)}>
+                        {region.value}
                         <Select.ItemIndicator class="ml-auto" asChild={false}><span>✔</span></Select.ItemIndicator>
                     </Select.Item>
                 {/each}
@@ -167,8 +168,8 @@
                 </Select.Trigger>
                 <Select.Content class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none" transition={fly} sideOffset={8}>
                     {#each attractions as attraction}
-                        <Select.Item class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted" value={attraction.value} label={attraction.label} on:click={() => onAttractionSelect(attraction.value)}>
-                            {attraction.label}
+                        <Select.Item class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted" value={attraction.value} on:click={() => onAttractionSelect(attraction.value)}>
+                            {attraction.value}
                             <Select.ItemIndicator class="ml-auto" asChild={false}><span>✔</span></Select.ItemIndicator>
                         </Select.Item>
                     {/each}
@@ -188,8 +189,8 @@
                 </Select.Trigger>
                 <Select.Content class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none" transition={fly} sideOffset={8}>
                     {#each nearAttractions as nearAttraction}
-                        <Select.Item class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted" value={nearAttraction.value} label={nearAttraction.label} on:click={() => addItem(nearAttraction.value)}>
-                            {nearAttraction.label}
+                        <Select.Item class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted" value={nearAttraction.value} on:click={() => addItem(nearAttraction.value)}>
+                            {nearAttraction.value}
                             <Select.ItemIndicator class="ml-auto" asChild={false}><span>✔</span></Select.ItemIndicator>
                         </Select.Item>
                     {/each}
@@ -205,7 +206,7 @@
             </Button.Root>
             <ul>
                 {#each selectedNearAttractions as selectedNearAttraction}
-                    <li>{selectedNearAttraction.label}</li>
+                    <li>{selectedNearAttraction.value}</li>
                 {/each}
             </ul>
         {/if}
@@ -217,13 +218,13 @@
         
 
         <h1>What is your preferred travel pace?</h1>
-        <Select.Root items={[{ value: "Relaxed", label: "Relaxed" }, { value: "Moderate", label: "Moderate" }, { value: "Packed", label: "Packed" }]} on:ValueChange={e => travelPace = e.detail.value}>
+        <Select.Root items={[{ value: "Relaxed"}, { value: "Moderate"}, { value: "Packed"}]} on:ValueChange={e => travelPace = e.detail.value}>
             <Select.Trigger class="inline-flex h-10 w-[296px] items-center rounded-[9px] border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background">
                 <Select.Value class="text-sm text-muted-foreground" placeholder="Select a travel pace" />
             </Select.Trigger>
             <Select.Content class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none" transition={fly} sideOffset={8}>
                 {#each ["Relaxed", "Moderate", "Packed"] as pace}
-                    <Select.Item class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted" value={pace} label={pace}>
+                    <Select.Item class="flex h-10 w-full select-none items-center rounded-button py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted" value={pace}>
                         {pace}
                     </Select.Item>
                 {/each}
