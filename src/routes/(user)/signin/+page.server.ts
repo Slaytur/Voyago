@@ -3,7 +3,6 @@
 import { goto } from "$app/navigation";
 import { SESSION_COOKIE, createAdminClient } from "$lib/server/appwrite.js";
 import { fail, redirect } from "@sveltejs/kit";
-import { ID } from "node-appwrite";
 
 export const actions = {
     signin: async ({ request, cookies }) => {

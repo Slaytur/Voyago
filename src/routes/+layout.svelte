@@ -42,8 +42,8 @@
     }}
 />
 
-<div class="">
-    <main class="">
+<div>
+    <main>
         <Header />
         <Toaster position="top-center" />
         <slot />

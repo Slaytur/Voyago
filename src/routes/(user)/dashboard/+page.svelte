@@ -9,14 +9,6 @@
 
 </script>
 
-<style>
-    .sele {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding-top: 80px;
-    }
-</style>
 <section class="tw-flex tw-w-full tw-h-full tw-items-center tw-space-x-6 tw-pt-24 tw-flex-col">
     
     <a href='/create' class= "">
