@@ -26,13 +26,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class DataRequest(BaseModel):
-    points_of_interest: str
-    interests: str
-    location: str
-    date: str
-    date_length: str
-    token: str
 
 class PointOfInrest1Request(BaseModel):
     region: str
@@ -42,6 +35,14 @@ class PointOfInrest1Request(BaseModel):
 class PointOfInrest2Request(BaseModel):
     point_of_interest: str
     interests: str
+    token: str
+
+class DataRequest(BaseModel):
+    points_of_interest: str
+    interests: str
+    location: str
+    date: str
+    date_length: str
     token: str
 
 class PointOfInrestResponse(BaseModel):
@@ -116,6 +117,7 @@ async def autofillPoI2(request: PointOfInrest2Request):
 # Root route
 @app.post("/create-itinerary", response_model=DataResponse)
 async def root(request: DataRequest):
+    return DataResponse(itinerary="hi", weather='hello', travel_tips=['howdy'], packing_list=['bye'])
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
     
