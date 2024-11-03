@@ -27,7 +27,7 @@ export const actions = {
             .then(session => {
                 // Set the session cookie with the secret
                 cookies.set(SESSION_COOKIE, session.secret, {
-                    sameSite: "strict",
+                    sameSite: "none",
                     expires: new Date(session.expire),
                     secure: true,
                     path: "/"
