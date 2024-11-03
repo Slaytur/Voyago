@@ -27,7 +27,11 @@ const config: Config = {
             colors: {
                 primary: "#433a5f",
                 secondary: "#a295cb",
-                accent: "#5c43a8"
+                secondaryForeground: "#5a5370",
+                accent: "#5c43a8",
+                accentForeground: "#3a2a6b",
+                text: "#000000",
+                background: "#ffffff"
             },
             borderRadius: {
                 lg: "var(--radius)",

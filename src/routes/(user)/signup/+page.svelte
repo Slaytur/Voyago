@@ -1,19 +1,54 @@
 <script lang="ts">
-    import { Button, Checkbox, Label } from "bits-ui";
-    import { Check, Minus } from "lucide-svelte";
+    import Logo from "$lib/images/icon.svg";
 
-    let fname = "",
-        lname = "",
-        email = "",
-        password = "",
-        cfpassword = "";
+    let { data, form } = $props();
 
-    function submit () {
-        if (password !== cfpassword) return;
-    }
+    const formFeedback: { state: "initial" | "success" | "error", message: string | undefined } = {
+        state: "initial",
+        message: undefined
+    };
 </script>
 
-<article class="py-20">
+<article>
+    <div class="card card-body tw-container tw-mt-20 tw-mb-5">
+        <img src={Logo} alt="Voyago logo" class="tw-mt-5 tw-mx-auto tw-max-w-[100px] tw-w-1/4" />
+        <h1 class="tw-text-5xl tw-font-bold tw-text-center tw-mt-5 tw-mb-10">Register</h1>
+
+        <form method="POST" action="?/signup">
+            <div class="row g-2 tw-mb-4">
+                <div class="col">
+                    <label for="fname" class="form-label">First Name</label>
+                    <input name="fname" type="text" class="form-control" placeholder="First name" aria-label="First Name" autocomplete="given-name" required>
+                </div>
+                <div class="col">
+                    <label for="lname" class="form-label">Last Name</label>
+                    <input name="lname" type="text" class="form-control" placeholder="Last name" aria-label="Last Name" autocomplete="family-name" required />
+                </div>
+            </div>
+            <div class="tw-mb-4">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" placeholder="Email address" autocomplete="email" required />
+            </div>
+            <div class="row g-2 tw-mb-4">
+                <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label">Password</label>
+                    <input type="password" class="form-control" placeholder="Enter password" autocomplete="new-password" required />
+                </div>
+                <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" placeholder="Confirm password" autocomplete="new-password" required />
+                </div>
+            </div>
+            <div class="tw-mb-4 form-check form-text">
+                <input type="checkbox" class="form-check-input" id="agree-terms" name="agree-terms" required />
+                <label for="agree-terms" class="form-check-label">By creating an account, I agree to the terms and conditions.</label>
+            </div>
+            <input type="submit" value="Sign Up" class="btn tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white" />
+        </form>
+    </div>
+</article>
+
+<!-- <article class="py-20">
     <div class="w-1/3 mx-auto p-8 bg-secondary rounded-lg">
         <div>
             <img src="/favicon.png" alt="Voyago logo" class="mx-auto" />
@@ -109,4 +144,4 @@
             <Button.Root class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register</Button.Root>
         </form>
     </div>
-</article>
+</article> -->

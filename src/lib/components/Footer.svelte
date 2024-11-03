@@ -1,12 +1,12 @@
 <script lang="ts">
     import GitHub from "$lib/images/github.svg";
-    // import Discord from "$lib/images/discord.svg";
+// import Discord from "$lib/images/discord.svg";
 </script>
 
-<!-- 
+<!--
 <style>
     .nav.flex-column a {
-            
+
     }
 </style> -->
 
@@ -59,7 +59,7 @@
     </div>
 </footer>
 
-<!-- 
+<!--
 <div class="foot">
     <footer class="foot flex flex-row justify-between items-start h-16 bg-white rounded px-16 text-[14px] py-2">
         <div class="flex flex-col justify-start">

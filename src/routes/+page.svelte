@@ -53,9 +53,9 @@
                     <span class="tw-ml-1">Embrace the richness of <span class="tw-text-accent">global diversity</span>.</span>
                 </p>
             </div>
-            <button class="btn btn-lg tw-w-1/3 tw-bg-secondary tw-text-white hover:tw-bg-black hover:tw-text-white tw-rounded-3xl tw-font-bold">
+            <a href="/signup" class="btn btn-lg tw-w-1/3 tw-bg-secondary tw-text-white hover:tw-bg-secondaryForeground hover:tw-text-white tw-rounded-3xl tw-font-bold">
                 Explore
-            </button>
+            </a>
         </div>
         <div class="col-sm-6">
             <div class="tw-flex">
@@ -89,7 +89,7 @@
             <div class="col-sm-6">
                 <h2 class="tw-text-7xl tw-font-bold tw-mt-20">Itineraries Crafted Just For You</h2>
                 <p class="tw-my-5 tw-text-primary">Experience expertly designed itineraries that blend your unique preferences with local insights, ensuring every moment of your journey is unforgettable.</p>
-                <button class="btn btn-lg tw-w-1/3 tw-bg-secondary tw-text-white hover:tw-bg-black hover:tw-text-white tw-rounded-3xl tw-font-bold">Build Experience</button>
+                <a href="/create" class="btn btn-lg tw-w-1/3 tw-bg-secondary tw-text-white hover:tw-bg-secondaryForeground hover:tw-text-white tw-rounded-3xl tw-font-bold">Build Experience</a>
             </div>
         </div>
     </section>
@@ -98,7 +98,7 @@
         <div class="col">
             <h2 class="tw-text-7xl tw-font-bold tw-mt-20">Unbeatable Value</h2>
             <p class="tw-my-5 tw-text-primary">Discover incredible adventures without breaking the bank -- our pricing makes dream travel accessible to everyone.</p>
-            <button class="btn btn-lg tw-w-1/3 tw-bg-secondary tw-text-white hover:tw-bg-black hover:tw-text-white tw-rounded-3xl tw-font-bold">View Pricing</button>
+            <a href="/pricing" class="btn btn-lg tw-w-1/3 tw-bg-secondary tw-text-white hover:tw-bg-secondaryForeground hover:tw-text-white tw-rounded-3xl tw-font-bold">View Pricing</a>
         </div>
         <div class="col">
             <img src={WorldMap} alt="World map" class="tw-h-[350px]">
@@ -146,7 +146,7 @@
                 <div class="tw-container tw-my-4">
                     <h3 class="tw-font-bold tw-text-4xl">Be A Part of the Next Big Thing</h3>
                 </div>
-                <button class="btn btn-lg tw-w-2/3 tw-bg-secondary tw-text-white hover:tw-bg-black hover:tw-text-white tw-rounded-3xl tw-font-bold">Get Started</button>
+                <a href="/create" class="btn btn-lg tw-w-2/3 tw-bg-secondary tw-text-white hover:tw-bg-text hover:tw-text-white tw-rounded-3xl tw-font-bold">Get Started</a>
             </div>
         </div>
     </section>
