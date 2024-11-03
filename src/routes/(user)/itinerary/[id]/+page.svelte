@@ -19,7 +19,7 @@
             if (currentSequence.length > 0) {
                 titles.push(currentSequence);
             }
-            currentSequence = [Itin[i].replace("##", "").trim()];
+            currentSequence = [Itin[i].replaceAll("#", "").trim()];
         } else if (Itin[i].includes("-") && currentSequence.length > 0) {
             // Add lines with '-' to the current sequence
             currentSequence.push(Itin[i].replace("-", "").replaceAll("**", "").trim());
@@ -35,19 +35,25 @@
         titles.push(currentSequence);
     }
 </script>
-<section class="tw-pt-24 tw-px-10 tw-w-full tw-h-screen tw-flex tw-flex-col tw-overflow-scroll">
-    <h1 class="tw-text-[50px] tw-font-opensans"><b>Trip</b>: {document.Name}</h1>
+<section class="tw-pt-14 tw-px-[300px] tw-w-full tw-min-h-screen tw-flex tw-flex-col">
+    <h1 class="tw-text-[50px] tw-font-opensans tw-w-full tw-text-center"><b>Trip</b>: {document.Name}</h1>
     {#each titles as titleArray}
     <!-- Title (First item in titleArray) -->
 
     <br>
-    <h1 class="tw-flex tw-flex-col tw-text-3xl">{titleArray[0]}</h1>
+    <!-- <h1 class="tw-flex tw-flex-col tw-text-3xl">{titleArray[0]}</h1> -->
     <!-- Lines (Remaining items in titleArray) -->
-        <div class="">
-            {#each titleArray.slice(1) as line}
-            <p class="tw-text-xl tw-font-opensans tw-ml-7 tw-text-gray-500">{line}</p>
-            {/each}
+    <div class="card tw-p-2">
+        <div class="card-body">
+            <h1 class="tw-flex tw-flex-col tw-text-3xl tw-pb-2">{titleArray[0]}</h1>
+            <div class="">
+                {#each titleArray.slice(1) as line}
+                    <p class="tw-text-xl tw-font-opensans tw-ml-7 tw-text-gray-500">{line}</p>
+                {/each}
+            </div>
         </div>
+    </div>
+    
             
     {/each}
 
