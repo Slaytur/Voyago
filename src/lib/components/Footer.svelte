@@ -5,7 +5,11 @@
 
 <!--
 <style>
-    .nav.flex-column a {
+    .foot {
+      bottom: 0;
+      width: 100%;
+    }
+</style>
 
     }
 </style> -->

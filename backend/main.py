@@ -43,6 +43,7 @@ class DataRequest(BaseModel):
     location: str
     date: str
     date_length: str
+    name: str
     id: str
     token: str
 
@@ -143,7 +144,7 @@ async def root(request: DataRequest):
         collection_id='6726c10f0033575af875',
         document_id=ID.unique(),
         data={
-            "Name": request.location,
+            "Name": request.name,
             "userId": request.id,
             'Itinerary': itinerary,
             'weather': weather,
