@@ -113,7 +113,7 @@
                 <div class="card-img-top tw-h-[227px]">
                     <img src={DavidL} alt="David L profile" class="card-img-top tw-h-[227px]">
                 </div>
-                <div class="card-body tw-z-50 tw-bg-white">
+                <div class="card-body tw-z-10 tw-bg-white tw-rounded-b-2xl">
                     <h5 class="card-title tw-font-bold">David L.</h5>
                     <p class="card-text">"Voyago turned my long-time travel dreams into a reality! I finally experienced Italy the way I always imagined, and the whole process was seamless! I can't believe how easy and affordable it was—my life truly feels richer thanks to this trip!"</p>
                 </div>
@@ -122,7 +122,7 @@
                 <div class="card-img-top tw-h-[227px]">
                     <img src={EstherM} alt="Esther M profile" class="card-img-top">
                 </div>
-                <div class="card-body tw-z-50 tw-bg-white">
+                <div class="card-body tw-z-10 tw-bg-white tw-rounded-b-2xl">
                     <h5 class="card-title tw-font-bold">Esther M.</h5>
                     <p class="card-text">"I always thought traveling to Japan would be overwhelming and out of reach, but Voyago made it unbelievably simple! Their AI-driven recommendations hit the mark every time, and I was able to immerse myself in experiences I never would've found on my own."</p>
                 </div>
@@ -131,7 +131,7 @@
                 <div class="card-img-top tw-h-[227px]">
                     <img src={AnnabelleH} alt="Annabelle H profile" class="card-img-top">
                 </div>
-                <div class="card-body tw-z-50 tw-bg-white">
+                <div class="card-body tw-z-10 tw-bg-white tw-rounded-b-2xl">
                     <h5 class="card-title tw-font-bold">Annabelle H.</h5>
                     <p class="card-text">"Voyago helped me plan the trip of a lifetime to South America. I didn't have to stress about the details; Voyago handled everything, even down to packing tips and what to expect at each spot. It's so intuitive to use, and the pricing was shockingly affordable. Thank you, Voyago!"</p>
                 </div>
