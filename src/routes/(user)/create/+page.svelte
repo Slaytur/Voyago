@@ -59,6 +59,7 @@
                 location: selectedRegion.value,
                 date: date,
                 date_length: String(vacationLength),
+                name: name,
                 id: user.$id,
                 token: token
               })
