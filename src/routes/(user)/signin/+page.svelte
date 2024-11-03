@@ -17,11 +17,11 @@
         <form method="POST" action="?/signin">
             <div class="tw-mb-4">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" placeholder="Email address" autocomplete="email" required />
+                <input type="email" name="email" id="email" class="form-control" placeholder="Email address" autocomplete="email" required />
             </div>
             <div class="tw-mb-4">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" placeholder="Enter password" autocomplete="new-password" required />
+                <input type="password" class="form-control" name="password" id="password" placeholder="Enter password" autocomplete="new-password" required />
             </div>
             <input type="submit" value="Log In" class="btn tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white" />
         </form>
