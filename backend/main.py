@@ -118,18 +118,13 @@ async def autofillPoI2(request: PointOfInrest2Request):
 async def root(request: DataRequest):
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
-    itinerary = "test"
-    weather="weather"
-    travel_tips=["travel_tips"]
-    packing_list=["packing_list"]
-    # task1 = asyncio.create_task(get_travel_tips(request.points_of_interest))
-    # task2 = asyncio.create_task(get_itinerary(request.interests, request.points_of_interest, request.location, request.date, request.date_length))
     task1 = asyncio.create_task(get_travel_tips(request.points_of_interest))
-    # task2 = asyncio.create_task(get_itinerary(request.interests, request.points_of_interest, request.location, request.date, request.date_length))
-    # weather = get_weather(request.points_of_interest, request.location, request.date)
-    # packing_list = get_packing_list(request.points_of_interest, request.location, request.date, request.date_length)
+    task2 = asyncio.create_task(get_itinerary(request.interests, request.points_of_interest, request.location, request.date, request.date_length))
+    
+    weather = get_weather(request.points_of_interest, request.location, request.date)
+    packing_list = get_packing_list(request.points_of_interest, request.location, request.date, request.date_length)
     travel_tips = await task1
-    # itinerary = await task2
+    itinerary = await task2
 
     return DataResponse(itinerary=itinerary, weather=weather, travel_tips=travel_tips, packing_list=packing_list)
 
