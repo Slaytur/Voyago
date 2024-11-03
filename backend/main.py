@@ -120,8 +120,8 @@ async def root(request: DataRequest):
         return {"error": "Invalid token"}
     
     print(request)    
-    weather = get_weather(request.points_of_interest, request.location, request.date)
-    packing_list = get_packing_list(request.points_of_interest, request.location, request.date, request.date_length)
+    weather = await get_weather(request.points_of_interest, request.location, request.date)
+    packing_list = await get_packing_list(request.points_of_interest, request.location, request.date, request.date_length)
     travel_tips = await get_travel_tips(request.points_of_interest)
     itinerary = await get_itinerary(request.interests, request.points_of_interest, request.location, request.date, request.date_length)
 
@@ -130,7 +130,7 @@ async def root(request: DataRequest):
 
     
 
-def get_weather(points_of_interest, location, date):
+async def get_weather(points_of_interest, location, date):
     messages = [{
         'role': 'user',
         'content': GET_WEATHER[::].replace("{location}", location).replace("{points_of_interest}", points_of_interest).replace("{date}", date)
@@ -232,7 +232,7 @@ async def get_itinerary(interests, points_of_interest, location, date, length):
     return response_text
 
       
-def get_packing_list(points_of_interest, location, date, weather):
+async def get_packing_list(points_of_interest, location, date, weather):
     custom_prompt = GET_PACKING_LIST[::].replace("{points_of_interest}", points_of_interest).replace("{location}", location).replace("{date}", date).replace("{weather}", weather)
 
     messages = [{
