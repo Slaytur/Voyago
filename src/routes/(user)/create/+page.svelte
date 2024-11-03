@@ -265,7 +265,7 @@
             </Select.Content>
         </Select.Root>
         <DatePicker.Root weekdayFormat="short" fixedWeeks={true}>
-            <div class="flex w-full max-w-[232px] flex-col gap-1.5">
+            <div class="flexw-full max-w-[232px] flex-col gap-1.5">
               <DatePicker.Label class="block select-none text-sm font-medium"
                 >Approximate travel Date</DatePicker.Label
               >
@@ -302,7 +302,7 @@
                 class="z-50"
               >
                 <DatePicker.Calendar
-                  class="rounded-[15px] border border-dark-10 bg-background-alt p-[22px] shadow-popover"
+                  class="rounded-[15px] border border-dark-10 bg-white p-[22px] shadow-popover"
                   let:months
                   let:weekdays
                 >
