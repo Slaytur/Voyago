@@ -23,7 +23,7 @@
       <div class="flex flex-col justify-center text-[14px]">
           <h1 class="font-bold">About</h1>
           <div class="flex flex-col text-[12px]">
-              <a href="/about">About</a>
+              <a href="/feedback">About</a>
           </div>
       </div>
       <div class="flex flex-col justify-center text-[14px]">
