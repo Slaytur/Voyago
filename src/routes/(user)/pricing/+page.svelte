@@ -1,6 +1,10 @@
 <script lang="ts">
     import { Button } from "bits-ui";
     import GradientText from "$lib/components/GradientText.svelte";
+    import personal from "$lib/images/personal.png";
+    import pro from "$lib/images/pro.png";
+    import team from "$lib/images/team.png";
+    import enterprise from "$lib/images/enterprise.png";
 </script>
 
 <style>
@@ -58,7 +62,7 @@
     <div class="prices space-x-10">
       <section class="login black">
           <div class="box flex flex-col items-start p-6">
-              <img src="" class="w-12 h-12" alt="StarterImg"/>
+              <img src={personal} class="w-12 h-12" alt="StarterImg"/>
               <h1 class=" mt-1.5">STARTER</h1>
               <h1 class=" text-[50px]  -mt-2 font-bold">$0</h1>
               <p class='mb-4'>
@@ -71,7 +75,7 @@
       </section>
       <section class="login black">
           <div class="box flex flex-col items-start p-6">
-              <img src="" class="w-12 h-12"/>
+              <img src={pro} class="w-12 h-12"/>
               <h1 class=" mt-1.5">EXPLORER</h1>
               <h1 class=" text-[50px]  -mt-2 font-bold">$5</h1>
               <p class='mb-4'>
@@ -84,7 +88,7 @@
       </section>
       <section class="login black">
           <div class="box flex flex-col items-start p-6">
-              <img src="" class="w-12 h-12"/>
+              <img src={team} class="w-12 h-12"/>
               <h1 class=" mt-1.5">VOYAGER</h1>
               <h1 class=" text-[50px]  -mt-2 font-bold">$15</h1>
               <p class='mb-4'>
@@ -97,7 +101,7 @@
       </section>
       <section class="login black">
           <div class="box flex flex-col items-start p-6">
-              <img src="" class="w-12 h-12"/>
+              <img src={enterprise} class="w-12 h-12"/>
               <h1 class=" mt-1.5">VETERAN</h1>
               <h1 class=" text-[50px]  -mt-2 font-bold">$30</h1>
               <p class='mb-4'>
