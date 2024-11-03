@@ -53,7 +53,7 @@ class DataResponse(BaseModel):
     travel_tips: List[str]
     packing_list: List[str]
 
-@app.post("/autofillPoI1", response_model=PointOfInrestResponse)
+# @app.post("/autofillPoI1", response_model=PointOfInrestResponse)
 async def autofillPoI1(request: PointOfInrest1Request):
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
@@ -72,6 +72,7 @@ async def autofillPoI1(request: PointOfInrest1Request):
     
 
     response_text = response.choices[0].message.content
+    print(response_text, request.interests, request.region)
     response_list = response_text.split("\n")
     
     poi = []
@@ -79,7 +80,6 @@ async def autofillPoI1(request: PointOfInrest1Request):
         if '-' in line:
             poi.append(line.replace("-", "").replace("*", "").strip())
     
-    print(poi)
     return PointOfInrestResponse(data=poi)
 
 
@@ -320,5 +320,6 @@ if __name__=="__main__":
     # print(get_packing_list(['louve', 'big ben'], 'France', '2024-12-01', weather))
     # research = research_cities(['lille', 'Paris'], ['art','museums'], 'France', '2024-12-01')
     # itinerary = get_itinerary(['art','museums'], ['louve', 'big ben'], 'France', '2024-12-01', '10')
+    # print(asyncio.run(autofillPoI1(PointOfInrest1Request(region="West Europe", interests="art, museums", token="i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR"))))
     # print(asyncio.run(autofillPoI2(PointOfInrest2Request(point_of_interest="The Louvre Museum", interests="art, museums", token="i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR"))))
 #pip freeze > requirements.txt
