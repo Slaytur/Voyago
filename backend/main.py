@@ -120,8 +120,6 @@ async def root(request: DataRequest):
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
 
-
-async def get_travel_info(request):
     # Run all async functions concurrently
     weather, packing_list, travel_tips, itinerary = await asyncio.gather(
         get_weather(request.points_of_interest, request.location, request.date),
