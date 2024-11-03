@@ -118,7 +118,8 @@ async def autofillPoI2(request: PointOfInrest2Request):
 async def root(request: DataRequest):
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
-        
+    
+    print(request)    
     weather = get_weather(request.points_of_interest, request.location, request.date)
     packing_list = get_packing_list(request.points_of_interest, request.location, request.date, request.date_length)
     travel_tips = await get_travel_tips(request.points_of_interest)
