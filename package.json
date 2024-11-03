@@ -61,7 +61,6 @@
 		"axios": "^1.7.7",
 		"bits-ui": "^0.21.16",
 		"bootstrap": "^5.3.3",
-		"framer-motion": "^11.11.11",
 		"gsap": "^3.12.5",
 		"jquery": "^3.7.1",
 		"lucide-svelte": "^0.454.0",
