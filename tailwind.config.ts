@@ -2,6 +2,7 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+    prefix: "tw-",
     darkMode: ["class"],
     content: ["./src/**/*.{html,js,svelte,ts}"],
     safelist: ["dark"],
@@ -24,39 +25,13 @@ const config: Config = {
         },
         extend: {
             colors: {
-                border: "hsl(var(--border) / <alpha-value>)",
-                input: "hsl(var(--input) / <alpha-value>)",
-                ring: "hsl(var(--ring) / <alpha-value>)",
-                background: "hsl(var(--background) / <alpha-value>)",
-                foreground: "hsl(var(--foreground) / <alpha-value>)",
-                primary: {
-                    DEFAULT: "hsl(var(--primary) / <alpha-value>)",
-                    foreground: "hsl(var(--primary-foreground) / <alpha-value>)"
-                },
-                secondary: {
-                    DEFAULT: "hsl(var(--secondary) / <alpha-value>)",
-                    foreground: "hsl(var(--secondary-foreground) / <alpha-value>)"
-                },
-                destructive: {
-                    DEFAULT: "hsl(var(--destructive) / <alpha-value>)",
-                    foreground: "hsl(var(--destructive-foreground) / <alpha-value>)"
-                },
-                muted: {
-                    DEFAULT: "hsl(var(--muted) / <alpha-value>)",
-                    foreground: "hsl(var(--muted-foreground) / <alpha-value>)"
-                },
-                accent: {
-                    DEFAULT: "hsl(var(--accent) / <alpha-value>)",
-                    foreground: "hsl(var(--accent-foreground) / <alpha-value>)"
-                },
-                popover: {
-                    DEFAULT: "hsl(var(--popover) / <alpha-value>)",
-                    foreground: "hsl(var(--popover-foreground) / <alpha-value>)"
-                },
-                card: {
-                    DEFAULT: "hsl(var(--card) / <alpha-value>)",
-                    foreground: "hsl(var(--card-foreground) / <alpha-value>)"
-                }
+                primary: "#433a5f",
+                secondary: "#a295cb",
+                secondaryForeground: "#5a5370",
+                accent: "#5c43a8",
+                accentForeground: "#3a2a6b",
+                text: "#000000",
+                background: "#ffffff"
             },
             borderRadius: {
                 lg: "var(--radius)",
@@ -65,7 +40,7 @@ const config: Config = {
             },
             fontFamily: {
                 sans: [...fontFamily.sans],
-                sourcesans: ["Source Sans", "sans"],
+                sourcesans: ["Source Sans Pro", "sans"],
                 opensans: ["Open Sans", "sans"],
                 chewy: ["Chewy", "sans"]
             }

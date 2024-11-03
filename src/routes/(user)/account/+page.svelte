@@ -1,12 +1,12 @@
 <script>
     export let data;
-  
-    const { user } = data
-  </script>
-  
-  <ul class="pt-14">
+
+    const { user } = data;
+</script>
+
+<ul class="pt-14">
     <li>
-      <strong>Email:</strong> {user.email}
+        <strong>Email:</strong> {user.email}
     </li>
     <li>
         <strong>Name:</strong> {user.name}
@@ -14,9 +14,8 @@
     <li>
         <strong>ID: </strong> {user.$id}
     </li>
-  </ul>
-  
-  <form method="post">
+</ul>
+
+<form method="post">
     <button type="submit">Log out</button>
-  </form>
-  
+</form>

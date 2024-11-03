@@ -1,31 +1,31 @@
 <script lang="ts">
     import { Button, Select, DatePicker } from "bits-ui";
     import { fly } from "svelte/transition";
-    import { goto } from '$app/navigation';
+    import { goto } from "$app/navigation";
 
     export let data;
-    const { user} = data;
+    const { user } = data;
 
     interface Region {
-        value: string;
+        value: string
     }
     interface Attraction {
-        value: string;
+        value: string
     }
 
     const regions: Region[] = [
-        { value: "United States"},
-        { value: "Canada / Greenland"},
-        { value: "Central America"},
-        { value: "South America"},
-        { value: "Western Europe"},
-        { value: "Eastern Europe"},
-        { value: "East Asia"},
-        { value: "South Asia"},
-        { value: "Southeast Asia"},
-        { value: "Middle East"},
-        { value: "Africa"},
-        { value: "Oceania"}
+        { value: "United States" },
+        { value: "Canada / Greenland" },
+        { value: "Central America" },
+        { value: "South America" },
+        { value: "Western Europe" },
+        { value: "Eastern Europe" },
+        { value: "East Asia" },
+        { value: "South Asia" },
+        { value: "Southeast Asia" },
+        { value: "Middle East" },
+        { value: "Africa" },
+        { value: "Oceania" }
     ];
 
     let selectedRegion: Region | null = null;
@@ -36,56 +36,52 @@
 
     let activities = "";
     let activityList: string[] = [];
-    let travelPace: string | null = 'Packed';
+    let travelPace: string | null = "Packed";
     let vacationLength: number | null = null;
     let date: string | null = null;
     let name = "";
 
-    async function makeRoute(selectedNearAttractions:Attraction[], activityList:string[], selectedRegion:Region, date:string, vacationLength:Number){
-      const token = 'i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR';
-      try {
-          const newatt: string[] = selectedNearAttractions.map(selectedNearAttractions => selectedNearAttractions.value);
-          console.log(newatt);
-          const response = await fetch("https://voyago-backend.namikas.dev/create-itinerary", {
-            //   mode: 'no-cors',
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-                  "Authorization": `Bearer ${token}`
-              },
-              body: JSON.stringify({
-                points_of_interest: newatt.join(", "),
-                interests: activityList.join(", "),
-                location: selectedRegion.value,
-                date: date,
-                date_length: String(vacationLength),
-                name: name,
-                id: user.$id,
-                token: token
-              })
-          });
+    async function makeRoute (selectedNearAttractions: Attraction[], activityList: string[], selectedRegion: Region, date: string, vacationLength: number) {
+        const token = "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR";
+        try {
+            const newatt: string[] = selectedNearAttractions.map(selectedNearAttractions => selectedNearAttractions.value);
+            console.log(newatt);
+            const response = await fetch("https://voyago-backend.namikas.dev/create-itinerary", {
+                //   mode: 'no-cors',
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    points_of_interest: newatt.join(", "),
+                    interests: activityList.join(", "),
+                    location: selectedRegion.value,
+                    date: date,
+                    date_length: String(vacationLength),
+                    id: user.$id,
+                    token: token
+                })
+            });
 
-          if (!response.ok) {
-              throw new Error(`Error ${response.status}: ${response.statusText}`);
-          }
-          
-          const iten = await response.json();
-          goto('/dashboard');
+            if (!response.ok)
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
 
-
-      } catch (error) {
-          console.error("Failed to fetch near attractions:", error);
-      }
+            const iten = await response.json();
+            goto("/dashboard");
+        } catch (error) {
+            console.error("Failed to fetch near attractions:", error);
+        }
     }
-    async function onRegionSelect(value: string) {
+    async function onRegionSelect (value: string) {
         selectedRegion = regions.find(region => region.value === value) || null;
-        if (!selectedRegion){
+        if (!selectedRegion) {
             attractions = [];
             selectedAttraction = null;
-            console.log('how');
+            console.log("how");
             return;
         }
-        const token = 'i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR';
+        const token = "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR";
         try {
             const response = await fetch("https://voyago-backend.namikas.dev/autofillPoI1", {
                 // mode: 'no-cors',
@@ -101,29 +97,27 @@
                 })
             });
 
-            if (!response.ok) {
+            if (!response.ok)
                 throw new Error(`Error ${response.status}: ${response.statusText}`);
-            }
-            
+
             const major_attractions = await response.json();
             console.log(major_attractions);
             let attractionstemp: Attraction[] = major_attractions.data.map((location: any) => ({ value: location }));
             attractions = attractionstemp;
-            console.log(attractions)
-
+            console.log(attractions);
         } catch (error) {
             console.error("Failed to fetch attractions:", error);
-            attractions = [];  // Return an empty array in case of an error to match original behavior
+            attractions = []; // Return an empty array in case of an error to match original behavior
         }
         selectedAttraction = null;
     }
-    async function onAttractionSelect(value: string) {
+    async function onAttractionSelect (value: string) {
         selectedAttraction = attractions.find(region => region.value === value) || null;
-        if (!selectedAttraction){
+        if (!selectedAttraction) {
             selectedAttraction = null;
             return;
         }
-        const token = 'i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR';
+        const token = "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR";
         try {
             console.log(selectedAttraction);
             const response = await fetch("https://voyago-backend.namikas.dev/autofillPoI2", {
@@ -140,47 +134,44 @@
                 })
             });
 
-            if (!response.ok) {
+            if (!response.ok)
                 throw new Error(`Error ${response.status}: ${response.statusText}`);
-            }
-            
+
             const near_attractions = await response.json();
             console.log(near_attractions);
             let nearattractionstemp: Attraction[] = near_attractions.data.map((location: any) => ({ value: location }));
             nearAttractions = nearattractionstemp;
             selectedNearAttractions = [selectedAttraction];
-            console.log(nearAttractions)
-
+            console.log(nearAttractions);
         } catch (error) {
             console.error("Failed to fetch near attractions:", error);
-            nearAttractions = [];  // Return an empty array in case of an error to match original behavior
+            nearAttractions = []; // Return an empty array in case of an error to match original behavior
         }
     }
 
-    function addItem(value: string) {
+    function addItem (value: string) {
         let nearAttraction = nearAttractions.find(region => region.value === value) || null;
-        if (nearAttraction && !selectedNearAttractions.find(attraction => attraction.value === nearAttraction.value)) {
+        if (nearAttraction && !selectedNearAttractions.find(attraction => attraction.value === nearAttraction.value))
             selectedNearAttractions = [...selectedNearAttractions, nearAttraction];
-        } else {
+        else
             selectedNearAttractions = selectedNearAttractions.filter(item => item.value !== nearAttraction?.value);
-        }
     }
-    
-    function addActivity() {
+
+    function addActivity () {
         if (activities.trim() !== "") {
             activityList = [...activityList, activities.trim()];
             activities = ""; // Clear the input
         }
     }
-    function removeActivity(index: number) {
+    function removeActivity (index: number) {
         activityList = activityList.filter((_, i) => i !== index);
     }
 
-    async function submit() {//hah litle dogma
-      const token = 'i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR';
+    async function submit () {
+        const token = "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR";
         try {
             const response = await fetch("https://voyago-backend.namikas.dev/create-itinerary", {
-                mode: 'no-cors',
+                mode: "no-cors",
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -196,46 +187,44 @@
                 })
             });
 
-            if (!response.ok) {
+            if (!response.ok)
                 throw new Error(`Error ${response.status}: ${response.statusText}`);
-            }
-            
+
             const res = await response.json();
             console.log(res);
-
         } catch (error) {
             console.error("Failed to fetch itinerary:", error);
         }
     }
 </script>
 
-<div class="flex flex-col w-full justify-center items-center py-16">
-    <div class="sele pt-14 flex ml-7 max-w-[40%] flex-col space-y-4 justify-center">
+<div class="tw-flex tw-flex-col tw-w-full tw-justify-center tw-items-center tw-py-16">
+    <div class="sele tw-pt-14 tw-flex tw-ml-7 tw-max-w-[40%] tw-flex-col tw-space-y-4 tw-justify-center">
         <h1>Name:</h1>
-        <input type="text" bind:value={name} placeholder="Ex. My favorite trip" min="5" class="border rounded-md p-2 w-[300px]" />
+        <input type="text" bind:value={name} placeholder="Ex. My favorite trip" min="5" class="tw-border tw-rounded-md tw-p-2 tw-w-[300px]" />
 
         {#if name.length > 4}
-        <h1>Enter your planned activities/interests:</h1>
-        <div class="flex items-center space-x-2">
-            <input
-                type="text"
-                bind:value={activities}
-                placeholder="e.g., hiking, museum visit"
-                class="border rounded-md p-2"
-                required
-            />
-            <Button.Root on:click={addActivity} class="border rounded-md bg-green p-2">
-                Enter
-            </Button.Root>
-        </div>
+            <h1>Enter your planned activities/interests:</h1>
+            <div class="tw-flex tw-items-center tw-space-x-2">
+                <input
+                    type="text"
+                    bind:value={activities}
+                    placeholder="e.g., hiking, museum visit"
+                    class="border rounded-md p-2"
+                    required
+                />
+                <Button.Root on:click={addActivity} class="tw-border tw-rounded-md tw-bg-green tw-p-2">
+                    Enter
+                </Button.Root>
+            </div>
         {/if}
 
         {#if activityList.length > 0}
             <ul class="mt-4 space-y-2">
                 {#each activityList as activity, index}
-                    <li class="flex items-center space-x-2">
+                    <li class="tw-flex tw-items-center tw-space-x-2">
                         <span>{activity}</span>
-                        <Button.Root on:click={() => removeActivity(index)} class="border rounded-md bg-red p-1 ">
+                        <Button.Root on:click={() => removeActivity(index)} class="tw-border tw-rounded-md tw-bg-red tw-p-1 ">
                             X
                         </Button.Root>
                     </li>
@@ -244,39 +233,38 @@
         {/if}
 
         {#if activityList.length > 0 && name.length > 4}
-        <Select.Root items={regions} on:ValueChange={e => onRegionSelect(e.detail.value)}>
-            <h1>Choose a region:</h1>
-            <Select.Trigger class="inline-flex h-10 w-[296px] items-center rounded-md border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select a region">
-                <span class="mr-[9px] size-6 text-muted-foreground">🌏</span>
-                <Select.Value class="text-sm text-muted-foreground" placeholder="Select a region" />
-                <span class="ml-auto size-6 text-muted-foreground">▼</span>
-            </Select.Trigger>
-            <Select.Content class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none" transition={fly} sideOffset={8}>
-                {#each regions as region}
-                    <Select.Item class="flex h-10 w-full select-none items-center rounded-sm py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted" value={region.value} on:click={() => onRegionSelect(region.value)}>
-                        {region.value}
-                        <Select.ItemIndicator class="ml-auto" asChild={false}><span>✔</span></Select.ItemIndicator>
-                    </Select.Item>
-                {/each}
-            </Select.Content>
-            <Select.Input name="favoriteRegion" />
-        </Select.Root>
+            <Select.Root items={regions} on:ValueChange={e => onRegionSelect(e.detail.value)}>
+                <h1>Choose a region:</h1>
+                <Select.Trigger class="tw-inline-flex tw-h-10 w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-foreground focus:tw-ring-offset-2 focus:tw-ring-offset-background" aria-label="Select a region">
+                    <span class="tw-mr-[9px] tw-size-6 tw-text-muted-foreground">🌏</span>
+                    <Select.Value class="tw-text-sm tw-text-muted-foreground" placeholder="Select a region" />
+                    <span class="tw-ml-auto tw-size-6 tw-text-muted-foreground">▼</span>
+                </Select.Trigger>
+                <Select.Content class="tw-w-full tw-max-h-80 tw-overflow-auto tw-rounded-xl tw-border tw-border-muted tw-bg-background tw-px-1 tw-py-3 tw-shadow-popover tw-outline-none" transition={fly} sideOffset={8}>
+                    {#each regions as region}
+                        <Select.Item class="tw-flex tw-h-10 tw-w-full tw-select-none tw-items-center tw-rounded-sm tw-py-3 tw-pl-5 tw-pr-1.5 tw-text-sm tw-outline-none tw-transition-all tw-duration-75 data-[highlighted]:bg-muted" value={region.value} on:click={() => onRegionSelect(region.value)}>
+                            {region.value}
+                            <Select.ItemIndicator class="tw-ml-auto" asChild={false}><span>✔</span></Select.ItemIndicator>
+                        </Select.Item>
+                    {/each}
+                </Select.Content>
+                <Select.Input name="favoriteRegion" />
+            </Select.Root>
         {/if}
-
 
         {#if selectedRegion != null && attractions.length > 0 && activityList.length > 0 && name.length > 4}
             <Select.Root items={attractions}>
                 <h1>Choose an attraction:</h1>
-                <Select.Trigger class="inline-flex h-10 w-[296px] items-center rounded-md border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select an attraction">
-                    <span class="mr-[9px] size-6 text-muted-foreground">🎢</span>
-                    <Select.Value class="text-sm text-muted-foreground" placeholder="Select an attraction" />
-                    <span class="ml-auto size-6 text-muted-foreground">▼</span>
+                <Select.Trigger class="tw-inline-flex tw-h-10 tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select an attraction">
+                    <span class="tw-mr-[9px] tw-size-6 tw-text-muted-foreground">🎢</span>
+                    <Select.Value class="tw-text-sm tw-text-muted-foreground" placeholder="Select an attraction" />
+                    <span class="tw-ml-auto tw-size-6 tw-text-muted-foreground">▼</span>
                 </Select.Trigger>
-                <Select.Content class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none" transition={fly} sideOffset={8}>
+                <Select.Content class="tw-w-full tw-max-h-80 tw-overflow-auto tw-rounded-xl tw-border tw-border-muted tw-bg-background tw-px-1 tw-py-3 tw-shadow-popover tw-outline-none" transition={fly} sideOffset={8}>
                     {#each attractions as attraction}
-                        <Select.Item class="flex h-10 w-full select-none items-center rounded-sm py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted" value={attraction.value} on:click={() => onAttractionSelect(attraction.value)}>
+                        <Select.Item class="tw-flex tw-h-10 tw-w-full tw-select-none tw-items-center tw-rounded-sm tw-py-3 tw-pl-5 tw-pr-1.5 tw-text-sm tw-outline-none tw-transition-all tw-duration-75 data-[highlighted]:bg-muted" value={attraction.value} on:click={() => onAttractionSelect(attraction.value)}>
                             {attraction.value}
-                            <Select.ItemIndicator class="ml-auto" asChild={false}><span>✔</span></Select.ItemIndicator>
+                            <Select.ItemIndicator class="tw-ml-auto" asChild={false}><span>✔</span></Select.ItemIndicator>
                         </Select.Item>
                     {/each}
                 </Select.Content>
@@ -284,20 +272,19 @@
             </Select.Root>
         {/if}
 
-
-        {#if nearAttractions.length >0 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 4}
+        {#if nearAttractions.length > 0 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 4}
             <Select.Root items={nearAttractions} multiple>
                 <h1>Choose up to 4 nearby attractions:</h1>
-                <Select.Trigger class="inline-flex h-10 w-[296px] items-center rounded-md border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select a nearer attraction">
-                    <span class="mr-[9px] size-6 text-muted-foreground">🎢</span>
-                    <Select.Value class="text-sm text-muted-foreground" placeholder="Select an attraction" />
-                    <span class="ml-auto size-6 text-muted-foreground">▼</span>
+                <Select.Trigger class="tw-inline-flex tw-h-10 tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select a nearer attraction">
+                    <span class="tw-mr-[9px] tw-size-6 tw-text-muted-foreground">🎢</span>
+                    <Select.Value class="tw-text-sm tw-text-muted-foreground" placeholder="Select an attraction" />
+                    <span class="tw-ml-auto tw-size-6 tw-text-muted-foreground">▼</span>
                 </Select.Trigger>
-                <Select.Content class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none" transition={fly} sideOffset={8}>
+                <Select.Content class="tw-w-full tw-max-h-80 tw-overflow-auto tw-rounded-xl tw-border tw-border-muted tw-bg-background tw-px-1 tw-py-3 tw-shadow-popover tw-outline-none" transition={fly} sideOffset={8}>
                     {#each nearAttractions as nearAttraction}
-                        <Select.Item class="flex h-10 w-full select-none items-center rounded-sm py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted" value={nearAttraction.value} on:click={() => addItem(nearAttraction.value)}>
+                        <Select.Item class="tw-flex tw-h-10 tw-w-full tw-select-none tw-items-center tw-rounded-sm tw-py-3 tw-pl-5 tw-pr-1.5 tw-text-sm tw-outline-none tw-transition-all tw-duration-75 data-[highlighted]:bg-muted" value={nearAttraction.value} on:click={() => addItem(nearAttraction.value)}>
                             {nearAttraction.value}
-                            <Select.ItemIndicator class="ml-auto" asChild={false}><span>✔</span></Select.ItemIndicator>
+                            <Select.ItemIndicator class="tw-ml-auto" asChild={false}><span>✔</span></Select.ItemIndicator>
                         </Select.Item>
                     {/each}
                 </Select.Content>
@@ -306,8 +293,7 @@
         {/if}
     </div>
 
-
-    <div class="sele pt-14 flex ml-7 flex-col space-y-4">
+    <div class="sele tw-pt-14 tw-flex tw-ml-7 tw-flex-col tw-space-y-4">
 
         <!-- {#if selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 4}
         <h1>What is your preferred travel pace?</h1>
@@ -326,116 +312,116 @@
         {/if} -->
 
         {#if travelPace && selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion && activityList.length > 0 && name.length > 4}
-        <DatePicker.Root weekdayFormat="short" fixedWeeks={true} onValueChange={e => date = String(e?.month) + "/" + String(e?.day) + "/" + String(e?.year)}>
-            <div class="flex w-full max-w-[232px] flex-col gap-1.5">
-              <DatePicker.Label class="block select-none text-sm font-medium"
-                >Approximate travel Date</DatePicker.Label
-              >
-              <DatePicker.Input
-                let:segments
-                class="flex h-10 w-full max-w-[232px] select-none items-center rounded-md border border-border-input bg-background px-2 py-3 text-sm tracking-[0.01em] text-foreground focus-within:border-border-input-hover focus-within:shadow-date-field-focus hover:border-border-input-hover"
-              >
-                {#each segments as { part, value }}
-                  <div class="inline-block select-none">
-                    {#if part === "literal"}
-                      <DatePicker.Segment {part} class="p-1 text-muted-foreground">
-                        {value}
-                      </DatePicker.Segment>
-                    {:else}
-                      <DatePicker.Segment
-                        {part}
-                        class="rounded-5px px-1 py-1 hover:bg-muted focus:bg-muted focus:text-foreground focus-visible:!ring-0 focus-visible:!ring-offset-0 aria-[valuetext=Empty]:text-muted-foreground"
-                      >
-                        {value}
-                      </DatePicker.Segment>
-                    {/if}
-                  </div>
-                {/each}
-                <DatePicker.Trigger
-                  class="ml-auto inline-flex size-8 items-center justify-center rounded-[5px] text-foreground/60 transition-all hover:bg-muted active:bg-dark-10"
-                >
-                📅
-                </DatePicker.Trigger>
-              </DatePicker.Input>
-              <DatePicker.Content
-                sideOffset={6}
-                transition={fly}
-                transitionConfig={{ duration: 150, y: -8 }}
-                class="z-50"
-              >
-                <DatePicker.Calendar
-                  class="rounded-[15px] border border-dark-10 bg-secondary p-[22px] shadow-popover"
-                  let:months
-                  let:weekdays
-                >
-                  <DatePicker.Header class="flex items-center justify-between">
-                    <DatePicker.PrevButton
-                      class="inline-flex size-10 items-center justify-center rounded-9px bg-secondary transition-all hover:bg-muted active:scale-98"
+            <DatePicker.Root weekdayFormat="short" fixedWeeks={true} onValueChange={e => date = `${String(e?.month)}/${String(e?.day)}/${String(e?.year)}`}>
+                <div class="tw-flex tw-w-full tw-max-w-[232px] tw-flex-col tw-gap-1.5">
+                    <DatePicker.Label class="tw-block tw-select-none tw-text-sm tw-font-medium"
+                    >Approximate travel Date</DatePicker.Label
                     >
-                    ↶
-                    </DatePicker.PrevButton>
-                    <DatePicker.Heading class="text-[15px] font-medium" />
-                    <DatePicker.NextButton
-                      class="inline-flex size-10 items-center justify-center rounded-9px bg-secondary transition-all hover:bg-muted active:scale-98"
+                    <DatePicker.Input
+                        let:segments
+                        class="tw-flex tw-h-10 tw-w-full tw-max-w-[232px] tw-select-none tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-2 tw-py-3 tw-text-sm tw-tracking-[0.01em] tw-text-foreground focus-within:tw-border-border-input-hover focus-within:tw-shadow-date-field-focus hover:tw-border-border-input-hover"
                     >
-                    ↷
-                    </DatePicker.NextButton>
-                  </DatePicker.Header>
-                  <div
-                    class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0"
-                  >
-                    {#each months as month}
-                      <DatePicker.Grid
-                        class="w-full border-collapse select-none space-y-1"
-                      >
-                        <DatePicker.GridHead>
-                          <DatePicker.GridRow class="mb-1 flex w-full justify-between">
-                            {#each weekdays as day}
-                              <DatePicker.HeadCell
-                                class="w-10 rounded-md text-xs !font-normal text-muted-foreground"
-                              >
-                                <div>{day.slice(0, 2)}</div>
-                              </DatePicker.HeadCell>
-                            {/each}
-                          </DatePicker.GridRow>
-                        </DatePicker.GridHead>
-                        <DatePicker.GridBody>
-                          {#each month.weeks as weekDates}
-                            <DatePicker.GridRow class="flex w-full">
-                              {#each weekDates as date}
-                                <DatePicker.Cell
-                                  {date}
-                                  class="relative size-10 !p-0 text-center text-sm"
+                        {#each segments as { part, value }}
+                            <div class="tw-inline-block tw-select-none">
+                                {#if part === "literal"}
+                                    <DatePicker.Segment {part} class="tw-p-1 tw-text-muted-foreground">
+                                        {value}
+                                    </DatePicker.Segment>
+                                {:else}
+                                    <DatePicker.Segment
+                                        {part}
+                                        class="tw-rounded-5px tw-px-1 tw-py-1 hover:tw-bg-muted focus:tw-bg-muted focus:tw-text-foreground focus-visible:!tw-ring-0 focus-visible:!tw-ring-offset-0 aria-[valuetext=Empty]:tw-text-muted-foreground"
+                                    >
+                                        {value}
+                                    </DatePicker.Segment>
+                                {/if}
+                            </div>
+                        {/each}
+                        <DatePicker.Trigger
+                            class="tw-ml-auto tw-inline-flex tw-size-8 tw-items-center tw-justify-center tw-rounded-[5px] tw-text-foreground/60 tw-transition-all hover:tw-bg-muted active:tw-bg-dark-10"
+                        >
+                            📅
+                        </DatePicker.Trigger>
+                    </DatePicker.Input>
+                    <DatePicker.Content
+                        sideOffset={6}
+                        transition={fly}
+                        transitionConfig={{ duration: 150, y: -8 }}
+                        class="tw-z-50"
+                    >
+                        <DatePicker.Calendar
+                            class="tw-rounded-[15px] tw-border tw-border-dark-10 tw-bg-secondary tw-p-[22px] tw-shadow-popover"
+                            let:months
+                            let:weekdays
+                        >
+                            <DatePicker.Header class="tw-flex tw-items-center tw-justify-between">
+                                <DatePicker.PrevButton
+                                    class="tw-inline-flex tw-size-10 tw-items-center tw-justify-center tw-rounded-9px tw-bg-secondary tw-transition-all tw-hover:bg-muted active:tw-scale-98"
                                 >
-                                  <DatePicker.Day
-                                    {date}
-                                    month={month.value}
-                                    class="group relative inline-flex size-10 items-center justify-center whitespace-nowrap rounded-9px border border-transparent bg-transparent p-0 text-sm font-normal text-foreground transition-all hover:border-foreground data-[disabled]:pointer-events-none data-[outside-month]:pointer-events-none data-[selected]:bg-foreground data-[selected]:font-medium data-[disabled]:text-foreground/30 data-[selected]:text-background data-[unavailable]:text-muted-foreground data-[unavailable]:line-through"
-                                  >
-                                    <div
-                                      class="absolute top-[5px] hidden size-1 rounded-full bg-foreground transition-all group-data-[today]:block group-data-[selected]:bg-background"
-                                    ></div>
-                                    {date.day}
-                                  </DatePicker.Day>
-                                </DatePicker.Cell>
-                              {/each}
-                            </DatePicker.GridRow>
-                          {/each}
-                        </DatePicker.GridBody>
-                      </DatePicker.Grid>
-                    {/each}
-                  </div>
-                </DatePicker.Calendar>
-              </DatePicker.Content>
-            </div>
-          </DatePicker.Root>
+                                    ↶
+                                </DatePicker.PrevButton>
+                                <DatePicker.Heading class="tw-text-[15px] font-medium" />
+                                <DatePicker.NextButton
+                                    class="tw-inline-flex tw-size-10 tw-items-center tw-justify-center tw-rounded-9px tw-bg-secondary tw-transition-all hover:tw-bg-muted active:tw-scale-98"
+                                >
+                                    ↷
+                                </DatePicker.NextButton>
+                            </DatePicker.Header>
+                            <div
+                                class="tw-flex tw-flex-col tw-space-y-4 tw-pt-4 sm:tw-flex-row sm:tw-space-x-4 sm:tw-space-y-0"
+                            >
+                                {#each months as month}
+                                    <DatePicker.Grid
+                                        class="tw-w-full tw-border-collapse tw-select-none tw-space-y-1"
+                                    >
+                                        <DatePicker.GridHead>
+                                            <DatePicker.GridRow class="tw-mb-1 tw-flex tw-w-full tw-justify-between">
+                                                {#each weekdays as day}
+                                                    <DatePicker.HeadCell
+                                                        class="tw-w-10 tw-rounded-md tw-text-xs !tw-font-normal tw-text-muted-foreground"
+                                                    >
+                                                        <div>{day.slice(0, 2)}</div>
+                                                    </DatePicker.HeadCell>
+                                                {/each}
+                                            </DatePicker.GridRow>
+                                        </DatePicker.GridHead>
+                                        <DatePicker.GridBody>
+                                            {#each month.weeks as weekDates}
+                                                <DatePicker.GridRow class="tw-flex tw-w-full">
+                                                    {#each weekDates as date}
+                                                        <DatePicker.Cell
+                                                            {date}
+                                                            class="tw-relative tw-size-10 !tw-p-0 tw-text-center tw-text-sm"
+                                                        >
+                                                            <DatePicker.Day
+                                                                {date}
+                                                                month={month.value}
+                                                                class="tw-group tw-relative tw-inline-flex tw-size-10 tw-items-center tw-justify-center tw-whitespace-nowrap tw-rounded-9px tw-border tw-border-transparent tw-bg-transparent tw-p-0 tw-text-sm tw-font-normal tw-text-foreground tw-transition-all hover:tw-border-foreground data-[disabled]:tw-pointer-events-none data-[outside-month]:tw-pointer-events-none data-[selected]:tw-bg-foreground data-[selected]:tw-font-medium data-[disabled]:tw-text-foreground/30 data-[selected]:tw-text-background data-[unavailable]:tw-text-muted-foreground data-[unavailable]:tw-line-through"
+                                                            >
+                                                                <div
+                                                                    class="tw-absolute tw-top-[5px] tw-hidden tw-size-1 tw-rounded-full tw-bg-foreground tw-transition-all group-data-[today]:tw-block group-data-[selected]:tw-bg-background"
+                                                                ></div>
+                                                                {date.day}
+                                                            </DatePicker.Day>
+                                                        </DatePicker.Cell>
+                                                    {/each}
+                                                </DatePicker.GridRow>
+                                            {/each}
+                                        </DatePicker.GridBody>
+                                    </DatePicker.Grid>
+                                {/each}
+                            </div>
+                        </DatePicker.Calendar>
+                    </DatePicker.Content>
+                </div>
+            </DatePicker.Root>
         {/if}
         {#if selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 4 && date && travelPace}
-        <h1>Enter your vacation length (in days):</h1>
-        <input type="number" bind:value={vacationLength} placeholder="Enter days" min="1" class="border rounded-md p-2 w-[100px]" />
+            <h1>Enter your vacation length (in days):</h1>
+            <input type="number" bind:value={vacationLength} placeholder="Enter days" min="1" class="tw-border tw-rounded-md tw-p-2 tw-w-[100px]" />
         {/if}
         {#if selectedNearAttractions.length > 0 && activityList.length > 0 && travelPace && vacationLength && date && name}
-            <Button.Root color="green" class="border rounded-md ml-3 bg-green w-fit p-2" on:click={e=>makeRoute(selectedNearAttractions, activityList, selectedRegion!, date!, vacationLength!)}>
+            <Button.Root color="green" class="tw-border tw-rounded-md tw-ml-3 tw-bg-green tw-w-fit tw-p-2" on:click={e => makeRoute(selectedNearAttractions, activityList, selectedRegion!, date!, vacationLength ?? 0)}>
                 Continue
             </Button.Root>
         {/if}
