@@ -42,11 +42,12 @@
     }}
  />
 
-<div class="min-h-screen">
-    <main>
+<div class="">
+    <main class="">
         <Header />
         <Toaster position="top-center" />
         <slot />
+        <hr>
         <Footer />
     </main>
 </div>
