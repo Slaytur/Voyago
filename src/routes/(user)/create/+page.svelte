@@ -211,7 +211,7 @@
 <div class="flex flex-col w-full justify-center items-center py-16">
     <div class="sele pt-14 flex ml-7 max-w-[40%] flex-col space-y-4 justify-center">
         <h1>Name:</h1>
-        <input type="text" bind:value={name} placeholder="My favorite trip" min="5" class="border rounded-md p-2 w-[300px]" />
+        <input type="text" bind:value={name} placeholder="Ex. My favorite trip" min="5" class="border rounded-md p-2 w-[300px]" />
 
         {#if name.length > 4}
         <h1>Enter your planned activities/interests:</h1>
