@@ -113,7 +113,7 @@ async def autofillPoI2(request: PointOfInrest2Request):
     return PointOfInrestResponse(data=poi)
 
 # Root route
-@app.get("/", response_model=DataResponse)
+@app.post("/create-itinerary", response_model=DataResponse)
 async def root(request: DataRequest):
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
