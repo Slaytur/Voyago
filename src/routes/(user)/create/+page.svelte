@@ -117,7 +117,7 @@
             console.error("Failed to fetch near attractions:", error);
             nearAttractions = [];  // Return an empty array in case of an error to match original behavior
         }
-        nearAttractions = [{ value: "needs api  call for near selections"}, { value: "Canada / needs api  call for near selections"}];
+        // nearAttractions = [{ value: "needs api  call for near selections"}, { value: "Canada / needs api  call for near selections"}];
     }
 
     function addItem(value: string) {
