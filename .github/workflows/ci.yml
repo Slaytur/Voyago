@@ -25,8 +25,8 @@ jobs:
       - name: Install Packages
         run: bun install
 
-      # - name: Generate Prisma Client
-      #   run: bunx prisma generate
+      - name: Generate Prisma Client
+        run: bunx prisma generate
 
       - name: Lint
         run: bun lint:ci
