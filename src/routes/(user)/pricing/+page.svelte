@@ -24,27 +24,34 @@
       text-align: center;
       justify-content: center;
       justify-items: center;
-      padding-bottom: 30px;
-      font-size: 50px;
     }
     #grad {
       padding: 0px 30px 0px; 
     }
 </style>
 
-<section class="py-48">
+<section class="py-40 font-opensans">
     <section class="top">
-      <div class="text">
+      <div class="text text-[60px] font-bold">
         World-class 
         <div id="grad" class="text">
             <GradientText interval={210} text="adventures" />
         </div>
           within reach
       </div>
+      <h2 class="text text-[26px] font-bold tracking-wide mb-10">Transparent pricing that fits your budget</h2>
     </section>
-    <section class="login">
-        <div class="box">
-          yes 
+    <section class="login black">
+        <div class="box flex flex-col items-start p-6">
+            <img src="" class="w-12 h-12"/>
+            <h1 class=" mt-1.5">STARTER</h1>
+            <h1 class=" text-[50px]  -mt-2 font-bold">$0</h1>
+            <p class='mb-4'>
+                Your first itinerary is free!
+            </p>
+            <p>
+                You’re going to love it.
+            </p>
         </div>
     </section>
 </section>
