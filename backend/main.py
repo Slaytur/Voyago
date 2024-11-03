@@ -117,11 +117,10 @@ async def autofillPoI2(request: PointOfInrest2Request):
 # Root route
 @app.post("/create-itinerary", response_model=DataResponse)
 async def root(request: DataRequest):
-    print(request.points_of_interest)    
-    # return DataResponse(itinerary="hi", weather='hello', travel_tips=['howdy'], packing_list=['bye'])
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
     
+    return DataResponse(itinerary=request.points_of_interest, weather=request.location, travel_tips=[request.date, request.date_length], packing_list=['bye'])
     weather = await get_weather(request.points_of_interest, request.location, request.date)
     packing_list = await get_packing_list(request.points_of_interest, request.location, request.date, request.date_length)
     travel_tips = await get_travel_tips(request.points_of_interest)
