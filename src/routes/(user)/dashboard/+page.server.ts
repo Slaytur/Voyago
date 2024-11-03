@@ -14,7 +14,7 @@ export async function load (event): Promise<{ user: any, documents: any }> {
     // Fetch documents related to the user.
     const documents = await dbaccount.listDocuments("6726c103000d53b938ab", "6726c10f0033575af875", [
         // Query.equal("userId", locals.user.$id),
-        Query.orderDesc("createdAt"),
+        Query.orderDesc("$createdAt"),
         Query.limit(10)
 
     ]);
