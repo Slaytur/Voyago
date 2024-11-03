@@ -1,0 +1,29 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
+@layer base {
+  @font-face {
+    font-family: "Chewy";
+    src: local("Chewy"), url("/fonts/Chewy/Chewy-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    src: local("Open Sans"), url("/fonts/Open_Sans/static/OpenSans-Regular.ttf");
+  }
+
+  @font-face {
+    font-family: "Source Sans Pro";
+    src: local("Source Sans Pro"), url("/fonts/Source_Sans_Pro/SourceSansPro-Regular.otf");
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: "Source Sans Pro";
+    src: local("Source Sans Pro"), url("/fonts/Source_Sans_Pro/SourceSansPro-Bold.otf");
+    font-weight: 700;
+  }
+}

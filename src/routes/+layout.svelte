@@ -6,7 +6,7 @@
 
     import { MetaTags } from "svelte-meta-tags";
 
-    import "../app.css";
+    import "../app.scss";
 </script>
 
 <MetaTags
@@ -40,7 +40,7 @@
         image: "https://voyago.namikas.dev/favicon.png",
         imageAlt: "The Twitter image"
     }}
- />
+/>
 
 <div class="">
     <main class="">

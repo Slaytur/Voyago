@@ -29,23 +29,23 @@
     });
 
     $: animationDuration = contentWidth > 0 ? `${contentWidth / 50}s` : "0s";
-  </script>
+</script>
 
-  <div class="w-full overflow-hidden bg-black bg-opacity-[.1] py-4">
+<div class="w-full overflow-hidden bg-black bg-opacity-[.1] py-4">
     <div class="scroll-container">
-      <div class="scroll-content items-center" style="animation-duration: {animationDuration};">
-        {#each [...cards, ...cards] as card} <!-- Duplicate cards for seamless loop -->
-          <div class="w-80 flex flex-row rounded-lg py-4 mx-10">
-            <h2 class="text-[12px] font-bold text-[#706BE8] mb-2">{card.title}</h2>
-            <p class="text-[12px] font-bold ml-4 tracking-wide">{card.content}</p>
-            <p class="font-bold scale-150">&rarr;</p>
-          </div>
-        {/each}
-      </div>
+        <div class="scroll-content items-center" style="animation-duration: {animationDuration};">
+            {#each [...cards, ...cards] as card} <!-- Duplicate cards for seamless loop -->
+                <div class="w-80 flex flex-row rounded-lg py-4 mx-10">
+                    <h2 class="text-[12px] font-bold text-[#706BE8] mb-2">{card.title}</h2>
+                    <p class="text-[12px] font-bold ml-4 tracking-wide">{card.content}</p>
+                    <p class="font-bold scale-150">&rarr;</p>
+                </div>
+            {/each}
+        </div>
     </div>
-  </div>
+</div>
 
-  <style>
+<style>
     .scroll-container {
       width: 100%;
       overflow: hidden;

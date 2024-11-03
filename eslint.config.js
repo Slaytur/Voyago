@@ -92,7 +92,16 @@ export default tseslint.config(
             ["@typescript-eslint/no-unsafe-member-access"]: "off",
             ["@typescript-eslint/no-unsafe-return"]: "off",
             ["@typescript-eslint/no-redundant-type-constituents"]: "off",
-            ["@typescript-eslint/no-unnecessary-type-parameters"]: "off"
+            ["@typescript-eslint/no-unnecessary-type-parameters"]: "off",
+
+            // Svelte
+            ["svelte/indent"]: ["warn", {
+                indent: 4,
+                ignoredNodes: [],
+                switchCase: 1,
+                alignAttributesVertically: false
+            }
+            ]
         }
     },
     {

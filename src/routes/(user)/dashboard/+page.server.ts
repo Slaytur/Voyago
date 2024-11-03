@@ -19,6 +19,6 @@ export async function load (event): Promise<{ user: any, documents: any }> {
     // Pass the user and documents to the page.
     return {
         user: locals.user,
-        documents: documents.documents, // Access the documents array
+        documents: documents.documents // Access the documents array
     };
 }
