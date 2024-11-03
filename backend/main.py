@@ -43,6 +43,7 @@ class DataRequest(BaseModel):
     location: str
     date: str
     date_length: str
+    id: str
     token: str
 
 class PointOfInrestResponse(BaseModel):
@@ -123,11 +124,35 @@ async def root(request: DataRequest):
     # Run all async functions concurrently
     weather, packing_list, travel_tips, itinerary = await asyncio.gather(
         get_weather(request.points_of_interest, request.location, request.date),
-        get_packing_list(request.points_of_interest, request.location, request.date, request.date_length),
+        get_packing_list(request.points_of_interest, request.location, request.date, request.date_length    ),
         get_travel_tips(request.points_of_interest),
         get_itinerary(request.interests, request.points_of_interest, request.location, request.date, request.date_length)
     )
-    print(weather, packing_list, travel_tips, itinerary)
+
+    from appwrite.client import Client
+    from appwrite.services.databases import Databases
+    from appwrite.id import ID
+
+    client = Client()
+    client.set_endpoint('https://appwrite.namikas.dev/v1')
+    client.set_project('6726685d001ee9f609a0')
+    client.set_key('standard_a3f4eb6ea38d31afe0ebe4f80757d357a0f5002df9932d759d3fd134c2d83db1d3d7453f4da136a381b46a9577b69c23d6251faa2c03c24a2cf385dcf6001862456e8aba0a7a05d2f797771947394cc34cf3b6f8022057348d1182435ef06ce5228c1191014371ca190f5e4104f30a3ac76ce8e0505091fe2230f61dd5bb00b2')
+    databases = Databases(client)
+    databases.create_document(
+        database_id='6726c103000d53b938ab',
+        collection_id='6726c10f0033575af875',
+        document_id=ID.unique(),
+        data={
+            "Name": request.location,
+            "userId": request.id,
+            'Itinerary': itinerary,
+            'weather': weather,
+            'travel_tips': travel_tips,
+            'packing_list': packing_list
+        }
+    )
+
+
 
     return DataResponse(itinerary=itinerary, weather=weather, travel_tips=travel_tips, packing_list=packing_list)
 
