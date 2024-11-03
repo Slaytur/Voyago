@@ -21,7 +21,8 @@
                     <li>You're going to love it.</li>
                 </ul>
                 <hr class="tw-my-4">
-                <button class="btn tw-bg-secondary tw-text-white tw-font-semibold">Sign Up</button>
+                <!-- TODO: DISABLE ENTIRE CARD IF LOGGED IN -->
+                <a href="/signup" class="btn tw-bg-secondary tw-text-white hover:tw-bg-secondaryForeground hover:tw-text-white tw-font-semibold">Sign Up</a>
             </div>
         </div>
         <div class="col">
@@ -35,7 +36,7 @@
                     <li>For the curious traveler, dipping their toes in adventure.</li>
                 </ul>
                 <hr class="tw-my-4">
-                <button class="btn tw-bg-secondary tw-text-white tw-font-semibold">Get Started</button>
+                <button class="btn tw-bg-secondary tw-text-white hover:tw-bg-secondaryForeground hover:tw-text-white tw-font-semibold">Get Started</button>
             </div>
         </div>
         <div class="col">
@@ -49,7 +50,7 @@
                     <li>For the avid explorer, ready to roam further.</li>
                 </ul>
                 <hr class="tw-my-4">
-                <button class="btn tw-bg-secondary tw-text-white tw-font-semibold">Get Started</button>
+                <button class="btn tw-bg-secondary tw-text-white hover:tw-bg-secondaryForeground hover:tw-text-white tw-font-semibold">Get Started</button>
             </div>
         </div>
         <div class="col">
@@ -63,7 +64,7 @@
                     <li>For the seasoned adventurer, conquering every corner of the map.</li>
                 </ul>
                 <hr class="tw-my-4">
-                <button class="btn tw-bg-accent tw-text-white tw-font-semibold">Get Started</button>
+                <button class="btn tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white tw-font-semibold">Get Started</button>
             </div>
         </div>
     </div>
