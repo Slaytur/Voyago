@@ -1,6 +1,11 @@
 <script lang="ts">
     import { Button, Select, DatePicker } from "bits-ui";
     import { fly } from "svelte/transition";
+    import { goto } from '$app/navigation';
+
+    export let data;
+    const { user} = data;
+
     interface Region {
         value: string;
     }
@@ -41,19 +46,20 @@
           const newatt: string[] = selectedNearAttractions.map(selectedNearAttractions => selectedNearAttractions.value);
           console.log(newatt);
           const response = await fetch("https://voyago-backend.namikas.dev/create-itinerary", {
-              // mode: 'no-cors',
+            //   mode: 'no-cors',
               method: "POST",
               headers: {
                   "Content-Type": "application/json",
                   "Authorization": `Bearer ${token}`
               },
               body: JSON.stringify({
-                  points_of_interest: newatt,
-                  interests: activityList,
-                  location: selectedRegion.value,
-                  date: date,
-                  date_length: String(vacationLength),
-                  token: token
+                points_of_interest: newatt.join(", "),
+                interests: activityList.join(", "),
+                location: selectedRegion.value,
+                date: date,
+                date_length: String(vacationLength),
+                id: user.$id,
+                token: token
               })
           });
 
@@ -62,7 +68,8 @@
           }
           
           const iten = await response.json();
-          console.log(iten);
+          goto('/dashboard');
+
 
       } catch (error) {
           console.error("Failed to fetch near attractions:", error);
@@ -171,14 +178,14 @@
       const token = 'i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR';
         try {
             const response = await fetch("https://voyago-backend.namikas.dev/create-itinerary", {
-                // mode: 'no-cors',
+                mode: 'no-cors',
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    points_of_interest: nearAttractions.join(", "),
+                    points_of_interest: `${selectedAttraction}, ${selectedNearAttractions.join(", ")}`,
                     interests: activityList.join(", "),
                     location: selectedRegion?.value,
                     date: date,
