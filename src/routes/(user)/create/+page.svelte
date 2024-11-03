@@ -235,9 +235,9 @@
 
         <!-- Display selected nearby attractions and Continue button -->
         {#if selectedNearAttractions.length > 0}
-            <Button.Root color="green" hidden={false} class="border rounded-md ml-3 bg-green w-fit p-2">
+            <!-- <Button.Root color="green" hidden={false} class="border rounded-md ml-3 bg-green w-fit p-2">
                 Continue
-            </Button.Root>
+            </Button.Root> -->
             <ul>
                 {#each selectedNearAttractions as selectedNearAttraction}
                     <li>{selectedNearAttraction.value}</li>
@@ -369,5 +369,8 @@
           </DatePicker.Root>
         <h1>Enter your vacation length (in days):</h1>
         <input type="number" bind:value={vacationLength} placeholder="Enter days" min="1" class="border rounded-md p-2 w-[100px]" />
+        <Button.Root color="green" hidden={false} class="border rounded-md bg-[#A295CB] w-fit p-2">
+          Submit
+      </Button.Root>
     </div>
 </div>
