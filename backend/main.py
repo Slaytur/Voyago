@@ -15,7 +15,7 @@ dotenv.load_dotenv()
 
 API_KEY = os.environ.get("PERPLEXITY_API_KEY")
 client = AsyncOpenAI(api_key=API_KEY, base_url="https://api.perplexity.ai")
-ollama_client = Client(host='http://100.80.188.54:11434')
+ollama_client = Client(host='http://:11434')
 
 app = FastAPI(title="python backend")
 app.add_middleware(
@@ -26,13 +26,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-class DataRequest(BaseModel):
-    points_of_interest: list[str]
-    interests: list[str]
-    location: str
-    date: str
-    date_length: str
-    token: str
 
 class PointOfInrest1Request(BaseModel):
     region: str
@@ -44,14 +37,23 @@ class PointOfInrest2Request(BaseModel):
     interests: str
     token: str
 
+class DataRequest(BaseModel):
+    points_of_interest: str
+    interests: str
+    location: str
+    date: str
+    date_length: str
+    id: str
+    token: str
+
 class PointOfInrestResponse(BaseModel):
     data: List[str]
 
 class DataResponse(BaseModel):
     itinerary: str
     weather: str
-    travel_tips: List[str]
-    packing_list: List[str]
+    travel_tips: list[str]
+    packing_list: list[str]
 
 @app.post("/autofillPoI1", response_model=PointOfInrestResponse)
 async def autofillPoI1(request: PointOfInrest1Request):
@@ -118,37 +120,63 @@ async def autofillPoI2(request: PointOfInrest2Request):
 async def root(request: DataRequest):
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
-    task1 = asyncio.create_task(get_travel_tips(request.points_of_interest))
-    task2 = asyncio.create_task(get_itinerary(request.interests, request.points_of_interest, request.location, request.date, request.date_length))
-    
-    weather = get_weather(request.points_of_interest, request.location, request.date)
-    packing_list = get_packing_list(request.points_of_interest, request.location, request.date, request.date_length)
-    travel_tips = await task1
-    itinerary = await task2
+
+    # Run all async functions concurrently
+    weather, packing_list, travel_tips, itinerary = await asyncio.gather(
+        get_weather(request.points_of_interest, request.location, request.date),
+        get_packing_list(request.points_of_interest, request.location, request.date, request.date_length    ),
+        get_travel_tips(request.points_of_interest),
+        get_itinerary(request.interests, request.points_of_interest, request.location, request.date, request.date_length)
+    )
+
+    from appwrite.client import Client
+    from appwrite.services.databases import Databases
+    from appwrite.id import ID
+
+    client = Client()
+    client.set_endpoint('https://appwrite.namikas.dev/v1')
+    client.set_project('6726685d001ee9f609a0')
+    client.set_key('standard_a3f4eb6ea38d31afe0ebe4f80757d357a0f5002df9932d759d3fd134c2d83db1d3d7453f4da136a381b46a9577b69c23d6251faa2c03c24a2cf385dcf6001862456e8aba0a7a05d2f797771947394cc34cf3b6f8022057348d1182435ef06ce5228c1191014371ca190f5e4104f30a3ac76ce8e0505091fe2230f61dd5bb00b2')
+    databases = Databases(client)
+    databases.create_document(
+        database_id='6726c103000d53b938ab',
+        collection_id='6726c10f0033575af875',
+        document_id=ID.unique(),
+        data={
+            "Name": request.location,
+            "userId": request.id,
+            'Itinerary': itinerary,
+            'weather': weather,
+            'travel_tips': travel_tips,
+            'packing_list': packing_list
+        }
+    )
+
+
 
     return DataResponse(itinerary=itinerary, weather=weather, travel_tips=travel_tips, packing_list=packing_list)
 
 
     
 
-def get_weather(points_of_interest, location, date):
+async def get_weather(points_of_interest, location, date):
     messages = [{
         'role': 'user',
-        'content': GET_WEATHER[::].replace("{location}", ", ".join(location)).replace("{points_of_interest}", ", ".join(points_of_interest)).replace("{date}", date)
+        'content': GET_WEATHER[::].replace("{location}", location).replace("{points_of_interest}", points_of_interest).replace("{date}", date)
     }]
-    response = ollama_client.chat(model='qwen2.5:14b-instruct-q4_K_M', messages=messages)['message']['content']
-    return response
+    response = await client.chat.completions.create(
+        model="llama-3.1-70b-instruct",
+        messages=messages,
+    )
+    
+    response_text = response.choices[0].message.content
+    
+    return response_text
 
 async def get_travel_tips(points_of_interest):
     tips = []
-    
-    if os.path.exists("travel_tips_cache.pkl"):
-        with open("travel_tips_cache.pkl", "rb") as f:
-            tips = pickle.load(f)
-            return tips
 
-
-    custom_prompt = GET_TRAVEL_TIPS[::].replace("{points_of_interest}", ", ".join(points_of_interest))
+    custom_prompt = GET_TRAVEL_TIPS[::].replace("{points_of_interest}", points_of_interest)
 
     messages = [{
             "role": "user",
@@ -168,11 +196,6 @@ async def get_travel_tips(points_of_interest):
     for line in response_list:
         if '-' in line:
             tips.append(line.replace("-", "").replace("*", "").strip())
-    
-    
-            
-    with open('travel_tips_cache.pkl', 'wb') as f:
-        pickle.dump(tips, f)
 
     return tips
 
@@ -221,40 +244,37 @@ async def get_travel_tips(points_of_interest):
 # research_dict = {'city': {'attraction_type': [(attraction_title, attraction_description), ...], ...}, ...}
 
 async def get_itinerary(interests, points_of_interest, location, date, length):
-    custom_prompt = GET_ITINERARY[::].replace("{interests}", ", ".join(interests)).replace("{date}", date).replace("{location}", location).replace("{points_of_interest}", ", ".join(points_of_interest)).replace("{length}", str(length))
+    custom_prompt = GET_ITINERARY[::].replace("{interests}", interests).replace("{date}", date).replace("{location}", location).replace("{points_of_interest}", points_of_interest).replace("{length}", str(length))
       
     messages = [{
         "role": "user",
         "content": custom_prompt
     },]
-    
-    if os.path.exists("get_itinerary.pkl"):
-        with open("get_itinerary.pkl", "rb") as f:
-            itin = pickle.load(f)
-            return itin
-    
+        
     response = await client.chat.completions.create(
-        model="llama-3.1-sonar-huge-128k-online",
+        model="llama-3.1-sonar-large-128k-online",
         messages=messages,
     )
     
     response_text = response.choices[0].message.content
-    with open('get_itinerary.pkl', 'wb') as f:
-        pickle.dump(response_text, f)
-
     
     return response_text
 
       
-def get_packing_list(points_of_interest, location, date, weather):
-    custom_prompt = GET_PACKING_LIST[::].replace("{points_of_interest}", ", ".join(points_of_interest)).replace("{location}", location).replace("{date}", date).replace("{weather}", weather)
+async def get_packing_list(points_of_interest, location, date, length):
+    custom_prompt = GET_PACKING_LIST[::].replace("{points_of_interest}", points_of_interest).replace("{location}", location).replace("{date}", date).replace("{length}", length)
 
     messages = [{
             "role": "user",
             "content": custom_prompt
         }]
 
-    response_text = ollama_client.chat(model='qwen2.5:14b-instruct-q4_K_M', messages=messages)['message']['content']
+    response = await client.chat.completions.create(
+        model="llama-3.1-70b-instruct",
+        messages=messages,
+    )
+    
+    response_text = response.choices[0].message.content
     response_list = response_text.split("\n")
     packing_list = []
     for line in response_list:
