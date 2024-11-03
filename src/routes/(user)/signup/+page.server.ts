@@ -16,10 +16,10 @@ export const actions = {
         const lname: any = data.get("lname");
 
         if (typeof email !== "string"
-            && typeof password !== "string"
-            && typeof cfpassword !== "string"
-            && typeof fname !== "string"
-            && typeof lname !== "string") {
+            || typeof password !== "string"
+            || typeof cfpassword !== "string"
+            || typeof fname !== "string"
+            || typeof lname !== "string") {
             return fail(422, {
                 error: "Invalid form data."
             });

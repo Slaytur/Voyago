@@ -3,18 +3,17 @@
 
     // TODO: FIX FORM SO IT DOESN'T REFRESH AND WAITS FOR REDIRECT
     let { data, form } = $props();
-
-    const formFeedback: { state: "initial" | "success" | "error", message: string | undefined } = {
-        state: "initial",
-        message: undefined
-    };
 </script>
 
 <article>
     <div class="card card-body tw-container tw-mt-20 tw-mb-5">
         <img src={Logo} alt="Voyago logo" class="tw-mt-5 tw-mx-auto tw-max-w-[100px] tw-w-1/4" />
         <h1 class="tw-text-5xl tw-font-bold tw-text-center tw-mt-5 tw-mb-10">Register</h1>
-
+        {#if form?.error}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <span>{form.error}</span>
+            </div>
+        {/if}
         <form method="POST" action="?/signup">
             <div class="row g-2 tw-mb-4">
                 <div class="col">
