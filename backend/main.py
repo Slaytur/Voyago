@@ -176,47 +176,47 @@ async def get_travel_tips(points_of_interest):
 
     return tips
 
-async def research_cities(cities, interests, location, date):
-    research = {}
+# async def research_cities(cities, interests, location, date):
+#     research = {}
     
-    if os.path.exists("research_cities.pkl"):
-        with open("research_cities.pkl", "rb") as f:
-            research = pickle.load(f)
-            return research
-    os.exit()
-    attraction_types = ['restaurants', 'hotels', 'tourist attractions', 'niche and quaint attractions', 'local events']
-    non_food_interests = [x for x in interests if 'food' not in x and 'restaurant' not in x]
-    for city in cities:
-        research_dict = {}
-        for attraction_type in attraction_types:
-            custom_prompt = GET_CITY_ATTRACTION[::].replace("{location}", location).replace("{interests}", ", ".join(non_food_interests)).replace("{date}", date).replace("{city}", city).replace("{attraction_type}", attraction_type)
+#     if os.path.exists("research_cities.pkl"):
+#         with open("research_cities.pkl", "rb") as f:
+#             research = pickle.load(f)
+#             return research
+#     os.exit()
+#     attraction_types = ['restaurants', 'hotels', 'tourist attractions', 'niche and quaint attractions', 'local events']
+#     non_food_interests = [x for x in interests if 'food' not in x and 'restaurant' not in x]
+#     for city in cities:
+#         research_dict = {}
+#         for attraction_type in attraction_types:
+#             custom_prompt = GET_CITY_ATTRACTION[::].replace("{location}", location).replace("{interests}", ", ".join(non_food_interests)).replace("{date}", date).replace("{city}", city).replace("{attraction_type}", attraction_type)
 
-            messages = [{
-                    "role": "user",
-                    "content": custom_prompt
-                },]
+#             messages = [{
+#                     "role": "user",
+#                     "content": custom_prompt
+#                 },]
             
-            response = await client.chat.completions.create(
-                model="llama-3.1-sonar-large-128k-online",
-                messages=messages,
-            )
+#             response = await client.chat.completions.create(
+#                 model="llama-3.1-sonar-large-128k-online",
+#                 messages=messages,
+#             )
             
 
-            response_text = response.choices[0].message.content
-            response_list = response_text.split("\n")
+#             response_text = response.choices[0].message.content
+#             response_list = response_text.split("\n")
             
-            research_list = []
-            for i in range(len(response_list)):
-                if "#" in response_list[i]:
-                    research_list.append((response_list[i].replace("#", "").strip(), response_list[i+1]))
-            research_dict[attraction_type] = research_list
+#             research_list = []
+#             for i in range(len(response_list)):
+#                 if "#" in response_list[i]:
+#                     research_list.append((response_list[i].replace("#", "").strip(), response_list[i+1]))
+#             research_dict[attraction_type] = research_list
             
-        research[city] = research_dict
+#         research[city] = research_dict
             
-    with open('research_cities.pkl', 'wb') as f:
-        pickle.dump(research, f)
+#     with open('research_cities.pkl', 'wb') as f:
+#         pickle.dump(research, f)
     
-    return research
+#     return research
 
 # research_dict = {'city': {'attraction_type': [(attraction_title, attraction_description), ...], ...}, ...}
 
