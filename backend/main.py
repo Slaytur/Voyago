@@ -120,15 +120,16 @@ async def root(request: DataRequest):
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
 
-    t1 = get_weather(request.points_of_interest, request.location, request.date)
-    t2 = get_packing_list(request.points_of_interest, request.location, request.date, request.date_length)
-    t3 = get_travel_tips(request.points_of_interest)
-    t4 = get_itinerary(request.interests, request.points_of_interest, request.location, request.date, request.date_length)
+    import asyncio
 
-    weather = await t1
-    packing_list = await t2
-    travel_tips = await t3
-    itinerary = await t4
+async def get_travel_info(request):
+    # Run all async functions concurrently
+    weather, packing_list, travel_tips, itinerary = await asyncio.gather(
+        get_weather(request.points_of_interest, request.location, request.date),
+        get_packing_list(request.points_of_interest, request.location, request.date),
+        get_travel_tips(request.points_of_interest),
+        get_itinerary(request.interests, request.points_of_interest, request.location, request.date, request.date_length)
+    )
 
     return DataResponse(itinerary=itinerary, weather=weather, travel_tips=travel_tips, packing_list=packing_list)
 
@@ -237,8 +238,8 @@ async def get_itinerary(interests, points_of_interest, location, date, length):
     return response_text
 
       
-async def get_packing_list(points_of_interest, location, date, weather):
-    custom_prompt = GET_PACKING_LIST[::].replace("{points_of_interest}", points_of_interest).replace("{location}", location).replace("{date}", date).replace("{weather}", weather)
+async def get_packing_list(points_of_interest, location, date, length):
+    custom_prompt = GET_PACKING_LIST[::].replace("{points_of_interest}", points_of_interest).replace("{location}", location).replace("{date}", date).replace("{length}", length)
 
     messages = [{
             "role": "user",
