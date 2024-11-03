@@ -41,7 +41,6 @@
 
     async function onRegionSelect(value: string) {
         selectedRegion = regions.find(region => region.value === value) || null;
-        console.log(selectedRegion?.value);
         if (!selectedRegion){
             attractions = [];
             selectedAttraction = null;
@@ -81,8 +80,43 @@
         selectedAttraction = null;
     }
 
-    function onAttractionSelect(value: string) {
+    async function onAttractionSelect(value: string) {
         selectedAttraction = attractions.find(region => region.value === value) || null;
+        if (!selectedAttraction){
+            selectedAttraction = null;
+            return;
+        }
+        const token = 'i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR';
+        try {
+            console.log(selectedAttraction);
+            const response = await fetch("https://voyago-backend.namikas.dev/autofillPoI2", {
+                // mode: 'no-cors',
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    point_of_interest: selectedAttraction.value,
+                    interests: activityList.join(", "),
+                    token: token
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+            
+            const near_attractions = await response.json();
+            console.log(near_attractions);
+            let nearattractionstemp: Attraction[] = near_attractions.data.map(location => ({ value: location }));
+            nearAttractions = nearattractionstemp;
+            console.log(nearAttractions)
+
+        } catch (error) {
+            console.error("Failed to fetch near attractions:", error);
+            nearAttractions = [];  // Return an empty array in case of an error to match original behavior
+        }
         nearAttractions = [{ value: "needs api  call for near selections"}, { value: "Canada / needs api  call for near selections"}];
     }
 

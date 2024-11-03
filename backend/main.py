@@ -88,7 +88,7 @@ async def autofillPoI2(request: PointOfInrest2Request):
     if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
         return {"error": "Invalid token"}
     
-    custom_prompt = GET_POI_SUGGESTIONS_2[::].replace("{point_of_interest}", ", ".join(request.point_of_interest)).replace("{interests}", request.interests)
+    custom_prompt = GET_POI_SUGGESTIONS_2[::].replace("{point_of_interest}", request.point_of_interest).replace("{interests}", request.interests)
 
     messages = [{
             "role": "user",
@@ -102,13 +102,13 @@ async def autofillPoI2(request: PointOfInrest2Request):
     
 
     response_text = response.choices[0].message.content
-    print(custom_prompt, response_text)
+    # print(custom_prompt, response_text)
     response_list = response_text.split("\n")
     
     poi = []
     for line in response_list:
-        if '-' in line:
-            poi.append(line.replace("-", "").replace("*", "").strip())
+        if '-' in line or '•' in line:
+            poi.append(line.replace("-", "").replace("•", "").strip())
     
 
     return PointOfInrestResponse(data=poi)
