@@ -76,8 +76,8 @@
     }
 </script>
 
-<div class="flex-row">
-    <div class="sele pt-14 flex ml-7 max-w-[40%] flex-col space-y-4">
+<div class="flex flex-col justify-center items-center py-16">
+    <div class="sele pt-14 flex ml-7 max-w-[40%] flex-col space-y-4 justify-center">
         <!-- Region selection -->
         <Select.Root items={regions} on:ValueChange={e => onRegionSelect(e.detail.value)}>
             <h1>Choose a region:</h1>

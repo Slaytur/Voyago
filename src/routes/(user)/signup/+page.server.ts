@@ -10,7 +10,7 @@ export const actions = {
         const form = await request.formData();
         const email: any = form.get("email");
         const password: any = form.get("password");
-        const name: any = form.get("fname") + form.get("lname");
+        const name: any = form.get("fname") as string + form.get("lname") as string;
 
         // Create the Appwrite client.
         const { account } = createAdminClient();
