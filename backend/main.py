@@ -79,7 +79,7 @@ async def autofillPoI1(request: PointOfInrest1Request):
         if '-' in line:
             poi.append(line.replace("-", "").replace("*", "").strip())
     
-
+    print(poi)
     return PointOfInrestResponse(data=poi)
 
 
