@@ -43,7 +43,7 @@
     </section>
     <section class="login black">
         <div class="box flex flex-col items-start p-6">
-            <img src="" class="w-12 h-12"/>
+            <img src="" class="w-12 h-12" alt="StarterImg"/>
             <h1 class=" mt-1.5">STARTER</h1>
             <h1 class=" text-[50px]  -mt-2 font-bold">$0</h1>
             <p class='mb-4'>
