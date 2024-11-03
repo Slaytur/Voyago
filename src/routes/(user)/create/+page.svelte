@@ -167,7 +167,7 @@
         activityList = activityList.filter((_, i) => i !== index);
     }
 
-    async function submit () { // hah litle dogma
+    async function submit () {
         const token = "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR";
         try {
             const response = await fetch("https://voyago-backend.namikas.dev/create-itinerary", {
