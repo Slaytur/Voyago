@@ -133,7 +133,7 @@ async def root(request: DataRequest):
 def get_weather(points_of_interest, location, date):
     messages = [{
         'role': 'user',
-        'content': GET_WEATHER[::].replace("{location}", ", ".join(location)).replace("{points_of_interest}", ", ".join(points_of_interest)).replace("{date}", date)
+        'content': GET_WEATHER[::].replace("{location}", location).replace("{points_of_interest}", points_of_interest).replace("{date}", date)
     }]
     response = ollama_client.chat(model='qwen2.5:14b-instruct-q4_K_M', messages=messages)['message']['content']
     return response
@@ -147,7 +147,7 @@ async def get_travel_tips(points_of_interest):
             return tips
 
 
-    custom_prompt = GET_TRAVEL_TIPS[::].replace("{points_of_interest}", ", ".join(points_of_interest))
+    custom_prompt = GET_TRAVEL_TIPS[::].replace("{points_of_interest}", points_of_interest)
 
     messages = [{
             "role": "user",
@@ -220,7 +220,7 @@ async def get_travel_tips(points_of_interest):
 # research_dict = {'city': {'attraction_type': [(attraction_title, attraction_description), ...], ...}, ...}
 
 async def get_itinerary(interests, points_of_interest, location, date, length):
-    custom_prompt = GET_ITINERARY[::].replace("{interests}", ", ".join(interests)).replace("{date}", date).replace("{location}", location).replace("{points_of_interest}", ", ".join(points_of_interest)).replace("{length}", str(length))
+    custom_prompt = GET_ITINERARY[::].replace("{interests}", interests).replace("{date}", date).replace("{location}", location).replace("{points_of_interest}", points_of_interest).replace("{length}", str(length))
       
     messages = [{
         "role": "user",
@@ -246,7 +246,7 @@ async def get_itinerary(interests, points_of_interest, location, date, length):
 
       
 def get_packing_list(points_of_interest, location, date, weather):
-    custom_prompt = GET_PACKING_LIST[::].replace("{points_of_interest}", ", ".join(points_of_interest)).replace("{location}", location).replace("{date}", date).replace("{weather}", weather)
+    custom_prompt = GET_PACKING_LIST[::].replace("{points_of_interest}", points_of_interest).replace("{location}", location).replace("{date}", date).replace("{weather}", weather)
 
     messages = [{
             "role": "user",
