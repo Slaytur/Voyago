@@ -1,8 +1,9 @@
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
 from prompts import *
-from openai import OpenAI
+from openai import AsyncOpenAI
 import dotenv
 import os
 import uvicorn
@@ -13,10 +14,17 @@ from ollama import Client
 dotenv.load_dotenv()
 
 API_KEY = os.environ.get("PERPLEXITY_API_KEY")
-client = OpenAI(api_key=API_KEY, base_url="https://api.perplexity.ai")
+client = AsyncOpenAI(api_key=API_KEY, base_url="https://api.perplexity.ai")
 ollama_client = Client(host='http://100.80.188.54:11434')
 
 app = FastAPI(title="python backend")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class DataRequest(BaseModel):
     points_of_interest: list[str]
@@ -26,11 +34,83 @@ class DataRequest(BaseModel):
     date_length: str
     token: str
 
+class PointOfInrest1Request(BaseModel):
+    region: str
+    interests: str
+    token: str
+    
+class PointOfInrest2Request(BaseModel):
+    point_of_interest: str
+    interests: str
+    token: str
+
+class PointOfInrestResponse(BaseModel):
+    data: List[str]
+
 class DataResponse(BaseModel):
     itinerary: str
     weather: str
     travel_tips: List[str]
     packing_list: List[str]
+
+@app.get("/autofillPoI1", response_model=PointOfInrestResponse)
+async def autofillPoI1(request: PointOfInrest1Request):
+    if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
+        return {"error": "Invalid token"}
+    
+    custom_prompt = GET_POI_SUGGESTIONS_1[::].replace("{interests}", ", ".join(request.interests)).replace("{region}", request.region)
+
+    messages = [{
+            "role": "user",
+            "content": custom_prompt
+        }]
+    
+    response = await client.chat.completions.create(
+        model="llama-3.1-70b-instruct",
+        messages=messages,
+    )
+    
+
+    response_text = response.choices[0].message.content
+    response_list = response_text.split("\n")
+    
+    poi = []
+    for line in response_list:
+        if '-' in line:
+            poi.append(line.replace("-", "").replace("*", "").strip())
+    
+
+    return PointOfInrestResponse(data=poi)
+
+
+@app.get("/autofillPoI2", response_model=DataResponse)
+async def autofillPoI2(request: PointOfInrest2Request):
+    if request.token != "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR":
+        return {"error": "Invalid token"}
+    
+    custom_prompt = GET_POI_SUGGESTIONS_2[::].replace("{point_of_interest}", ", ".join(request.interests)).replace("{interests}", request.interests)
+
+    messages = [{
+            "role": "user",
+            "content": custom_prompt
+        }]
+    
+    response = await client.chat.completions.create(
+        model="llama-3.1-70b-instruct",
+        messages=messages,
+    )
+    
+
+    response_text = response.choices[0].message.content
+    response_list = response_text.split("\n")
+    
+    poi = []
+    for line in response_list:
+        if '-' in line:
+            poi.append(line.replace("-", "").replace("*", "").strip())
+    
+
+    return PointOfInrestResponse(data=poi)
 
 # Root route
 @app.get("/", response_model=DataResponse)
@@ -46,7 +126,8 @@ async def root(request: DataRequest):
     itinerary = await task2
 
     return DataResponse(itinerary=itinerary, weather=weather, travel_tips=travel_tips, packing_list=packing_list)
-    
+
+
     
 
 def get_weather(points_of_interest, location, date):
@@ -73,7 +154,7 @@ async def get_travel_tips(points_of_interest):
             "content": custom_prompt
         },]
     
-    response = client.async_chat.completions.create(
+    response = await client.chat.completions.create(
         model="llama-3.1-sonar-large-128k-online",
         messages=messages,
     )
@@ -94,7 +175,7 @@ async def get_travel_tips(points_of_interest):
 
     return tips
 
-def research_cities(cities, interests, location, date):
+async def research_cities(cities, interests, location, date):
     research = {}
     
     if os.path.exists("research_cities.pkl"):
@@ -114,7 +195,7 @@ def research_cities(cities, interests, location, date):
                     "content": custom_prompt
                 },]
             
-            response = client.chat.completions.create(
+            response = await client.chat.completions.create(
                 model="llama-3.1-sonar-large-128k-online",
                 messages=messages,
             )
@@ -151,7 +232,7 @@ async def get_itinerary(interests, points_of_interest, location, date, length):
             itin = pickle.load(f)
             return itin
     
-    response = client.async_chat.completions.create(
+    response = await client.chat.completions.create(
         model="llama-3.1-sonar-huge-128k-online",
         messages=messages,
     )
@@ -230,11 +311,14 @@ def get_packing_list(points_of_interest, location, date, weather):
     
 
 if __name__=="__main__":
+    # voyago_backend.namikas.dev
     uvicorn.run(app, host='0.0.0.0', port=8000)
+    
     # weather = get_weather(['louve', 'big ben'], 'France', '2024-12-01')
     # print(weather)
     # print(get_travel_tips(['louve', 'big ben']))
     # print(get_packing_list(['louve', 'big ben'], 'France', '2024-12-01', weather))
     # research = research_cities(['lille', 'Paris'], ['art','museums'], 'France', '2024-12-01')
     # itinerary = get_itinerary(['art','museums'], ['louve', 'big ben'], 'France', '2024-12-01', '10')
+    # print(asyncio.run(autofillPoI2(PointOfInrest2Request(point_of_interest="The Louvre Museum", interests="art, museums", token="i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR"))))
 #pip freeze > requirements.txt
