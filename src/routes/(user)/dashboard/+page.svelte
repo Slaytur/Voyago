@@ -17,18 +17,18 @@
         padding-top: 80px;
     }
 </style>
-<section class="flex justify-center space-x-6 pt-14 flex-col">
+<section class="flex w-full h-full items-center space-x-6 pt-24 flex-col">
     
-    <a href='/create'>
-    create
+    <a href='/create' class= "">
+        <button class="text-black outline-[#A295CB] outline outline-2 shadow-lg focus:ring-4 focus:outline-none  font-medium rounded-full text-xl w-full sm:w-auto px-10 py-2.5 text-center" >Create an Itinerary</button>
     </a>
 
-    <h2 class="pt-8">Itineraries: </h2>
-    <ul class="my-8 space-y-4">
+    <h2 class="pt-8 text-[40px] font-semibold">Itineraries: </h2>
+    <ul class="my-8 space-y-4 flex flex-col justify-center items-center">
         {#if documents && documents.length > 0}
         {#each documents as document}
         <li class="pt-2">
-          <a href={`/itinerary/${document.$id}`}><button class="text-white bg-[#A295CB]  focus:ring-4 focus:outline-none  font-medium rounded-full text-sm w-full sm:w-auto px-10 py-2.5 text-center" >{`${document.Name}, ${(convertToDate(document.$createdAt))}`}</button></a>
+          <a href={`/itinerary/${document.$id}`}><button class="text-black outline outline-[#A295CB] shadow-xl focus:ring-4 focus:outline-none  font-medium rounded-full text-xl w-full sm:w-auto px-10 py-2.5 text-center" >{`${document.Name}, ${(convertToDate(document.$createdAt))}`}</button></a>
         </li>
         {/each}
         {:else}
