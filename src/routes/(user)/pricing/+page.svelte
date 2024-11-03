@@ -55,7 +55,7 @@
       </div>
       <h2 class="text text-[26px] font-bold tracking-wide mb-10">Transparent pricing that fits your budget</h2>
     </section>
-    <div class="prices">
+    <div class="prices space-x-10">
       <section class="login black">
           <div class="box flex flex-col items-start p-6">
               <img src="" class="w-12 h-12" alt="StarterImg"/>
