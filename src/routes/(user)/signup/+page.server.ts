@@ -54,8 +54,9 @@ export const actions = {
             })
             .catch(err => {
                 return fail(422, {
-                    error: err ?? "Passwords must be between 8 and 255 characters, and may not be commonly used."
+                    error: err
                 });
             });
+        redirect(302, "/dashboard");
     }
 };
