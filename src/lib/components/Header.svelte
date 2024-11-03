@@ -48,12 +48,12 @@
     </div>
     <Menubar.Menu>
         <Menubar.Trigger class="inline-flex h-10 cursor-default items-center justify-center rounded-9px px-3 text-base font-medium !ring-0 !ring-transparent data-[highlighted]:bg-muted data-[state=open]:bg-muted">
-            <a href="/dashboard">Itineraries</a>
+            <a href="/dashboard">Dashboard</a>
         </Menubar.Trigger>
     </Menubar.Menu>
     <Menubar.Menu>
         <Menubar.Trigger class="inline-flex h-10 cursor-default items-center justify-center rounded-9px px-3 text-base font-medium !ring-0 !ring-transparent data-[highlighted]:bg-muted data-[state=open]:bg-muted">
-            <a href="/services">Services</a>
+            <a href="/services">Create</a>
         </Menubar.Trigger>
     </Menubar.Menu>
     <Menubar.Menu>
