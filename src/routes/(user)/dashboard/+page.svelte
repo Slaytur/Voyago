@@ -28,7 +28,7 @@
         {#if documents && documents.length > 0}
         {#each documents as document}
         <li class="pt-2">
-          <a href={`/itinerary/${document.$id}`}><button class="text-black outline outline-[#A295CB] shadow-xl focus:ring-4 focus:outline-none  font-medium rounded-full text-xl w-full sm:w-auto px-10 py-2.5 text-center" >{`${document.Name}, ${(convertToDate(document.$createdAt))}`}</button></a>
+            <a href={`/itinerary/${document.$id}`}><button class="text-black outline outline-[#A295CB] shadow-xl focus:ring-4 focus:outline-none  font-medium rounded-full text-xl w-full sm:w-auto px-10 py-2.5 text-center hover:scale-125 transition-all ease-in-out hover:shadow-gray-500" >{`${document.Name}, ${(convertToDate(document.$createdAt))}`}</button></a>
         </li>
         {/each}
         {:else}
