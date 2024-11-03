@@ -36,9 +36,10 @@
 
     let activities = "";
     let activityList: string[] = [];
-    let travelPace: string | null = null;
+    let travelPace: string | null = 'Packed';
     let vacationLength: number | null = null;
     let date: string | null = null;
+    let name = "";
 
     async function makeRoute(selectedNearAttractions:Attraction[], activityList:string[], selectedRegion:Region, date:string, vacationLength:Number){
       const token = 'i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR';
@@ -209,7 +210,10 @@
 
 <div class="flex flex-col w-full justify-center items-center py-16">
     <div class="sele pt-14 flex ml-7 max-w-[40%] flex-col space-y-4 justify-center">
+        <h1>Name:</h1>
+        <input type="text" bind:value={name} placeholder="My favorite trip" min="5" class="border rounded-md p-2 w-[300px]" />
 
+        {#if name.length > 4}
         <h1>Enter your planned activities/interests:</h1>
         <div class="flex items-center space-x-2">
             <input
@@ -223,6 +227,7 @@
                 Enter
             </Button.Root>
         </div>
+        {/if}
 
         {#if activityList.length > 0}
             <ul class="mt-4 space-y-2">
@@ -237,7 +242,7 @@
             </ul>
         {/if}
 
-
+        {#if activityList.length > 0 && name.length > 4}
         <Select.Root items={regions} on:ValueChange={e => onRegionSelect(e.detail.value)}>
             <h1>Choose a region:</h1>
             <Select.Trigger class="inline-flex h-10 w-[296px] items-center rounded-md border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select a region">
@@ -255,9 +260,10 @@
             </Select.Content>
             <Select.Input name="favoriteRegion" />
         </Select.Root>
+        {/if}
 
 
-        {#if attractions.length > 0}
+        {#if selectedRegion != null && attractions.length > 0 && activityList.length > 0 && name.length > 4}
             <Select.Root items={attractions}>
                 <h1>Choose an attraction:</h1>
                 <Select.Trigger class="inline-flex h-10 w-[296px] items-center rounded-md border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select an attraction">
@@ -278,7 +284,7 @@
         {/if}
 
 
-        {#if nearAttractions.length > 0}
+        {#if nearAttractions.length >0 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 4}
             <Select.Root items={nearAttractions} multiple>
                 <h1>Choose up to 4 nearby attractions:</h1>
                 <Select.Trigger class="inline-flex h-10 w-[296px] items-center rounded-md border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select a nearer attraction">
@@ -302,8 +308,7 @@
 
     <div class="sele pt-14 flex ml-7 flex-col space-y-4">
 
-        
-
+        <!-- {#if selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 4}
         <h1>What is your preferred travel pace?</h1>
         <Select.Root items={[{ value: "Relaxed"}, { value: "Moderate"}, { value: "Packed"}]} onSelectedChange={e => travelPace = e!.value}>
             <Select.Trigger class="inline-flex h-10 w-[296px] items-center rounded-md border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background">
@@ -317,8 +322,9 @@
                 {/each}
             </Select.Content>
         </Select.Root>
+        {/if} -->
 
-        
+        {#if travelPace && selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion && activityList.length > 0 && name.length > 4}
         <DatePicker.Root weekdayFormat="short" fixedWeeks={true} onValueChange={e => date = String(e?.month) + "/" + String(e?.day) + "/" + String(e?.year)}>
             <div class="flex w-full max-w-[232px] flex-col gap-1.5">
               <DatePicker.Label class="block select-none text-sm font-medium"
@@ -422,12 +428,13 @@
               </DatePicker.Content>
             </div>
           </DatePicker.Root>
-
-          
+        {/if}
+        {#if selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 4 && date && travelPace}
         <h1>Enter your vacation length (in days):</h1>
         <input type="number" bind:value={vacationLength} placeholder="Enter days" min="1" class="border rounded-md p-2 w-[100px]" />
-        {#if selectedNearAttractions.length > 0 && activityList.length > 0 && travelPace && vacationLength && date}
-            <Button.Root color="green" class="border rounded-md ml-3 bg-green w-fit p-2" on:click={e=>makeRoute(selectedNearAttractions, activityList, selectedRegion, date, vacationLength)}>
+        {/if}
+        {#if selectedNearAttractions.length > 0 && activityList.length > 0 && travelPace && vacationLength && date && name}
+            <Button.Root color="green" class="border rounded-md ml-3 bg-green w-fit p-2" on:click={e=>makeRoute(selectedNearAttractions, activityList, selectedRegion!, date!, vacationLength!)}>
                 Continue
             </Button.Root>
         {/if}
