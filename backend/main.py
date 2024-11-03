@@ -15,7 +15,7 @@ dotenv.load_dotenv()
 
 API_KEY = os.environ.get("PERPLEXITY_API_KEY")
 client = AsyncOpenAI(api_key=API_KEY, base_url="https://api.perplexity.ai")
-ollama_client = Client(host='http://100.80.188.54:11434')
+ollama_client = Client(host='http://:11434')
 
 app = FastAPI(title="python backend")
 app.add_middleware(
@@ -135,17 +135,17 @@ def get_weather(points_of_interest, location, date):
         'role': 'user',
         'content': GET_WEATHER[::].replace("{location}", location).replace("{points_of_interest}", points_of_interest).replace("{date}", date)
     }]
-    response = ollama_client.chat(model='qwen2.5:14b-instruct-q4_K_M', messages=messages)['message']['content']
-    return response
+    response = await client.chat.completions.create(
+        model="llama-3.1-70b-instruct",
+        messages=messages,
+    )
+    
+    response_text = response.choices[0].message.content
+    
+    return response_text
 
 async def get_travel_tips(points_of_interest):
     tips = []
-    
-    if os.path.exists("travel_tips_cache.pkl"):
-        with open("travel_tips_cache.pkl", "rb") as f:
-            tips = pickle.load(f)
-            return tips
-
 
     custom_prompt = GET_TRAVEL_TIPS[::].replace("{points_of_interest}", points_of_interest)
 
@@ -167,11 +167,6 @@ async def get_travel_tips(points_of_interest):
     for line in response_list:
         if '-' in line:
             tips.append(line.replace("-", "").replace("*", "").strip())
-    
-    
-            
-    with open('travel_tips_cache.pkl', 'wb') as f:
-        pickle.dump(tips, f)
 
     return tips
 
@@ -226,21 +221,13 @@ async def get_itinerary(interests, points_of_interest, location, date, length):
         "role": "user",
         "content": custom_prompt
     },]
-    
-    if os.path.exists("get_itinerary.pkl"):
-        with open("get_itinerary.pkl", "rb") as f:
-            itin = pickle.load(f)
-            return itin
-    
+        
     response = await client.chat.completions.create(
         model="llama-3.1-sonar-huge-128k-online",
         messages=messages,
     )
     
     response_text = response.choices[0].message.content
-    with open('get_itinerary.pkl', 'wb') as f:
-        pickle.dump(response_text, f)
-
     
     return response_text
 
@@ -253,7 +240,12 @@ def get_packing_list(points_of_interest, location, date, weather):
             "content": custom_prompt
         }]
 
-    response_text = ollama_client.chat(model='qwen2.5:14b-instruct-q4_K_M', messages=messages)['message']['content']
+    response = await client.chat.completions.create(
+        model="llama-3.1-70b-instruct",
+        messages=messages,
+    )
+    
+    response_text = response.choices[0].message.content
     response_list = response_text.split("\n")
     packing_list = []
     for line in response_list:
