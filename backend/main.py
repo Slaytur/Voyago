@@ -102,6 +102,7 @@ async def autofillPoI2(request: PointOfInrest2Request):
     
 
     response_text = response.choices[0].message.content
+    print(custom_prompt, response_text)
     response_list = response_text.split("\n")
     
     poi = []
