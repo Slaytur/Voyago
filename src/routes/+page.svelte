@@ -5,6 +5,7 @@
     import city from "$lib/images/unsplash_allwyway-modified.png";
     import pyramids from "$lib/images/pyramids-modified.png";
     import { Button } from "bits-ui";
+    import { concurrent } from "svelte-typewriter";
 
 </script>
 
@@ -19,9 +20,10 @@
         <img src={pyramids} alt="pyramids" class="h-[100%]" />
     </div>
     <div class="h-full flex flex-col w-[500px] ml-[15%] justify-center items-center">
-        <div class="font-sourcesans font-black text-[80px] leading-[80px] tracking-tight">Plan the next era of your
+        <div class="font-sourcesans font-black text-[80px] leading-[80px] tracking-tight">
+            <p use:concurrent={{ interval: 60 }}>Plan the next era of your</p>
             <div class="text-[90px]">
-                <GradientText text="life" />
+                <GradientText interval={210} text="life" />
             </div>
         </div>
         <p class="mt-20 leading-7 text text-[18px] font-sourcesans">&rarr; Revolutionizing ease of travel to every part of the world.</p>

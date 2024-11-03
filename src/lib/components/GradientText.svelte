@@ -1,16 +1,19 @@
 <script>
   export let text = "Gradient Text";
+  export let interval = 0;
+
+  import { concurrent } from "svelte-typewriter";
 </script>
 
 <div class="relative w-full h-full">
   <h1 class="text-transparent w-full h-full pt-3 bg-clip-text bg-gradient-to-r from-pink-400  to-orange-400 animate-gradient-x">
-    {text}
+    <p use:concurrent={{ interval: interval}}>{text}</p>
   </h1>
 </div>
 
 <style>
   @keyframes gradientMove {
-    0% {
+    0% { 
       background-position: 0% 50%;
     }
     50% {
