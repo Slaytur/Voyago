@@ -21,7 +21,7 @@
     </div>
     <div class="h-full flex flex-col w-[500px] ml-[15%] justify-center items-center">
         <div class="font-sourcesans font-black text-[80px] leading-[80px] tracking-tight">
-            <p use:concurrent={{ interval: 60 }}>Plan the next era of your</p>
+            <p use:concurrent={{ interval: 60 }}>Plan the next </p> <p use:concurrent={{ interval: 90 }}>era of your</p>
             <div class="text-[90px]">
                 <GradientText interval={210} text="life" />
             </div>
