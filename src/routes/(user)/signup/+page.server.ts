@@ -6,7 +6,7 @@ import { ID } from "node-appwrite";
 
 export const actions = {
     signup: async ({ request, cookies }) => {
-    // Extract the form data.
+        // Extract the form data.
         const form = await request.formData();
         const email: any = form.get("email");
         const password: any = form.get("password");
