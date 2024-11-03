@@ -40,13 +40,6 @@
       align-items: center;
       padding-left: 30px;
     }
-    .login-block {
-      text-align: center;
-      align-items: center;
-      text-align: center;
-      justify-content: center;
-      justify-items: center;
-    }
 </style>
 
 <section class="py-40 font-opensans">
