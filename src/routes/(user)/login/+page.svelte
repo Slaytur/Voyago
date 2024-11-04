@@ -14,7 +14,7 @@
                 <span>{form.error}</span>
             </div>
         {/if}
-        <form method="POST" action="?/signin">
+        <form method="POST" action="?/login">
             <div class="tw-mb-4">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" name="email" id="email" class="form-control" placeholder="Email address" autocomplete="email" required />

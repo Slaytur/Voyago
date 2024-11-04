@@ -1,4 +1,4 @@
-// export { signIn, signOut, handle } from "./auth";
+// export { login, signOut, handle } from "./auth";
 
 import { createSessionClient } from "$lib/server/appwrite";
 

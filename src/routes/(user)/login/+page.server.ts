@@ -5,7 +5,7 @@ import { SESSION_COOKIE, createAdminClient } from "$lib/server/appwrite.js";
 import { fail, redirect } from "@sveltejs/kit";
 
 export const actions = {
-    signin: async ({ request, cookies }) => {
+    login: async ({ request, cookies }) => {
         // Extract the form data.
         const data = await request.formData();
 

@@ -31,12 +31,12 @@
                         <a class="nav-link" href="/feedback">Feedback</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav ms-auto tw-font-medium">
+                <ul class="navbar-nav ms-auto tw-font-medium tw-mr-4">
                     <li class="nav-item tw-me-2">
-                        <a href="/signup" class="btn tw-bg-primary tw-text-white hover:tw-bg-primaryForeground hover:tw-text-white">Sign Up</a>
+                        <a href="/signup" class="btn tw-rounded-full tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white">Sign Up</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/signin" class="btn tw-bg-primary tw-text-white hover:tw-bg-primaryForeground hover:tw-text-white">Sign In</a>
+                        <a href="/login" class="btn tw-rounded-full tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white">Sign In</a>
                     </li>
                 </ul>
             </div>
