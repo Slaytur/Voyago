@@ -201,18 +201,18 @@
 </script>
 
 <div class="tw-flex tw-flex-col tw-w-full tw-justify-center tw-items-center tw-py-16">
-    <div class="sele tw-pt-14 tw-flex tw-ml-7 tw-max-w-[40%] tw-flex-col tw-space-y-4 tw-justify-center">
-        <h1>Name:</h1>
+    <div class="sele tw-pt-14 tw-flex tw-ml-7 tw-max-w-[40%] tw-flex-col tw-space-y-2 tw-justify-center">
+        <h1>Enter Trip Name:</h1>
         <input type="text" bind:value={name} placeholder="Ex. My favorite trip" min="5" class="tw-border tw-rounded-md tw-p-2 tw-w-[300px]" />
-
+        <br>
         {#if name.length > 1}
-            <h1>Enter your interests, or activities you would like to do:</h1>
+            <h1 class="mt-4">Enter your interests, or activities you would like to do:</h1>
             <div class="tw-flex tw-items-center tw-space-x-2">
                 <input
                     type="text"
                     bind:value={activities}
                     placeholder="e.g., hiking, museum visit"
-                    class="border rounded-md p-2"
+                    class="tw-border tw-rounded-md tw-p-2"
                     required
                 />
                 <Button.Root on:click={addActivity} class="tw-border tw-rounded-md tw-bg-green tw-p-2">
@@ -220,9 +220,8 @@
                 </Button.Root>
             </div>
         {/if}
-
         {#if activityList.length > 0}
-            <ul class="mt-4 space-y-2">
+            <ul class="space-y-2">
                 {#each activityList as activity, index}
                     <li class="tw-flex tw-items-center tw-space-x-2">
                         <span>{activity}</span>
@@ -233,7 +232,7 @@
                 {/each}
             </ul>
         {/if}
-
+        <br>
         {#if activityList.length > 0 && name.length > 1}
             <Select.Root items={regions} on:ValueChange={e => onRegionSelect(e.detail.value)}>
                 <h1>Choose a region:</h1>
@@ -253,7 +252,7 @@
                 <Select.Input name="favoriteRegion" />
             </Select.Root>
         {/if}
-
+        <br>
         {#if selectedRegion != null && attractions.length > 0 && activityList.length > 0 && name.length > 1}
             <Select.Root items={attractions}>
                 <h1>Choose an attraction:</h1>
@@ -273,11 +272,11 @@
                 <Select.Input name="favoriteAttraction" />
             </Select.Root>
         {/if}
-
+        <br>
         {#if nearAttractions.length > 0 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 1}
             <Select.Root items={nearAttractions} multiple>
                 <h1>Choose up to 4 nearby attractions:</h1>
-                <Select.Trigger class="tw-inline-flex tw-h-10 tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select a nearer attraction">
+                <Select.Trigger class="tw-inline-flex tw-h-20 tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select a nearer attraction">
                     <span class="tw-mr-[9px] tw-size-6 tw-text-muted-foreground">🎢</span>
                     <Select.Value class="tw-text-sm tw-text-muted-foreground" placeholder="Select an attraction" />
                     <span class="tw-ml-auto tw-size-6 tw-text-muted-foreground">▼</span>
@@ -293,9 +292,10 @@
                 <Select.Input name="favoriteNearAttractions" />
             </Select.Root>
         {/if}
-    </div>
+        <br>
+    <!-- </div> -->
 
-    <div class="sele tw-pt-14 tw-flex tw-ml-7 tw-flex-col tw-space-y-4">
+    <!-- <div class="sele tw-pt-14 tw-flex tw-flex-col tw-space-y-4"> -->
 
         <!-- {#if selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 1}
         <h1>What is your preferred travel pace?</h1>
@@ -316,7 +316,7 @@
         {#if travelPace && selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion && activityList.length > 0 && name.length > 1}
             <DatePicker.Root weekdayFormat="short" fixedWeeks={true} onValueChange={e => date = `${String(e?.month)}/${String(e?.day)}/${String(e?.year)}`}>
                 <div class="tw-flex tw-w-full tw-max-w-[232px] tw-flex-col tw-gap-1.5">
-                    <DatePicker.Label class="tw-block tw-select-none tw-text-sm tw-font-medium"
+                    <DatePicker.Label class="tw-block tw-select-none tw-text-sm"
                     >Approximate travel Date</DatePicker.Label
                     >
                     <DatePicker.Input
@@ -418,12 +418,14 @@
                 </div>
             </DatePicker.Root>
         {/if}
+        <br>
         {#if selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 1 && date && travelPace}
             <h1>Enter your vacation length (in days):</h1>
             <input type="number" bind:value={vacationLength} placeholder="Enter days" min="1" class="tw-border tw-rounded-md tw-p-2 tw-w-[100px]" />
         {/if}
+        <br>
         {#if selectedNearAttractions.length > 0 && activityList.length > 0 && travelPace && vacationLength && date && name}
-            <Button.Root color="green" class="tw-border tw-bg-accent tw-rounded-md tw-ml-3 tw-bg-green tw-w-fit tw-p-2" on:click={e => makeRoute(selectedNearAttractions, activityList, selectedRegion!, date!, vacationLength ?? 0)}>
+            <Button.Root color="green" class=" tw-border-accent tw-border-2 tw-rounded-full  tw-text-accent tw-font-bold tw-bg-green tw-w-fit tw-px-3 tw-py-2" on:click={e => makeRoute(selectedNearAttractions, activityList, selectedRegion!, date!, vacationLength ?? 0)}>
                 Continue
             </Button.Root>
         {/if}
