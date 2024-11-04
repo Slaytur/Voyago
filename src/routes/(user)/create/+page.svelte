@@ -205,8 +205,8 @@
         <h1>Name:</h1>
         <input type="text" bind:value={name} placeholder="Ex. My favorite trip" min="5" class="tw-border tw-rounded-md tw-p-2 tw-w-[300px]" />
 
-        {#if name.length > 4}
-            <h1>Enter your planned activities/interests:</h1>
+        {#if name.length > 1}
+            <h1>Enter your interests, or activities you would like to do:</h1>
             <div class="tw-flex tw-items-center tw-space-x-2">
                 <input
                     type="text"
@@ -234,7 +234,7 @@
             </ul>
         {/if}
 
-        {#if activityList.length > 0 && name.length > 4}
+        {#if activityList.length > 0 && name.length > 1}
             <Select.Root items={regions} on:ValueChange={e => onRegionSelect(e.detail.value)}>
                 <h1>Choose a region:</h1>
                 <Select.Trigger class="tw-inline-flex tw-h-10 w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-foreground focus:tw-ring-offset-2 focus:tw-ring-offset-background" aria-label="Select a region">
@@ -254,7 +254,7 @@
             </Select.Root>
         {/if}
 
-        {#if selectedRegion != null && attractions.length > 0 && activityList.length > 0 && name.length > 4}
+        {#if selectedRegion != null && attractions.length > 0 && activityList.length > 0 && name.length > 1}
             <Select.Root items={attractions}>
                 <h1>Choose an attraction:</h1>
                 <Select.Trigger class="tw-inline-flex tw-h-10 tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select an attraction">
@@ -274,7 +274,7 @@
             </Select.Root>
         {/if}
 
-        {#if nearAttractions.length > 0 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 4}
+        {#if nearAttractions.length > 0 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 1}
             <Select.Root items={nearAttractions} multiple>
                 <h1>Choose up to 4 nearby attractions:</h1>
                 <Select.Trigger class="tw-inline-flex tw-h-10 tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select a nearer attraction">
@@ -297,7 +297,7 @@
 
     <div class="sele tw-pt-14 tw-flex tw-ml-7 tw-flex-col tw-space-y-4">
 
-        <!-- {#if selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 4}
+        <!-- {#if selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 1}
         <h1>What is your preferred travel pace?</h1>
         <Select.Root items={[{ value: "Relaxed"}, { value: "Moderate"}, { value: "Packed"}]} onSelectedChange={e => travelPace = e!.value}>
             <Select.Trigger class="inline-flex h-10 w-[296px] items-center rounded-md border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background">
@@ -313,7 +313,7 @@
         </Select.Root>
         {/if} -->
 
-        {#if travelPace && selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion && activityList.length > 0 && name.length > 4}
+        {#if travelPace && selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion && activityList.length > 0 && name.length > 1}
             <DatePicker.Root weekdayFormat="short" fixedWeeks={true} onValueChange={e => date = `${String(e?.month)}/${String(e?.day)}/${String(e?.year)}`}>
                 <div class="tw-flex tw-w-full tw-max-w-[232px] tw-flex-col tw-gap-1.5">
                     <DatePicker.Label class="tw-block tw-select-none tw-text-sm tw-font-medium"
@@ -321,7 +321,7 @@
                     >
                     <DatePicker.Input
                         let:segments
-                        class="tw-flex tw-h-10 tw-w-full tw-max-w-[232px] tw-select-none tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-2 tw-py-3 tw-text-sm tw-tracking-[0.01em] tw-text-foreground focus-within:tw-border-border-input-hover focus-within:tw-shadow-date-field-focus hover:tw-border-border-input-hover"
+                        class="tw-flex tw-h-10 tw-w-full tw-max-w-[232px] tw-select-none tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-white tw-px-2 tw-py-3 tw-text-sm tw-tracking-[0.01em] tw-text-foreground focus-within:tw-border-border-input-hover focus-within:tw-shadow-date-field-focus hover:tw-border-border-input-hover"
                     >
                         {#each segments as { part, value }}
                             <div class="tw-inline-block tw-select-none">
@@ -352,19 +352,19 @@
                         class="tw-z-50"
                     >
                         <DatePicker.Calendar
-                            class="tw-rounded-[15px] tw-border tw-border-dark-10 tw-bg-secondary tw-p-[22px] tw-shadow-popover"
+                            class="tw-rounded-[15px] tw-border-2 tw-border-dark-10 tw-bg-white tw-p-[22px] tw-shadow-popover"
                             let:months
                             let:weekdays
                         >
                             <DatePicker.Header class="tw-flex tw-items-center tw-justify-between">
                                 <DatePicker.PrevButton
-                                    class="tw-inline-flex tw-size-10 tw-items-center tw-justify-center tw-rounded-9px tw-bg-secondary tw-transition-all tw-hover:bg-muted active:tw-scale-98"
+                                    class="tw-inline-flex tw-size-10 tw-items-center tw-justify-center tw-rounded-9px tw-bg-white tw-transition-all tw-hover:bg-muted active:tw-scale-98"
                                 >
                                     ↶
                                 </DatePicker.PrevButton>
                                 <DatePicker.Heading class="tw-text-[15px] font-medium" />
                                 <DatePicker.NextButton
-                                    class="tw-inline-flex tw-size-10 tw-items-center tw-justify-center tw-rounded-9px tw-bg-secondary tw-transition-all hover:tw-bg-muted active:tw-scale-98"
+                                    class="tw-inline-flex tw-size-10 tw-items-center tw-justify-center tw-rounded-9px tw-bg-white tw-transition-all hover:tw-bg-muted active:tw-scale-98"
                                 >
                                     ↷
                                 </DatePicker.NextButton>
@@ -398,7 +398,7 @@
                                                             <DatePicker.Day
                                                                 {date}
                                                                 month={month.value}
-                                                                class="tw-group tw-relative tw-inline-flex tw-size-10 tw-items-center tw-justify-center tw-whitespace-nowrap tw-rounded-9px tw-border tw-border-transparent tw-bg-transparent tw-p-0 tw-text-sm tw-font-normal tw-text-foreground tw-transition-all hover:tw-border-foreground data-[disabled]:tw-pointer-events-none data-[outside-month]:tw-pointer-events-none data-[selected]:tw-bg-foreground data-[selected]:tw-font-medium data-[disabled]:tw-text-foreground/30 data-[selected]:tw-text-background data-[unavailable]:tw-text-muted-foreground data-[unavailable]:tw-line-through"
+                                                                class="tw-group tw-relative tw-inline-flex tw-size-10 tw-items-center tw-justify-center tw-whitespace-nowrap tw-rounded-9px tw-border tw-border-transparent tw-bg-transparent tw-p-0 tw-text-sm tw-font-normal tw-text-foreground tw-transition-all hover:tw-border-foreground data-[disabled]:tw-pointer-events-none data-[outside-month]:tw-pointer-events-none data-[selected]:tw-bg-foreground data-[selected]:tw-font-medium data-[disabled]:tw-text-foreground/30 data-[selected]:tw-text-accent data-[unavailable]:tw-text-muted-foreground data-[unavailable]:tw-line-through"
                                                             >
                                                                 <div
                                                                     class="tw-absolute tw-top-[5px] tw-hidden tw-size-1 tw-rounded-full tw-bg-foreground tw-transition-all group-data-[today]:tw-block group-data-[selected]:tw-bg-background"
@@ -418,12 +418,12 @@
                 </div>
             </DatePicker.Root>
         {/if}
-        {#if selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 4 && date && travelPace}
+        {#if selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 1 && date && travelPace}
             <h1>Enter your vacation length (in days):</h1>
             <input type="number" bind:value={vacationLength} placeholder="Enter days" min="1" class="tw-border tw-rounded-md tw-p-2 tw-w-[100px]" />
         {/if}
         {#if selectedNearAttractions.length > 0 && activityList.length > 0 && travelPace && vacationLength && date && name}
-            <Button.Root color="green" class="tw-border tw-rounded-md tw-ml-3 tw-bg-green tw-w-fit tw-p-2" on:click={e => makeRoute(selectedNearAttractions, activityList, selectedRegion!, date!, vacationLength ?? 0)}>
+            <Button.Root color="green" class="tw-border tw-bg-accent tw-rounded-md tw-ml-3 tw-bg-green tw-w-fit tw-p-2" on:click={e => makeRoute(selectedNearAttractions, activityList, selectedRegion!, date!, vacationLength ?? 0)}>
                 Continue
             </Button.Root>
         {/if}

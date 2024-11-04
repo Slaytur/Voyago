@@ -80,8 +80,8 @@ async def autofillPoI1(request: PointOfInrest1Request):
     
     poi = []
     for line in response_list:
-        if '-' in line:
-            poi.append(line.replace("-", "").replace("*", "").strip())
+        if '-' in line or '•' in line:
+            poi.append(line.replace("-", "").replace("•", "").replace("*", "").strip())
     
     return PointOfInrestResponse(data=poi)
 
@@ -111,7 +111,7 @@ async def autofillPoI2(request: PointOfInrest2Request):
     poi = []
     for line in response_list:
         if '-' in line or '•' in line:
-            poi.append(line.replace("-", "").replace("•", "").strip())
+            poi.append(line.replace("-", "").replace("•", "").replace("*", "").strip())
     
 
     return PointOfInrestResponse(data=poi)
