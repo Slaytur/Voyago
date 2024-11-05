@@ -23,6 +23,15 @@
     import { faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
 
     import { concurrent } from "svelte-typewriter";
+    import type { PageData } from "./$types";
+
+    export let data: PageData;
+
+    const User = {
+        id: (data as any).user?.$id,
+        name: (data as any).user?.name,
+        email: (data as any).user?.email
+    }
 
 </script>
 
@@ -54,7 +63,7 @@
                     <span class="tw-ml-1">Embrace the richness of <span class="tw-text-accent">global diversity</span>.</span>
                 </p>
             </div>
-            <a href="/signup" class="btn btn-lg tw-w-1/3 tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white  tw-font-bold">
+            <a href={User.id ? "/create" : "/signup"} class="btn btn-lg tw-w-1/3 tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white  tw-font-bold">
                 Explore
             </a>
         </div>
