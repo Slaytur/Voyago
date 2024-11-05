@@ -27,7 +27,7 @@
         { value: "Africa" },
         { value: "Oceania" }
     ];
-
+    let loading = false;
     let selectedRegion: Region | null = null;
     let attractions: Attraction[] = [];
     let nearAttractions: Attraction[] = [];
@@ -43,6 +43,7 @@
 
     async function makeRoute (selectedNearAttractions: Attraction[], activityList: string[], selectedRegion: Region, date: string, vacationLength: number) {
         const token = "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR";
+        loading = true;
         try {
             const newatt: string[] = selectedNearAttractions.map(selectedNearAttractions => selectedNearAttractions.value);
             console.log(newatt);
@@ -72,6 +73,8 @@
             goto("/dashboard");
         } catch (error) {
             console.error("Failed to fetch near attractions:", error);
+        } finally {
+            loading = false; // Stop loading
         }
     }
     async function onRegionSelect (value: string) {
@@ -82,6 +85,7 @@
             console.log("how");
             return;
         }
+        loading = true;
         const token = "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR";
         try {
             const response = await fetch("https://voyago-backend.namikas.dev/autofillPoI1", {
@@ -109,6 +113,8 @@
         } catch (error) {
             console.error("Failed to fetch attractions:", error);
             attractions = []; // Return an empty array in case of an error to match original behavior
+        } finally {
+            loading = false; // Stop loading
         }
         selectedAttraction = null;
     }
@@ -118,6 +124,7 @@
             selectedAttraction = null;
             return;
         }
+        loading = true;
         const token = "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR";
         try {
             console.log(selectedAttraction);
@@ -147,6 +154,8 @@
         } catch (error) {
             console.error("Failed to fetch near attractions:", error);
             nearAttractions = []; // Return an empty array in case of an error to match original behavior
+        } finally {
+            loading = false; // Stop loading
         }
     }
 
@@ -167,41 +176,17 @@
     function removeActivity (index: number) {
         activityList = activityList.filter((_, i) => i !== index);
     }
-
-    async function submit () {
-        const token = "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR";
-        try {
-            const response = await fetch("https://voyago-backend.namikas.dev/create-itinerary", {
-                mode: "no-cors",
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    points_of_interest: `${selectedAttraction}, ${selectedNearAttractions.join(", ")}`,
-                    interests: activityList.join(", "),
-                    location: selectedRegion?.value,
-                    date: date,
-                    name: name,
-                    date_length: vacationLength as unknown as string,
-                    token: token
-                })
-            });
-
-            if (!response.ok)
-                throw new Error(`Error ${response.status}: ${response.statusText}`);
-
-            const res = await response.json();
-            console.log(res);
-        } catch (error) {
-            console.error("Failed to fetch itinerary:", error);
-        }
-    }
 </script>
 
 <div class="tw-flex tw-flex-col tw-w-full tw-justify-center tw-items-center tw-py-16">
     <div class="sele tw-pt-14 tw-flex tw-ml-7 tw-max-w-[40%] tw-flex-col tw-space-y-2 tw-justify-center">
+        {#if loading}
+            <div class="fixed inset-0 bg-gray-700 bg-opacity-50 flex items-center justify-center z-50">
+                <div class="bg-white p-6 rounded shadow-lg">
+                    <p class="text-xl font-semibold">Loading...</p>
+                </div>
+            </div>
+        {/if}
         <h1>Enter Trip Name:</h1>
         <input type="text" bind:value={name} placeholder="Ex. My favorite trip" min="1" class="tw-border tw-rounded-md tw-p-2 tw-w-[300px]" />
         <br>
@@ -278,7 +263,7 @@
                 <h1>Choose up to 4 nearby attractions:</h1>
                 <Select.Trigger class="tw-inline-flex tw-h-10 tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-foreground focus:tw-ring-offset-2 focus:tw-ring-offset-background" aria-label="Select a nearer attraction">
                     <span class="tw-mr-[9px] tw-size-6 tw-text-muted-foreground">🎢</span>
-                    <Select.Value class="tw-text-sm tw-text-muted-foreground" placeholder="Select an attraction" />
+                    <Select.Value class="tw-h-fit tw-text-sm tw-text-muted-foreground" placeholder="Select an attraction" />
                     <span class="tw-ml-auto tw-size-6 tw-text-muted-foreground">▼</span>
                 </Select.Trigger>
                 <Select.Content class="tw-w-full tw-max-h-80 tw-overflow-auto tw-rounded-xl tw-border tw-border-muted tw-bg-background tw-px-1 tw-py-3 tw-shadow-popover tw-outline-none" transition={fly} sideOffset={8}>
@@ -293,26 +278,6 @@
             </Select.Root>
         {/if}
         <br>
-    <!-- </div> -->
-
-    <!-- <div class="sele tw-pt-14 tw-flex tw-flex-col tw-space-y-4"> -->
-
-        <!-- {#if selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 1}
-        <h1>What is your preferred travel pace?</h1>
-        <Select.Root items={[{ value: "Relaxed"}, { value: "Moderate"}, { value: "Packed"}]} onSelectedChange={e => travelPace = e!.value}>
-            <Select.Trigger class="inline-flex h-10 w-[296px] items-center rounded-md border border-border-input bg-background px-[11px] text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background">
-                <Select.Value class="text-sm text-muted-foreground" placeholder="Select a travel pace" />
-            </Select.Trigger>
-            <Select.Content class="w-full max-h-80 overflow-auto rounded-xl border border-muted bg-background px-1 py-3 shadow-popover outline-none" transition={fly} sideOffset={8}>
-                {#each ["Relaxed", "Moderate", "Packed"] as pace}
-                    <Select.Item class="flex h-10 w-full select-none items-center rounded-sm py-3 pl-5 pr-1.5 text-sm outline-none transition-all duration-75 data-[highlighted]:bg-muted" value={pace}>
-                        {pace}
-                    </Select.Item>
-                {/each}
-            </Select.Content>
-        </Select.Root>
-        {/if} -->
-
         {#if travelPace && selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion && activityList.length > 0 && name.length > 1}
             <DatePicker.Root weekdayFormat="short" fixedWeeks={true} onValueChange={e => date = `${String(e?.month)}/${String(e?.day)}/${String(e?.year)}`}>
                 <div class="tw-flex tw-w-full tw-max-w-[232px] tw-flex-col tw-gap-1.5">
