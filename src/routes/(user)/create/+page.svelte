@@ -266,7 +266,7 @@
         <br>
             <Select.Root items={nearAttractions} multiple>
                 <h1>Choose up to 4 nearby attractions:</h1>
-                <Select.Trigger class="tw-inline-flex tw-h-min-10 tw-h-fit tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-foreground focus:tw-ring-offset-2 focus:tw-ring-offset-background" aria-label="Select a nearer attraction">
+                <Select.Trigger class="tw-inline-flex tw-min-h-10 tw-h-fit tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-foreground focus:tw-ring-offset-2 focus:tw-ring-offset-background" aria-label="Select a nearer attraction">
                     <span class="tw-mr-[9px] tw-size-6 tw-text-muted-foreground">🎢</span>
                     <Select.Value class="tw-h-fit tw-text-sm tw-text-muted-foreground" placeholder="Select an attraction" />
                     <span class="tw-ml-auto tw-size-6 tw-text-muted-foreground">▼</span>
@@ -282,8 +282,8 @@
                 <Select.Input name="favoriteNearAttractions" />
             </Select.Root>
         {/if}
-        {#if travelPace && selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion && activityList.length > 0 && name.length > 1}
         <br>
+        {#if travelPace && selectedNearAttractions.length > 1 && selectedAttraction != null && selectedRegion && activityList.length > 0 && name.length > 1} 
             <DatePicker.Root weekdayFormat="short" fixedWeeks={true} onValueChange={e => date = `${String(e?.month)}/${String(e?.day)}/${String(e?.year)}`}>
                 <div class="tw-flex tw-w-full tw-max-w-[232px] tw-flex-col tw-gap-1.5">
                     <DatePicker.Label class="tw-block tw-select-none tw-text-sm"
@@ -388,8 +388,8 @@
                 </div>
             </DatePicker.Root>
         {/if}
-        {#if selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 1 && date && travelPace}
         <br>
+        {#if selectedNearAttractions.length > 1 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 1 && date && travelPace}
             <h1>Enter your vacation length (in days):</h1>
             <input type="number" bind:value={vacationLength} placeholder="Enter days" min="1" class="tw-border tw-rounded-md tw-p-2 tw-w-[100px]" />
         {/if}
