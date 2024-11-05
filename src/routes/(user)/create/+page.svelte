@@ -28,6 +28,7 @@
         { value: "Oceania" }
     ];
     let loading = false;
+    let generating = false;
     let selectedRegion: Region | null = null;
     let attractions: Attraction[] = [];
     let nearAttractions: Attraction[] = [];
@@ -42,39 +43,43 @@
     let name = "";
 
     async function makeRoute (selectedNearAttractions: Attraction[], activityList: string[], selectedRegion: Region, date: string, vacationLength: number) {
-        const token = "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR";
-        loading = true;
-        try {
-            const newatt: string[] = selectedNearAttractions.map(selectedNearAttractions => selectedNearAttractions.value);
-            console.log(newatt);
-            const response = await fetch("https://voyago-backend.namikas.dev/create-itinerary", {
-                //   mode: 'no-cors',
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    points_of_interest: newatt.join(", "),
-                    interests: activityList.join(", "),
-                    location: selectedRegion.value,
-                    date: date,
-                    date_length: String(vacationLength),
-                    name: name,
-                    id: user.$id,
-                    token: token
-                })
-            });
+        if (!loading){
+            const token = "i2JGyVfh3hVdzibdtx63sCnu3Nh4wDNDX3lCSWhkLwlH4wFr7jZQ6oq3wpb5StCR";
+            loading = true;
+            generating = true;
+            try {
+                const newatt: string[] = selectedNearAttractions.map(selectedNearAttractions => selectedNearAttractions.value);
+                console.log(newatt);
+                const response = await fetch("https://voyago-backend.namikas.dev/create-itinerary", {
+                    //   mode: 'no-cors',
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        points_of_interest: newatt.join(", "),
+                        interests: activityList.join(", "),
+                        location: selectedRegion.value,
+                        date: date,
+                        date_length: String(vacationLength),
+                        name: name,
+                        id: user.$id,
+                        token: token
+                    })
+                });
 
-            if (!response.ok)
-                throw new Error(`Error ${response.status}: ${response.statusText}`);
+                if (!response.ok)
+                    throw new Error(`Error ${response.status}: ${response.statusText}`);
 
-            const iten = await response.json();
-            goto("/dashboard");
-        } catch (error) {
-            console.error("Failed to fetch near attractions:", error);
-        } finally {
-            loading = false; // Stop loading
+                const iten = await response.json();
+                goto("/dashboard");
+            } catch (error) {
+                console.error("Failed to fetch near attractions:", error);
+            } finally {
+                loading = false; // Stop loading
+                generating = false;
+            }
         }
     }
     async function onRegionSelect (value: string) {
@@ -189,8 +194,8 @@
         {/if}
         <h1>Enter Trip Name:</h1>
         <input type="text" bind:value={name} placeholder="Ex. My favorite trip" min="1" class="tw-border tw-rounded-md tw-p-2 tw-w-[300px]" />
-        <br>
         {#if name.length > 1}
+        <br>
             <h1 class="tw-mt-4">Enter your interests, or activities you would like to do:</h1>
             <div class="tw-flex tw-items-center tw-space-x-2">
                 <input
@@ -217,8 +222,8 @@
                 {/each}
             </ul>
         {/if}
-        <br>
         {#if activityList.length > 0 && name.length > 1}
+        <br>
             <Select.Root items={regions} on:ValueChange={e => onRegionSelect(e.detail.value)}>
                 <h1>Choose a region:</h1>
                 <Select.Trigger class="tw-inline-flex tw-h-10 w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-foreground focus:tw-ring-offset-2 focus:tw-ring-offset-background" aria-label="Select a region">
@@ -237,8 +242,8 @@
                 <Select.Input name="favoriteRegion" />
             </Select.Root>
         {/if}
-        <br>
         {#if selectedRegion != null && attractions.length > 0 && activityList.length > 0 && name.length > 1}
+        <br>
             <Select.Root items={attractions}>
                 <h1>Choose an attraction:</h1>
                 <Select.Trigger class="tw-inline-flex tw-h-10 tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-foreground focus:tw-ring-offset-2 focus:tw-ring-offset-background" aria-label="Select an attraction">
@@ -257,8 +262,8 @@
                 <Select.Input name="favoriteAttraction" />
             </Select.Root>
         {/if}
-        <br>
         {#if nearAttractions.length > 0 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 1}
+        <br>
             <Select.Root items={nearAttractions} multiple>
                 <h1>Choose up to 4 nearby attractions:</h1>
                 <Select.Trigger class="tw-inline-flex tw-h-min-10 tw-h-fit tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-foreground focus:tw-ring-offset-2 focus:tw-ring-offset-background" aria-label="Select a nearer attraction">
@@ -277,8 +282,8 @@
                 <Select.Input name="favoriteNearAttractions" />
             </Select.Root>
         {/if}
-        <br>
         {#if travelPace && selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion && activityList.length > 0 && name.length > 1}
+        <br>
             <DatePicker.Root weekdayFormat="short" fixedWeeks={true} onValueChange={e => date = `${String(e?.month)}/${String(e?.day)}/${String(e?.year)}`}>
                 <div class="tw-flex tw-w-full tw-max-w-[232px] tw-flex-col tw-gap-1.5">
                     <DatePicker.Label class="tw-block tw-select-none tw-text-sm"
@@ -383,16 +388,22 @@
                 </div>
             </DatePicker.Root>
         {/if}
-        <br>
         {#if selectedNearAttractions.length > 1 && selectedNearAttractions.length < 6 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 1 && date && travelPace}
+        <br>
             <h1>Enter your vacation length (in days):</h1>
             <input type="number" bind:value={vacationLength} placeholder="Enter days" min="1" class="tw-border tw-rounded-md tw-p-2 tw-w-[100px]" />
         {/if}
-        <br>
         {#if selectedNearAttractions.length > 0 && activityList.length > 0 && travelPace && vacationLength && date && name}
+        <br>
             <Button.Root color="green" class=" tw-border-accent tw-border-2 tw-rounded-full  tw-text-accent tw-font-bold tw-bg-green tw-w-fit tw-px-3 tw-py-2" on:click={e => makeRoute(selectedNearAttractions, activityList, selectedRegion!, date!, vacationLength ?? 0)}>
                 Continue
             </Button.Root>
+        {/if}
+        {#if loading}
+        <h1 class="tw-text-md tw-animate-pulse">Loading...</h1>
+        {/if}
+        {#if generating}
+        <h1 class="tw-text-md tw-animate-pulse">(Creating Itinerary may take 20-30s)</h1>
         {/if}
     </div>
 </div>
