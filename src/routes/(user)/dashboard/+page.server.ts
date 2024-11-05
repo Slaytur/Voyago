@@ -1,4 +1,4 @@
-import { SESSION_COOKIE, createDatabaseClient, createSessionClient } from "$lib/server/appwrite.js";
+import { createDatabaseClient } from "$lib/server/appwrite.js";
 import { redirect } from "@sveltejs/kit";
 import { Query } from "node-appwrite";
 

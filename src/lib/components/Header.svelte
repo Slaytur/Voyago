@@ -2,6 +2,8 @@
     import Logo from "$lib/images/icon.svg";
     import { browser } from "$app/environment";
 
+    export let session: any;
+
     if (browser)
         import("bootstrap");
 </script>
@@ -32,11 +34,14 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto tw-font-medium tw-mr-4">
-                    <li class="nav-item tw-me-2">
+                    <li class="nav-item tw-me-2" hidden={session.id}>
                         <a href="/signup" class="btn tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white">Sign Up</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" hidden={session.id}>
                         <a href="/login" class="btn tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white">Sign In</a>
+                    </li>
+                    <li class="nav-item" hidden={!session.id}>
+                        <a href="/account" class="btn tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white tw-tracking-wide">Account</a>
                     </li>
                 </ul>
             </div>

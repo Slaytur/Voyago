@@ -23,6 +23,7 @@
     import { faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";
 
     import { concurrent } from "svelte-typewriter";
+
 </script>
 
 <style>

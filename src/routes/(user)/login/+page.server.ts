@@ -1,8 +1,14 @@
 // src/routes/signup/+page.server.js
 
-import { goto } from "$app/navigation";
 import { SESSION_COOKIE, createAdminClient } from "$lib/server/appwrite.js";
 import { fail, redirect } from "@sveltejs/kit";
+
+export async function load (event): Promise<void> {
+    const { locals } = event;
+
+    // Logged out users can't access this page.
+    if (locals.user) redirect(302, "/");
+}
 
 export const actions = {
     login: async ({ request, cookies }) => {

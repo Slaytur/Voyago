@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { Toaster } from "svelte-french-toast";
 
     import Header from "$lib/components/Header.svelte";
@@ -7,6 +7,14 @@
     import { MetaTags } from "svelte-meta-tags";
 
     import "../app.scss";
+    import type { PageData } from "./$types";
+    export let data: PageData;
+
+    const User = {
+        id: (data as any).user?.$id,
+        name: (data as any).user?.name,
+        email: (data as any).user?.email
+    }
 </script>
 
 <MetaTags
@@ -43,7 +51,7 @@
 />
 
 <div>
-    <Header />
+    <Header session={User} />
     <main>
         <Toaster position="top-center" />
         <slot />
