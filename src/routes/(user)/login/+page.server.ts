@@ -6,8 +6,8 @@ import { fail, redirect } from "@sveltejs/kit";
 export async function load (event): Promise<void> {
     const { locals } = event;
 
-    // Logged out users can't access this page.
-    if (locals.user) redirect(302, "/");
+    // Logged in users can't access this page.
+    if (locals.user) redirect(302, "/dashboard");
 }
 
 export const actions = {
