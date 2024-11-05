@@ -14,13 +14,13 @@ import os
 import uvicorn
 import pickle
 import asyncio
-from ollama import Client
+# from ollama import Client
 
 dotenv.load_dotenv()
 
 API_KEY = os.environ.get("PERPLEXITY_API_KEY")
 client = AsyncOpenAI(api_key=API_KEY, base_url="https://api.perplexity.ai")
-ollama_client = Client(host='http://:11434')
+# ollama_client = Client(host='http://:11434')
 
 app = FastAPI(title="python backend")
 app.add_middleware(
