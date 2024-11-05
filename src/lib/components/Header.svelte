@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Logo from "../images/icon.svg";
+    import Logo from "$lib/images/icon.svg";
     import { browser } from "$app/environment";
 
     if (browser)

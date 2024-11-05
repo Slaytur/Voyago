@@ -6,11 +6,11 @@
     import city from "$lib/images/unsplash_allwyway-modified.webp";
     import pyramids from "$lib/images/pyramids-modified.webp";
 
-    import SASELogo from "$lib/images/logos/SASE.png";
-    import LSULogo from "$lib/images/logos/LSU.png";
-    import DOWLogo from "$lib/images/logos/DOW.png";
-    import ChevronLogo from "$lib/images/logos/Chevron.png";
-    import ChickenWagonLogo from "$lib/images/logos/ChickenWagon.png";
+    import SASELogo from "$lib/images/logos/SASE.webp";
+    import LSULogo from "$lib/images/logos/LSU.webp";
+    import DOWLogo from "$lib/images/logos/DOW.webp";
+    import ChevronLogo from "$lib/images/logos/Chevron.webp";
+    import ChickenWagonLogo from "$lib/images/logos/ChickenWagon.webp";
 
     import Itineraries from "$lib/images/itineraries.webp";
     import WorldMap from "$lib/images/world-map.webp";
