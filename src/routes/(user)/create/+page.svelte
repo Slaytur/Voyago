@@ -203,10 +203,10 @@
 <div class="tw-flex tw-flex-col tw-w-full tw-justify-center tw-items-center tw-py-16">
     <div class="sele tw-pt-14 tw-flex tw-ml-7 tw-max-w-[40%] tw-flex-col tw-space-y-2 tw-justify-center">
         <h1>Enter Trip Name:</h1>
-        <input type="text" bind:value={name} placeholder="Ex. My favorite trip" min="5" class="tw-border tw-rounded-md tw-p-2 tw-w-[300px]" />
+        <input type="text" bind:value={name} placeholder="Ex. My favorite trip" min="1" class="tw-border tw-rounded-md tw-p-2 tw-w-[300px]" />
         <br>
         {#if name.length > 1}
-            <h1 class="mt-4">Enter your interests, or activities you would like to do:</h1>
+            <h1 class="tw-mt-4">Enter your interests, or activities you would like to do:</h1>
             <div class="tw-flex tw-items-center tw-space-x-2">
                 <input
                     type="text"
@@ -221,7 +221,7 @@
             </div>
         {/if}
         {#if activityList.length > 0}
-            <ul class="space-y-2">
+            <ul class="tw-space-y-2">
                 {#each activityList as activity, index}
                     <li class="tw-flex tw-items-center tw-space-x-2">
                         <span>{activity}</span>
@@ -256,14 +256,14 @@
         {#if selectedRegion != null && attractions.length > 0 && activityList.length > 0 && name.length > 1}
             <Select.Root items={attractions}>
                 <h1>Choose an attraction:</h1>
-                <Select.Trigger class="tw-inline-flex tw-h-10 tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select an attraction">
+                <Select.Trigger class="tw-inline-flex tw-h-10 tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-foreground focus:tw-ring-offset-2 focus:tw-ring-offset-background" aria-label="Select an attraction">
                     <span class="tw-mr-[9px] tw-size-6 tw-text-muted-foreground">🎢</span>
                     <Select.Value class="tw-text-sm tw-text-muted-foreground" placeholder="Select an attraction" />
                     <span class="tw-ml-auto tw-size-6 tw-text-muted-foreground">▼</span>
                 </Select.Trigger>
                 <Select.Content class="tw-w-full tw-max-h-80 tw-overflow-auto tw-rounded-xl tw-border tw-border-muted tw-bg-background tw-px-1 tw-py-3 tw-shadow-popover tw-outline-none" transition={fly} sideOffset={8}>
                     {#each attractions as attraction}
-                        <Select.Item class="tw-flex tw-h-10 tw-w-full tw-select-none tw-items-center tw-rounded-sm tw-py-3 tw-pl-5 tw-pr-1.5 tw-text-sm tw-outline-none tw-transition-all tw-duration-75 data-[highlighted]:bg-muted" value={attraction.value} on:click={() => onAttractionSelect(attraction.value)}>
+                        <Select.Item class="tw-flex tw-h-10 tw-w-full tw-select-none tw-items-center tw-rounded-sm tw-py-3 tw-pl-5 tw-pr-1.5 tw-text-sm tw-outline-none tw-transition-all tw-duration-75" value={attraction.value} on:click={() => onAttractionSelect(attraction.value)}>
                             {attraction.value}
                             <Select.ItemIndicator class="tw-ml-auto" asChild={false}><span>✔</span></Select.ItemIndicator>
                         </Select.Item>
@@ -276,7 +276,7 @@
         {#if nearAttractions.length > 0 && selectedAttraction != null && selectedRegion != null && activityList.length > 0 && name.length > 1}
             <Select.Root items={nearAttractions} multiple>
                 <h1>Choose up to 4 nearby attractions:</h1>
-                <Select.Trigger class="tw-inline-flex tw-h-20 tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background" aria-label="Select a nearer attraction">
+                <Select.Trigger class="tw-inline-flex tw-h-10 tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-foreground focus:tw-ring-offset-2 focus:tw-ring-offset-background" aria-label="Select a nearer attraction">
                     <span class="tw-mr-[9px] tw-size-6 tw-text-muted-foreground">🎢</span>
                     <Select.Value class="tw-text-sm tw-text-muted-foreground" placeholder="Select an attraction" />
                     <span class="tw-ml-auto tw-size-6 tw-text-muted-foreground">▼</span>

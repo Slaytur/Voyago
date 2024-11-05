@@ -34,11 +34,11 @@ const config: Config = {
                 text: "#000000",
                 background: "#ffffff"
             },
-            borderRadius: {
-                lg: "var(--radius)",
-                md: "calc(var(--radius) - 2px)",
-                sm: "calc(var(--radius) - 4px)"
-            },
+            // borderRadius: {
+            //     lg: "var(--radius)",
+            //     md: "calc(var(--radius) - 2px)",
+            //     sm: "calc(var(--radius) - 4px)"
+            // },
             fontFamily: {
                 sans: [...fontFamily.sans],
                 sourcesans: ["Source Sans Pro", "sans"],
