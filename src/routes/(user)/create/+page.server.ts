@@ -1,6 +1,4 @@
-import { SESSION_COOKIE, createDatabaseClient, createSessionClient } from "$lib/server/appwrite.js";
 import { redirect } from "@sveltejs/kit";
-import { Query } from "node-appwrite";
 
 export async function load (event): Promise<{ user: any }> {
     const { locals } = event;

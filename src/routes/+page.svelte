@@ -37,7 +37,7 @@
         <div class="col-sm-6">
             <h1 class="tw-text-7xl tw-font-bold tw-max-w-[500px] tw-mt-10">
                 <p use:concurrent={{ interval: 60 }}>Plan the next</p> <p use:concurrent={{ interval: 90 }}>era of your</p>
-                <GradientText interval={210} text="life" />
+                <GradientText interval={210} text="adventure" />
             </h1>
             <div class="tw-text-lg tw-my-10">
                 <p class="tw-mb-2 tw-flex">
@@ -53,7 +53,7 @@
                     <span class="tw-ml-1">Embrace the richness of <span class="tw-text-accent">global diversity</span>.</span>
                 </p>
             </div>
-            <a href="/signup" class="btn btn-lg tw-w-1/3 tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white tw-rounded-3xl tw-font-bold">
+            <a href="/signup" class="btn btn-lg tw-w-1/3 tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white  tw-font-bold">
                 Explore
             </a>
         </div>
@@ -71,7 +71,7 @@
     <div class="tw-my-20"></div>
     <section>
         <h2 class="tw-uppercase tw-font-bold tw-text-2xl">Featured on</h2>
-        <div class="tw-flex tw-justify-center tw-p-5 tw-mt-4 md:tw-flex-col lg:!tw-flex-row md:tw-space-x-20 tw-bg-secondary tw-rounded-xl lg:tw-h-28">
+        <div class="tw-flex tw-justify-center tw-p-5 tw-mt-4 tw-flex-col lg:!tw-flex-row md:tw-space-x-20 tw-bg-secondary tw-rounded-xl lg:tw-h-28">
             <img src={SASELogo} alt="SASE logo">
             <img src={LSULogo} alt="LSU logo">
             <img src={DOWLogo} alt="DOW logo">
@@ -89,7 +89,7 @@
             <div class="col-sm-6">
                 <h2 class="tw-text-7xl tw-font-bold tw-mt-20">Itineraries Crafted Just For You</h2>
                 <p class="tw-my-5 tw-text-primary">Experience expertly designed itineraries that blend your unique preferences with local insights, ensuring every moment of your journey is unforgettable.</p>
-                <a href="/create" class="btn btn-lg tw-w-1/3 tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white tw-rounded-3xl tw-font-bold">Build Experience</a>
+                <a href="/create" class="btn btn-lg tw-w-1/3 tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white tw-font-bold">Build Experience</a>
             </div>
         </div>
     </section>
@@ -98,7 +98,7 @@
         <div class="col">
             <h2 class="tw-text-7xl tw-font-bold tw-mt-20">Unbeatable Value</h2>
             <p class="tw-my-5 tw-text-primary">Discover incredible adventures without breaking the bank -- our pricing makes dream travel accessible to everyone.</p>
-            <a href="/pricing" class="btn btn-lg tw-w-1/3 tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white tw-rounded-3xl tw-font-bold">View Pricing</a>
+            <a href="/pricing" class="btn btn-lg tw-w-1/3 tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white tw-font-bold">View Pricing</a>
         </div>
         <div class="col">
             <img src={WorldMap} alt="World map" class="tw-h-[350px]">
@@ -108,10 +108,10 @@
     <section>
         <h2 class="tw-uppercase tw-font-bold tw-text-xl tw-text-primary tw-text-center tw-mt-10">Testimonials</h2>
         <h3 class="tw-text-7xl tw-font-bold tw-text-center">Read What Others Have To Say</h3>
-        <div class="tw-flex tw-mt-10 tw-mx-auto tw-container tw-space-x-2 tw-max-w-4xl tw-justify-center">
+        <div class="tw-flex tw-mt-10 tw-mx-auto tw-container tw-flex-col md:tw-flex-row tw-space-x-2 tw-max-w-4xl tw-justify-center">
             <div class="card tw-border-secondary tw-border-4 tw-rounded-[10px] tw-w-[235px]">
                 <div class="card-img-top tw-h-[227px]">
-                    <img src={DavidL} alt="David L profile" class="card-img-top tw-h-[227px]">
+                    <img src={DavidL} alt="David L profile" class="card-img-top">
                 </div>
                 <div class="card-body tw-z-10 tw-bg-white tw-rounded-b-2xl">
                     <h5 class="card-title tw-font-bold">David L.</h5>
@@ -141,12 +141,12 @@
     <div class="tw-my-10"></div>
     <section>
         <div class="container">
-            <div class="tw-w-1/3 tw-mx-auto  tw-px-8 tw-py-4 tw-text-black tw-text-center tw-rounded-3xl">
+            <div class=" lg:tw-w-1/3 tw-mx-auto  tw-px-8 tw-py-4 tw-text-black tw-text-center tw-rounded-3xl">
                 <p class="tw-uppercase">Are you ready?</p>
                 <div class="tw-container tw-my-4">
                     <h3 class="tw-font-bold tw-text-4xl">Be A Part of the Next Big Thing</h3>
                 </div>
-                <a href="/create" class="btn btn-lg tw-w-2/3 tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white tw-rounded-3xl tw-font-bold">Get Started</a>
+                <a href="/create" class="btn btn-lg tw-w-2/3 tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white tw-font-bold">Get Started</a>
             </div>
         </div>
     </section>

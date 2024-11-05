@@ -43,11 +43,11 @@
 />
 
 <div>
+    <Header />
     <main>
-        <Header />
         <Toaster position="top-center" />
         <slot />
         <hr>
-        <Footer />
     </main>
+    <Footer />
 </div>
