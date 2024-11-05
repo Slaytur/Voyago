@@ -1,10 +1,10 @@
 <script lang="ts">
     import GradientText from "$lib/components/GradientText.svelte";
 
-    import palace from "$lib/images/Palace-modified.png";
-    import manchu from "$lib/images/Machu_Picchu_Peru-modified.png";
-    import city from "$lib/images/unsplash_allwyway-modified.png";
-    import pyramids from "$lib/images/pyramids-modified.png";
+    import palace from "$lib/images/Palace-modified.webp";
+    import manchu from "$lib/images/Machu_Picchu_Peru-modified.webp";
+    import city from "$lib/images/unsplash_allwyway-modified.webp";
+    import pyramids from "$lib/images/pyramids-modified.webp";
 
     import SASELogo from "$lib/images/logos/SASE.png";
     import LSULogo from "$lib/images/logos/LSU.png";
@@ -12,12 +12,12 @@
     import ChevronLogo from "$lib/images/logos/Chevron.png";
     import ChickenWagonLogo from "$lib/images/logos/ChickenWagon.png";
 
-    import Itineraries from "$lib/images/itineraries.png";
-    import WorldMap from "$lib/images/world-map.png";
+    import Itineraries from "$lib/images/itineraries.webp";
+    import WorldMap from "$lib/images/world-map.webp";
 
-    import DavidL from "$lib/images/davidL.png";
-    import EstherM from "$lib/images/estherM.png";
-    import AnnabelleH from "$lib/images/annabelleH.png";
+    import DavidL from "$lib/images/davidL.webp";
+    import EstherM from "$lib/images/estherM.webp";
+    import AnnabelleH from "$lib/images/annabelleH.webp";
 
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faCircleArrowRight } from "@fortawesome/free-solid-svg-icons";

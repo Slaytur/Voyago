@@ -6,9 +6,7 @@
 </script>
 
 <div class="relative w-full h-full">
-  <h1 class="text-transparent w-full h-full bg-clip-text bg-gradient-to-r from-[#5C43A8]  to-[#5C43A8] animate-gradient-x">
-    <p use:concurrent={{ interval: interval}}>{text}</p>
-  </h1>
+    <p class="text-transparent w-full h-full bg-clip-text bg-gradient-to-r from-[#5C43A8]  to-[#5C43A8] animate-gradient-x" use:concurrent={{ interval: interval}}>{text}</p>
 </div>
 
 <style>
