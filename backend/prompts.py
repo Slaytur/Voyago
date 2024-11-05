@@ -6,14 +6,19 @@ GET_TRAVEL_TIPS = "Research travel guides for the attractions of {points_of_inte
 GET_PACKING_LIST = "I am traveling to {location}. Create a packing list for {points_of_interest} and nearby attractions. The date of the visit is {date} and length is {length}. Then return a bullet pointed list of every item that could be needed.\nFormat:\n - {item1}\n - {item2}\n - {item3}"
 
 GET_ITINERARY= """
-Create a hyper-specific travel itinerary that is in the format of bullet points, separated by day.
+Create a hyper-specific travel itinerary that is in the format of bullet points, separated by day. Make sure to include what the user should be doing at all times of the day.
 User wants to visit {location}.
 User wants to make sure to visit the {points_of_interest}
 User wants to see popular tourist destinations but also smaller niche quaint gems.
 User likes {interests}.
 User wants a packed schedule.
 User's vacation is on the {date} and is {length} days long.
-Be hyper-specific with recommendations, such as recommending specific restaurants, not just area of restaurant.""".strip()
+Be hyper-specific with recommendations, such as recommending specific restaurants, not just area of restaurant.
+Format
+## Day 1 (place)
+ - 7:00 AM go to Cafe du Mond
+ - 8:00 Go the _ art gallery
+...""".strip()
 
 
 

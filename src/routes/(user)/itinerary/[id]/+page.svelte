@@ -19,10 +19,11 @@
             if (currentSequence.length > 0) {
                 titles.push(currentSequence);
             }
+
             currentSequence = [Itin[i].replaceAll("#", "").trim()];
-        } else if (Itin[i].includes("-") && currentSequence.length > 0) {
+        } else if ((Itin[i].includes("-") || Itin[i].includes("•")) && currentSequence.length > 0) {
             // Add lines with '-' to the current sequence
-            currentSequence.push(Itin[i].replace("-", "").replaceAll("**", "").trim());
+            currentSequence.push(Itin[i].replace("-", "").replace("•", "").replaceAll("**", "").trim());
         } else if (currentSequence.length > 0) {
             // End of the current sequence when a line without `-` is reached
             titles.push(currentSequence);

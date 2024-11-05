@@ -1,3 +1,8 @@
+from appwrite.client import Client
+from appwrite.services.databases import Databases
+from appwrite.id import ID
+from appwrite.permission import Permission
+from appwrite.role import Role
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -9,13 +14,13 @@ import os
 import uvicorn
 import pickle
 import asyncio
-from ollama import Client
+# from ollama import Client
 
 dotenv.load_dotenv()
 
 API_KEY = os.environ.get("PERPLEXITY_API_KEY")
 client = AsyncOpenAI(api_key=API_KEY, base_url="https://api.perplexity.ai")
-ollama_client = Client(host='http://:11434')
+# ollama_client = Client(host='http://:11434')
 
 app = FastAPI(title="python backend")
 app.add_middleware(
@@ -130,9 +135,6 @@ async def root(request: DataRequest):
         get_itinerary(request.interests, request.points_of_interest, request.location, request.date, request.date_length)
     )
 
-    from appwrite.client import Client
-    from appwrite.services.databases import Databases
-    from appwrite.id import ID
 
     client = Client()
     client.set_endpoint('https://appwrite.namikas.dev/v1')
@@ -150,7 +152,13 @@ async def root(request: DataRequest):
             'weather': weather,
             'travel_tips': travel_tips,
             'packing_list': packing_list
-        }
+        },
+        permissions= [
+            Permission.write(Role.user(request.id)),
+            Permission.read(Role.user(request.id)),
+            Permission.update(Role.user(request.id)),
+            Permission.delete(Role.user(request.id))
+        ]
     )
 
 
