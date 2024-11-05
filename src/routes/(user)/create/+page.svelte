@@ -266,8 +266,8 @@
         <br>
             <Select.Root items={nearAttractions} multiple>
                 <h1>Choose up to 4 nearby attractions:</h1>
-                <Select.Trigger class="tw-inline-flex tw-h-min-10 tw-h-fit tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-foreground focus:tw-ring-offset-2 focus:tw-ring-offset-background" aria-label="Select a nearer attraction">
-                    <span class="tw-mr-[9px] tw-size-6 tw-h-min-10 tw-text-muted-foreground">🎢</span>
+                <Select.Trigger class="tw-inline-flex tw-min-h-10 tw-h-fit tw-w-[296px] tw-items-center tw-rounded-md tw-border tw-border-border-input tw-bg-background tw-px-[11px] tw-text-sm tw-transition-colors focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-foreground focus:tw-ring-offset-2 focus:tw-ring-offset-background" aria-label="Select a nearer attraction">
+                    <span class="tw-mr-[9px] tw-size-6 tw-text-muted-foreground">🎢</span>
                     <Select.Value class="tw-h-fit tw-text-sm tw-text-muted-foreground" placeholder="Select an attraction" />
                     <span class="tw-ml-auto tw-size-6 tw-text-muted-foreground">▼</span>
                 </Select.Trigger>
