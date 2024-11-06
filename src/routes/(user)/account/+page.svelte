@@ -16,13 +16,11 @@
                 <strong>ID: </strong> {user.$id}
             </li>
         </ul>
-    
-        <div class="tw-flex tw-flex-row tw-justify-center tw-space-x-4">
-            <button type="submit" class="btn tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white tw-font-bold">Change Password</button>
-            <form method="POST" class="btn btn-lg tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white tw-font-bold">
-                <button type="submit">Log out</button>
-            </form>
-        </div>
+            
+        <form method="POST" action="?/logout" class="tw-flex tw-flex-row tw-justify-center tw-space-x-4 tw-items-center"> 
+            <a href="changepassword" class="btn tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white tw-font-bold">Change Password</a>
+            <button type="submit" class="btn btn-lg tw-bg-accent tw-text-white hover:tw-bg-accentForeground hover:tw-text-white tw-font-bold">Log out</button>
+        </form>
     </div>
 </article>
 

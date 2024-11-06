@@ -18,7 +18,6 @@ export async function load (event): Promise<{ user: any, documents: any }> {
         Query.limit(10)
 
     ]);
-    console.log(documents.documents);
     // Pass the user and documents to the page.
     return {
         user: locals.user,

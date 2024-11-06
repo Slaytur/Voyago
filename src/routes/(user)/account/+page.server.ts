@@ -13,10 +13,10 @@ export async function load ({ locals }): Promise<{ user: any }> {
     };
 }
 
-// Define our log out endpoint/server action.
 export const actions = {
-    default: async (event: any) => {
+    logout: async (event: any) => {
     // Create the Appwrite client.
+        console.log(event);
         const { account } = createSessionClient(event);
 
         // Delete the session on Appwrite, and delete the session cookie.
