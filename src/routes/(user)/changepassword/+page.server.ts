@@ -1,4 +1,4 @@
-import { createAdminClient, createSessionClient } from "$lib/server/appwrite";
+import { createSessionClient } from "$lib/server/appwrite";
 import { fail, redirect } from "@sveltejs/kit";
 
 export async function load ({ locals }): Promise<{ user: any }> {
